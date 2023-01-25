@@ -18,10 +18,10 @@ const callApi = () => __awaiter(void 0, void 0, void 0, function* () {
             //     'Content-Type': 'application/json',
             //   },
         }).then((r) => {
-            console.log(r);
+            console.log(r.body);
         });
-        const jsonResult = yield result.json();
-        console.log(jsonResult);
+        // const jsonResult: any = await result.json();
+        // console.log(jsonResult);
         // jsonResult = await resultValue.json();
     }
     catch (error) {

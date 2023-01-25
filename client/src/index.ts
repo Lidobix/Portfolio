@@ -9,11 +9,11 @@ const callApi = async (): Promise<void> => {
       //     'Content-Type': 'application/json',
       //   },
     }).then((r) => {
-      console.log(r);
+      console.log(r.body);
     });
 
-    const jsonResult: any = await result.json();
-    console.log(jsonResult);
+    // const jsonResult: any = await result.json();
+    // console.log(jsonResult);
     // jsonResult = await resultValue.json();
   } catch (error) {
     console.log(error);
