@@ -10,13 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 console.log('coucou');
 const bouton = document.querySelector('button');
-const callApi = () => __awaiter(void 0, void 0, void 0, function* () {
+const callProjects = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = fetch(`http://127.0.0.1:1234/api`, {
             method: 'GET',
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //   },
+            headers: {
+                'Content-Type': 'application/json',
+            },
         }).then((r) => {
             console.log(r.body);
         });
@@ -28,4 +28,4 @@ const callApi = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log(error);
     }
 });
-bouton === null || bouton === void 0 ? void 0 : bouton.addEventListener('click', callApi);
+bouton === null || bouton === void 0 ? void 0 : bouton.addEventListener('click', callProjects);

@@ -1,13 +1,13 @@
 console.log('coucou');
 const bouton: HTMLButtonElement | null = document.querySelector('button');
 
-const callApi = async (): Promise<void> => {
+const callProjects = async (): Promise<void> => {
   try {
     const result: any = fetch(`http://127.0.0.1:1234/api`, {
       method: 'GET',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }).then((r) => {
       console.log(r.body);
     });
@@ -20,4 +20,4 @@ const callApi = async (): Promise<void> => {
   }
 };
 
-bouton?.addEventListener('click', callApi);
+bouton?.addEventListener('click', callProjects);
