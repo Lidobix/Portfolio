@@ -2,7 +2,7 @@ console.log('coucou');
 const bouton: HTMLButtonElement | null = document.querySelector('button');
 
 type Type = "Projet d'études" | 'Projet perso';
-type State = 'Fini' | 'En cours';
+type State = 'Stand-By' | 'Fini' | 'En cours';
 type Techno =
   | 'HTML'
   | 'CSS'
