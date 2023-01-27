@@ -31,11 +31,16 @@ const callProjects = async (): Promise<void> => {
       'Content-Type': 'application/json',
     },
   })
-    .then((r) => {
-      return r.json();
+    .then((result) => {
+      return result.json();
     })
-    .then((r) => {
-      console.log(r);
+    .then((formattedResult) => {
+      const allProjects: Project[] = formattedResult;
+      // Créer une div de projets globale
+
+      allProjects.forEach((project) => {
+        //pour chaque projet insérer une div dans la div globale et la remplir du titre ...
+      });
     });
 };
 
