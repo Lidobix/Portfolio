@@ -14,15 +14,14 @@ const mongoClient = new MongoClient(dbUrl);
 
 function fetchDatas() {
   return new Promise((resolve, reject) => {
-    mongoClient.connect().then(() => {
-      mongoClient
-        .db(dbName)
-        .collection(dbCol)
-        .findOne({ title: 'sqware-it' })
-        .then((result) => {
-          resolve(result);
-        });
-    });
+    mongoClient
+      .connect()
+      .then(() => {
+        resolve(mongoClient.db(dbName).collection(dbCol).find({}).toArray());
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 }
 

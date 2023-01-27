@@ -1,4 +1,4 @@
-console.log('coucou');
+console.log('JS lancé');
 const bouton: HTMLButtonElement | null = document.querySelector('button');
 
 type Type = "Projet d'études" | 'Projet perso';
@@ -38,6 +38,10 @@ const callProjects = async (): Promise<void> => {
       const allProjects: Project[] = formattedResult;
       // Créer une div de projets globale
       console.log(formattedResult);
+
+      allProjects.forEach((e) => {
+        console.log(e);
+      });
       //   allProjects.forEach((project) => {
       // console.log(project);
       //pour chaque projet insérer une div dans la div globale et la remplir du titre ...
