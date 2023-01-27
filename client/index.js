@@ -17,11 +17,15 @@ const callProjects = () => __awaiter(void 0, void 0, void 0, function* () {
             'Content-Type': 'application/json',
         },
     })
-        .then((r) => {
-        return r.json();
+        .then((result) => {
+        return result.json();
     })
-        .then((r) => {
-        console.log(r);
+        .then((formattedResult) => {
+        const allProjects = formattedResult;
+        // Créer une div de projets globale
+        allProjects.forEach((project) => {
+            //pour chaque projet insérer une div dans la div globale et la remplir du titre ...
+        });
     });
 });
 bouton === null || bouton === void 0 ? void 0 : bouton.addEventListener('click', callProjects);
