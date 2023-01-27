@@ -11,8 +11,8 @@ window.addEventListener('DOMContentLoaded', function () {
   const projectList: HTMLElement | null =
     document.getElementById('projectList');
 
-  type Subtype = 'Projet perso' | "projet d'études";
-  type Type = 'project' | 'story';
+  type ProjectSubtype = 'Projet perso' | "projet d'études";
+  type elementSubtype = 'idPicture' | 'story';
   type Status = 'Fini' | 'En cours' | 'Stand-By';
   type Techno =
     | 'HTML'
@@ -24,10 +24,16 @@ window.addEventListener('DOMContentLoaded', function () {
     | 'React'
     | 'NODE_JS';
 
+  type Element = {
+    type: 'element';
+    subtype: elementSubtype;
+    description?: string;
+  };
+
   type Project = {
     title: string;
-    type: Type;
-    subtype: Subtype;
+    type: 'project';
+    subtype: ProjectSubtype;
     status: Status;
     description: string;
     technos?: Techno[];
@@ -51,7 +57,11 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   ///////////////////////////////////////////
 
-  function buildPage(formattedResult: Project[]): void {
+  // function buildPage(datas: (Element | Project)[]): void {
+  //   buildProjects(datas);
+  // }
+
+  function buildProjects(formattedResult: Project[]): any {
     const allProjects: Project[] = formattedResult;
     allProjects.forEach((project) => {
       const container: HTMLDivElement = document.createElement('div');
@@ -98,8 +108,8 @@ window.addEventListener('DOMContentLoaded', function () {
       .then((result) => {
         return result.json();
       })
-      .then((formattedResult) => {
-        buildPage(formattedResult);
+      .then((datas) => {
+        buildProjects(datas);
         // const allProjects: Project[] = formattedResult;
         // allProjects.forEach((project) => {
         //   const container: HTMLDivElement = document.createElement('div');

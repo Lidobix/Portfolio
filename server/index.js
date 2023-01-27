@@ -29,10 +29,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api', (req, res) => {
-  console.log('appel api');
-  fetchDatas().then((projects) => {
-    console.log('projects=', projects);
-    res.json(projects);
+  fetchDatas().then((elements) => {
+    console.log('projects=', elements);
+    res.json(elements);
   });
 });
 

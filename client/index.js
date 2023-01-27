@@ -33,7 +33,10 @@ window.addEventListener('DOMContentLoaded', function () {
         console.log(r);
     });
     ///////////////////////////////////////////
-    function buildPage(formattedResult) {
+    // function buildPage(datas: (Element | Project)[]): void {
+    //   buildProjects(datas);
+    // }
+    function buildProjects(formattedResult) {
         const allProjects = formattedResult;
         allProjects.forEach((project) => {
             var _a, _b;
@@ -74,8 +77,8 @@ window.addEventListener('DOMContentLoaded', function () {
             .then((result) => {
             return result.json();
         })
-            .then((formattedResult) => {
-            buildPage(formattedResult);
+            .then((datas) => {
+            buildProjects(datas);
             // const allProjects: Project[] = formattedResult;
             // allProjects.forEach((project) => {
             //   const container: HTMLDivElement = document.createElement('div');
