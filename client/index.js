@@ -10,6 +10,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 console.log('JS lancé');
 const bouton = document.querySelector('button');
+const projectLis = document.getElementById('projectList');
+fetch(`http://127.0.0.1:1234/`, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+    .then((r) => {
+    return r.json();
+})
+    .then((r) => {
+    console.log(r);
+});
 const callProjects = () => __awaiter(void 0, void 0, void 0, function* () {
     fetch(`http://127.0.0.1:1234/api`, {
         method: 'GET',
@@ -22,8 +35,7 @@ const callProjects = () => __awaiter(void 0, void 0, void 0, function* () {
     })
         .then((formattedResult) => {
         const allProjects = formattedResult;
-        // Créer une div de projets globale
-        console.log(formattedResult);
+        // console.log(formattedResult);
         allProjects.forEach((e) => {
             console.log(e);
         });

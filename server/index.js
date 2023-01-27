@@ -24,6 +24,9 @@ function fetchDatas() {
       });
   });
 }
+app.get('/', (req, res) => {
+  res.json('coucou depuis le serveur!');
+});
 
 app.get('/api', (req, res) => {
   console.log('appel api');
