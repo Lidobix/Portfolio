@@ -37,10 +37,11 @@ const callProjects = async (): Promise<void> => {
     .then((formattedResult) => {
       const allProjects: Project[] = formattedResult;
       // Créer une div de projets globale
-
-      allProjects.forEach((project) => {
-        //pour chaque projet insérer une div dans la div globale et la remplir du titre ...
-      });
+      console.log(formattedResult);
+      //   allProjects.forEach((project) => {
+      // console.log(project);
+      //pour chaque projet insérer une div dans la div globale et la remplir du titre ...
+      //   });
     });
 };
 
