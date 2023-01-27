@@ -66,6 +66,9 @@ const callProjects = async (): Promise<void> => {
         if (project.technos?.length) {
           const technoList: HTMLDivElement = document.createElement('div');
           project.technos?.forEach((techno) => {
+            const logo: HTMLImageElement = document.createElement('img');
+            logo.src = `assets/images/${techno.toLowerCase()}.png`;
+            technoList.appendChild(logo);
             console.log(techno);
           });
           container.appendChild(technoList);
