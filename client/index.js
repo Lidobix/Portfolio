@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 console.log('JS lancé');
 const bouton = document.querySelector('button');
-const projectLis = document.getElementById('projectList');
+const projectList = document.getElementById('projectList');
 fetch(`http://127.0.0.1:1234/`, {
     method: 'GET',
     headers: {
@@ -35,14 +35,27 @@ const callProjects = () => __awaiter(void 0, void 0, void 0, function* () {
     })
         .then((formattedResult) => {
         const allProjects = formattedResult;
-        // console.log(formattedResult);
-        allProjects.forEach((e) => {
-            console.log(e);
+        allProjects.forEach((project) => {
+            var _a, _b;
+            const container = document.createElement('div');
+            const title = document.createElement('h3');
+            title.innerText = `${project.title}`;
+            container.appendChild(title);
+            const status = document.createElement('p');
+            status.innerText = `${project.type} - ${project.status}`;
+            container.appendChild(status);
+            const description = document.createElement('p');
+            description.innerText = `${project.description}`;
+            container.appendChild(description);
+            if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
+                const technoList = document.createElement('div');
+                (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
+                    console.log(techno);
+                });
+                container.appendChild(technoList);
+            }
+            projectList === null || projectList === void 0 ? void 0 : projectList.appendChild(container);
         });
-        //   allProjects.forEach((project) => {
-        // console.log(project);
-        //pour chaque projet insérer une div dans la div globale et la remplir du titre ...
-        //   });
     });
 });
 bouton === null || bouton === void 0 ? void 0 : bouton.addEventListener('click', callProjects);

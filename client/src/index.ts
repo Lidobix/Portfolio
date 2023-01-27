@@ -1,29 +1,27 @@
 console.log('JS lancé');
 const bouton: HTMLButtonElement | null = document.querySelector('button');
-const projectLis: HTMLElement | null = document.getElementById('projectList');
+const projectList: HTMLElement | null = document.getElementById('projectList');
 
 type Type = 'Projet perso' | "projet d'études";
 type Status = 'Fini' | 'En cours' | 'Stand-By';
 type Techno =
   | 'HTML'
   | 'CSS'
-  | 'JS'
+  | 'JavaScript'
   | 'TypeScript'
   | 'WebSocket'
   | 'Angular'
   | 'React'
-  | 'NODE JS';
+  | 'NODE_JS';
 
 type Project = {
   title: string;
   type: Type;
   status: Status;
   description: string;
-  techno1: Techno;
-  techno2: Techno;
-  techno3: Techno;
-  image: string;
-  link: string;
+  technos?: Techno[];
+  image?: string;
+  link?: string;
 };
 
 fetch(`http://127.0.0.1:1234/`, {
@@ -50,16 +48,31 @@ const callProjects = async (): Promise<void> => {
     })
     .then((formattedResult) => {
       const allProjects: Project[] = formattedResult;
+      allProjects.forEach((project) => {
+        const container: HTMLDivElement = document.createElement('div');
 
-      // console.log(formattedResult);
+        const title: HTMLHeadElement = document.createElement('h3');
+        title.innerText = `${project.title}`;
+        container.appendChild(title);
 
-      allProjects.forEach((e) => {
-        console.log(e);
+        const status: HTMLParagraphElement = document.createElement('p');
+        status.innerText = `${project.type} - ${project.status}`;
+        container.appendChild(status);
+
+        const description: HTMLParagraphElement = document.createElement('p');
+        description.innerText = `${project.description}`;
+        container.appendChild(description);
+
+        if (project.technos?.length) {
+          const technoList: HTMLDivElement = document.createElement('div');
+          project.technos?.forEach((techno) => {
+            console.log(techno);
+          });
+          container.appendChild(technoList);
+        }
+
+        projectList?.appendChild(container);
       });
-      //   allProjects.forEach((project) => {
-      // console.log(project);
-      //pour chaque projet insérer une div dans la div globale et la remplir du titre ...
-      //   });
     });
 };
 
