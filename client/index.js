@@ -51,6 +51,7 @@ const callProjects = () => __awaiter(void 0, void 0, void 0, function* () {
                 const technoList = document.createElement('div');
                 (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
                     const logo = document.createElement('img');
+                    logo.classList.add('logoTechno');
                     logo.src = `assets/images/${techno.toLowerCase()}.png`;
                     technoList.appendChild(logo);
                     console.log(techno);
