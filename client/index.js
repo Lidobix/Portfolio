@@ -11,21 +11,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 console.log('coucou');
 const bouton = document.querySelector('button');
 const callProjects = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const result = fetch(`http://127.0.0.1:1234/api`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then((r) => {
-            console.log(r.body);
-        });
-        // const jsonResult: any = await result.json();
-        // console.log(jsonResult);
-        // jsonResult = await resultValue.json();
-    }
-    catch (error) {
-        console.log(error);
-    }
+    fetch(`http://127.0.0.1:1234/api`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((r) => {
+        return r.json();
+    })
+        .then((r) => {
+        console.log(r);
+    });
 });
 bouton === null || bouton === void 0 ? void 0 : bouton.addEventListener('click', callProjects);

@@ -12,42 +12,28 @@ const dbName = process.env.DB_NAME;
 const dbCol = process.env.COLLECTION_PROJECTS;
 const mongoClient = new MongoClient(dbUrl);
 
-app.listen(1234, () => {
-  console.log(`server démarré sur le port 1234`);
-});
-
-const fetchDatas = async () => {
-  try {
-    await mongoClient.connect();
-    await mongoClient
-      .db(dbName)
-      .collection(dbCol)
-      .findOne({ title: 'sqware-it' })
-      .then((r) => {
-        console.log(r);
-      });
-  } finally {
-    mongoClient.close();
-  }
-};
+function fetchDatas() {
+  return new Promise((resolve, reject) => {
+    mongoClient.connect().then(() => {
+      mongoClient
+        .db(dbName)
+        .collection(dbCol)
+        .findOne({ title: 'sqware-it' })
+        .then((result) => {
+          resolve(result);
+        });
+    });
+  });
+}
 
 app.get('/api', (req, res) => {
-  const projects = fetchDatas();
-  res.json(projects);
-  // mongoClient.connect();
-
-  //   (err, client) => {
-  //   const db = client.db(dbName);
-  //   const collection = db.collection(dbCol);
-  //   collection.findOne({ title: 'sqware-it' }, (err, result) => {
-  //     if (err) {
-  //       res.json(err);
-  //     } else {
-  //       res.json(result);
-  //     }
-  //   });
-  // }
-
   console.log('appel api');
-  // res.send(`réponse du serveur: coucou! :)`);
+  fetchDatas().then((projects) => {
+    console.log('projects=', projects);
+    res.json(projects);
+  });
+});
+
+app.listen(1234, () => {
+  console.log(`server démarré sur le port 1234`);
 });
