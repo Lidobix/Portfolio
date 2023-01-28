@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', function () {
     type: 'element';
     subtype: elementSubtype;
     description?: string;
+    pageTitle: string;
   };
 
   type Project = {
@@ -61,7 +62,12 @@ window.addEventListener('DOMContentLoaded', function () {
   // function buildPage(datas: (Element | Project)[]): void {
   //   buildProjects(datas);
   // }
-  function buildElements(siteElements: Element[]): void {}
+  function buildPage(siteElements: Element, projects: Project[]): void {
+    console.log(siteElements);
+    const pageTitle: HTMLHeadingElement = document.createElement('h1');
+    pageTitle.innerText = siteElements.pageTitle;
+    header?.appendChild(pageTitle);
+  }
 
   function buildProjects(projects: Project[]): void {
     projects.forEach((project) => {
@@ -110,8 +116,8 @@ window.addEventListener('DOMContentLoaded', function () {
         return result.json();
       })
       .then((datas) => {
-        buildElements(datas.siteElements);
-        buildProjects(datas.projects);
+        buildPage(datas.siteElements[0], datas.projects);
+        // buildProjects(datas.projects);
       });
   };
 

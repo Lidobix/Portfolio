@@ -32,7 +32,7 @@ app.get('/api', (req, res) => {
   fetchDatas().then((datas) => {
     console.log('projects=', datas);
     res.send({
-      siteElements: datas.filter((data) => data.type === 'element'),
+      siteElements: datas.filter((data) => data.type === 'elements'),
       projects: datas.filter((data) => data.type === 'project'),
     });
   });

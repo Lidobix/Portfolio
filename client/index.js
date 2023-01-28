@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log('JS lancé');
     // let onload: boolean = true;
     const bouton = document.querySelector('button');
+    const header = document.querySelector('header');
     const body = document.querySelector('body');
     const section = document.querySelector('section');
     const storyTitle = 'Mon histoire';
@@ -36,14 +37,19 @@ window.addEventListener('DOMContentLoaded', function () {
     // function buildPage(datas: (Element | Project)[]): void {
     //   buildProjects(datas);
     // }
-    function buildElements(siteElements) { }
+    function buildPage(siteElements, projects) {
+        console.log(siteElements);
+        const pageTitle = document.createElement('h1');
+        pageTitle.innerText = siteElements.pageTitle;
+        header === null || header === void 0 ? void 0 : header.appendChild(pageTitle);
+    }
     function buildProjects(projects) {
         projects.forEach((project) => {
             var _a, _b;
             const container = document.createElement('div');
-            const title = document.createElement('h3');
-            title.innerText = `${project.title}`;
-            container.appendChild(title);
+            const projectTitle = document.createElement('h3');
+            projectTitle.innerText = `${project.title}`;
+            container.appendChild(projectTitle);
             const status = document.createElement('p');
             status.innerText = `${project.subtype} - ${project.status}`;
             container.appendChild(status);
@@ -78,8 +84,8 @@ window.addEventListener('DOMContentLoaded', function () {
             return result.json();
         })
             .then((datas) => {
-            buildElements(datas.siteElements);
-            buildProjects(datas.projects);
+            buildPage(datas.siteElements[0], datas.projects);
+            // buildProjects(datas.projects);
         });
     });
     // callSiteElements();
