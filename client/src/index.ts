@@ -3,8 +3,9 @@ window.addEventListener('DOMContentLoaded', function () {
   // let onload: boolean = true;
   const bouton: HTMLButtonElement | null = document.querySelector('button');
   const header: HTMLElement | null = document.querySelector('header');
-  const body: HTMLBodyElement | null = document.querySelector('body');
   const section: HTMLElement | null = document.querySelector('section');
+  const body: HTMLBodyElement | null = document.querySelector('body');
+  // const section: HTMLElement | null = document.querySelector('section');
   const storyTitle: string = 'Mon histoire';
   const projectsTitle: string = 'Mes projets';
   const contactTitle: string = 'Contact';
@@ -13,7 +14,12 @@ window.addEventListener('DOMContentLoaded', function () {
     document.getElementById('projectList');
 
   type ProjectSubtype = 'Projet perso' | "projet d'études";
-  type elementSubtype = 'idPicture' | 'story';
+  // type ElementSubtype = 'idPicture' | 'story';
+  type Section = {
+    name: string;
+    type: 'text' | 'projectList' | 'contactForm';
+    content: string | Project[];
+  };
   type Status = 'Fini' | 'En cours' | 'Stand-By';
   type Techno =
     | 'HTML'
@@ -27,9 +33,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
   type Element = {
     type: 'element';
-    subtype: elementSubtype;
-    description?: string;
+    // subtype: ElementSubtype;
+    // description?: string;
     pageTitle: string;
+    subTitle: string;
+    pageSections: Section[];
   };
 
   type Project = {
@@ -66,7 +74,14 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log(siteElements);
     const pageTitle: HTMLHeadingElement = document.createElement('h1');
     pageTitle.innerText = siteElements.pageTitle;
+    const subTitle: HTMLHeadingElement = document.createElement('h2');
+    subTitle.innerText = siteElements.subTitle;
+
+    siteElements.pageSections.forEach((paragraphe) => {
+      const sectionTitle: HTMLHeadingElement = document.createElement('h3');
+    });
     header?.appendChild(pageTitle);
+    header?.appendChild(subTitle);
   }
 
   function buildProjects(projects: Project[]): void {

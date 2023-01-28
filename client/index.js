@@ -13,8 +13,9 @@ window.addEventListener('DOMContentLoaded', function () {
     // let onload: boolean = true;
     const bouton = document.querySelector('button');
     const header = document.querySelector('header');
-    const body = document.querySelector('body');
     const section = document.querySelector('section');
+    const body = document.querySelector('body');
+    // const section: HTMLElement | null = document.querySelector('section');
     const storyTitle = 'Mon histoire';
     const projectsTitle = 'Mes projets';
     const contactTitle = 'Contact';
@@ -41,7 +42,10 @@ window.addEventListener('DOMContentLoaded', function () {
         console.log(siteElements);
         const pageTitle = document.createElement('h1');
         pageTitle.innerText = siteElements.pageTitle;
+        const subTitle = document.createElement('h2');
+        subTitle.innerText = siteElements.subTitle;
         header === null || header === void 0 ? void 0 : header.appendChild(pageTitle);
+        header === null || header === void 0 ? void 0 : header.appendChild(subTitle);
     }
     function buildProjects(projects) {
         projects.forEach((project) => {
