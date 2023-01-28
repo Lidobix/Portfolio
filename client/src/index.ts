@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', function () {
   console.log('JS lancé');
   // let onload: boolean = true;
   const bouton: HTMLButtonElement | null = document.querySelector('button');
+  const header: HTMLElement | null = document.querySelector('header');
   const body: HTMLBodyElement | null = document.querySelector('body');
   const section: HTMLElement | null = document.querySelector('section');
   const storyTitle: string = 'Mon histoire';
@@ -60,18 +61,18 @@ window.addEventListener('DOMContentLoaded', function () {
   // function buildPage(datas: (Element | Project)[]): void {
   //   buildProjects(datas);
   // }
+  function buildElements(siteElements: Element[]): void {}
 
-  function buildProjects(formattedResult: Project[]): any {
-    const allProjects: Project[] = formattedResult;
-    allProjects.forEach((project) => {
+  function buildProjects(projects: Project[]): void {
+    projects.forEach((project) => {
       const container: HTMLDivElement = document.createElement('div');
 
-      const title: HTMLHeadElement = document.createElement('h3');
-      title.innerText = `${project.title}`;
-      container.appendChild(title);
+      const projectTitle: HTMLHeadElement = document.createElement('h3');
+      projectTitle.innerText = `${project.title}`;
+      container.appendChild(projectTitle);
 
       const status: HTMLParagraphElement = document.createElement('p');
-      status.innerText = `${project.type} - ${project.status}`;
+      status.innerText = `${project.subtype} - ${project.status}`;
       container.appendChild(status);
 
       const description: HTMLParagraphElement = document.createElement('p');
@@ -109,35 +110,8 @@ window.addEventListener('DOMContentLoaded', function () {
         return result.json();
       })
       .then((datas) => {
-        buildProjects(datas);
-        // const allProjects: Project[] = formattedResult;
-        // allProjects.forEach((project) => {
-        //   const container: HTMLDivElement = document.createElement('div');
-        //   const title: HTMLHeadElement = document.createElement('h3');
-        //   title.innerText = `${project.title}`;
-        //   container.appendChild(title);
-        //   const status: HTMLParagraphElement = document.createElement('p');
-        //   status.innerText = `${project.type} - ${project.status}`;
-        //   container.appendChild(status);
-        //   const description: HTMLParagraphElement = document.createElement('p');
-        //   description.innerText = `${project.description}`;
-        //   container.appendChild(description);
-        //   const view: HTMLImageElement = document.createElement('img');
-        //   view.classList.add('view');
-        //   view.src = 'assets/screen.png';
-        //   container.appendChild(view);
-        //   if (project.technos?.length) {
-        //     const technoList: HTMLDivElement = document.createElement('div');
-        //     project.technos?.forEach((techno) => {
-        //       const logo: HTMLImageElement = document.createElement('img');
-        //       logo.classList.add('logoTechno');
-        //       logo.src = `assets/images/${techno.toLowerCase()}.png`;
-        //       technoList.appendChild(logo);
-        //     });
-        //     container.appendChild(technoList);
-        //   }
-        //   projectList?.appendChild(container);
-        // });
+        buildElements(datas.siteElements);
+        buildProjects(datas.projects);
       });
   };
 

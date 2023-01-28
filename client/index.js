@@ -36,16 +36,16 @@ window.addEventListener('DOMContentLoaded', function () {
     // function buildPage(datas: (Element | Project)[]): void {
     //   buildProjects(datas);
     // }
-    function buildProjects(formattedResult) {
-        const allProjects = formattedResult;
-        allProjects.forEach((project) => {
+    function buildElements(siteElements) { }
+    function buildProjects(projects) {
+        projects.forEach((project) => {
             var _a, _b;
             const container = document.createElement('div');
             const title = document.createElement('h3');
             title.innerText = `${project.title}`;
             container.appendChild(title);
             const status = document.createElement('p');
-            status.innerText = `${project.type} - ${project.status}`;
+            status.innerText = `${project.subtype} - ${project.status}`;
             container.appendChild(status);
             const description = document.createElement('p');
             description.innerText = `${project.description}`;
@@ -78,35 +78,8 @@ window.addEventListener('DOMContentLoaded', function () {
             return result.json();
         })
             .then((datas) => {
-            buildProjects(datas);
-            // const allProjects: Project[] = formattedResult;
-            // allProjects.forEach((project) => {
-            //   const container: HTMLDivElement = document.createElement('div');
-            //   const title: HTMLHeadElement = document.createElement('h3');
-            //   title.innerText = `${project.title}`;
-            //   container.appendChild(title);
-            //   const status: HTMLParagraphElement = document.createElement('p');
-            //   status.innerText = `${project.type} - ${project.status}`;
-            //   container.appendChild(status);
-            //   const description: HTMLParagraphElement = document.createElement('p');
-            //   description.innerText = `${project.description}`;
-            //   container.appendChild(description);
-            //   const view: HTMLImageElement = document.createElement('img');
-            //   view.classList.add('view');
-            //   view.src = 'assets/screen.png';
-            //   container.appendChild(view);
-            //   if (project.technos?.length) {
-            //     const technoList: HTMLDivElement = document.createElement('div');
-            //     project.technos?.forEach((techno) => {
-            //       const logo: HTMLImageElement = document.createElement('img');
-            //       logo.classList.add('logoTechno');
-            //       logo.src = `assets/images/${techno.toLowerCase()}.png`;
-            //       technoList.appendChild(logo);
-            //     });
-            //     container.appendChild(technoList);
-            //   }
-            //   projectList?.appendChild(container);
-            // });
+            buildElements(datas.siteElements);
+            buildProjects(datas.projects);
         });
     });
     // callSiteElements();
