@@ -15,6 +15,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
   type ProjectSubtype = 'Projet perso' | "projet d'études";
   // type ElementSubtype = 'idPicture' | 'story';
+  type Header = {
+    title: string;
+    subtitle: string;
+  };
+  type Nav = { title: string };
+  type SiteElements = {
+    header: Header;
+    section: Section;
+    nav: Nav;
+  };
   type Section = {
     name: string;
     type: 'text' | 'projectList' | 'contactForm';
@@ -31,14 +41,14 @@ window.addEventListener('DOMContentLoaded', function () {
     | 'React'
     | 'NODE_JS';
 
-  type Element = {
-    type: 'element';
-    // subtype: ElementSubtype;
-    // description?: string;
-    pageTitle: string;
-    subTitle: string;
-    pageSections: Section[];
-  };
+  // type Element = {
+  //   type: 'element';
+  //   // subtype: ElementSubtype;
+  //   // description?: string;
+  //   pageTitle: string;
+  //   subTitle: string;
+  //   pageSections: Section[];
+  // };
 
   type Project = {
     title: string;
@@ -70,18 +80,19 @@ window.addEventListener('DOMContentLoaded', function () {
   // function buildPage(datas: (Element | Project)[]): void {
   //   buildProjects(datas);
   // }
-  function buildPage(siteElements: Element, projects: Project[]): void {
+  function buildPage(siteElements: SiteElements): void {
     console.log(siteElements);
-    const pageTitle: HTMLHeadingElement = document.createElement('h1');
-    pageTitle.innerText = siteElements.pageTitle;
-    const subTitle: HTMLHeadingElement = document.createElement('h2');
-    subTitle.innerText = siteElements.subTitle;
 
-    siteElements.pageSections.forEach((paragraphe) => {
-      const sectionTitle: HTMLHeadingElement = document.createElement('h3');
-    });
-    header?.appendChild(pageTitle);
-    header?.appendChild(subTitle);
+    // console.log(siteElements);
+    // const pageTitle: HTMLHeadingElement = document.createElement('h1');
+    // pageTitle.innerText = siteElements.pageTitle;
+    // const subTitle: HTMLHeadingElement = document.createElement('h2');
+    // subTitle.innerText = siteElements.subTitle;
+    // siteElements.pageSections.forEach((paragraphe) => {
+    //   const sectionTitle: HTMLHeadingElement = document.createElement('h3');
+    // });
+    // header?.appendChild(pageTitle);
+    // header?.appendChild(subTitle);
   }
 
   function buildProjects(projects: Project[]): void {
@@ -131,7 +142,8 @@ window.addEventListener('DOMContentLoaded', function () {
         return result.json();
       })
       .then((datas) => {
-        buildPage(datas.siteElements[0], datas.projects);
+        console.log('data=', datas);
+        buildPage(datas[0]);
         // buildProjects(datas.projects);
       });
   };

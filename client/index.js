@@ -38,14 +38,18 @@ window.addEventListener('DOMContentLoaded', function () {
     // function buildPage(datas: (Element | Project)[]): void {
     //   buildProjects(datas);
     // }
-    function buildPage(siteElements, projects) {
+    function buildPage(siteElements) {
         console.log(siteElements);
-        const pageTitle = document.createElement('h1');
-        pageTitle.innerText = siteElements.pageTitle;
-        const subTitle = document.createElement('h2');
-        subTitle.innerText = siteElements.subTitle;
-        header === null || header === void 0 ? void 0 : header.appendChild(pageTitle);
-        header === null || header === void 0 ? void 0 : header.appendChild(subTitle);
+        // console.log(siteElements);
+        // const pageTitle: HTMLHeadingElement = document.createElement('h1');
+        // pageTitle.innerText = siteElements.pageTitle;
+        // const subTitle: HTMLHeadingElement = document.createElement('h2');
+        // subTitle.innerText = siteElements.subTitle;
+        // siteElements.pageSections.forEach((paragraphe) => {
+        //   const sectionTitle: HTMLHeadingElement = document.createElement('h3');
+        // });
+        // header?.appendChild(pageTitle);
+        // header?.appendChild(subTitle);
     }
     function buildProjects(projects) {
         projects.forEach((project) => {
@@ -88,7 +92,8 @@ window.addEventListener('DOMContentLoaded', function () {
             return result.json();
         })
             .then((datas) => {
-            buildPage(datas.siteElements[0], datas.projects);
+            console.log('data=', datas);
+            buildPage(datas[0]);
             // buildProjects(datas.projects);
         });
     });
