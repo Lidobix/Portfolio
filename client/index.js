@@ -29,19 +29,7 @@ window.addEventListener('DOMContentLoaded', function () {
     ///////////////////////////////////////////
     function buildPage(siteElements) {
         body === null || body === void 0 ? void 0 : body.insertBefore(buildHeader(siteElements.header), script);
-        // console.log(typeof siteElements.section);
         body === null || body === void 0 ? void 0 : body.insertBefore(buildSection(siteElements.section), script);
-        // buildNav(siteElements.nav);
-        // console.log(siteElements);
-        // const pageTitle: HTMLHeadingElement = document.createElement('h1');
-        // pageTitle.innerText = siteElements.pageTitle;
-        // const subTitle: HTMLHeadingElement = document.createElement('h2');
-        // subTitle.innerText = siteElements.subTitle;
-        // siteElements.pageSections.forEach((paragraphe) => {
-        //   const sectionTitle: HTMLHeadingElement = document.createElement('h3');
-        // });
-        // header?.appendChild(pageTitle);
-        // header?.appendChild(subTitle);
     }
     function buildHeader(headerElements) {
         const header = document.createElement('header');
@@ -102,7 +90,7 @@ window.addEventListener('DOMContentLoaded', function () {
         });
         return container;
     }
-    const callProjects = () => __awaiter(this, void 0, void 0, function* () {
+    const callSiteContent = () => __awaiter(this, void 0, void 0, function* () {
         fetch(`http://127.0.0.1:1234/api`, {
             method: 'GET',
             headers: {
@@ -113,11 +101,8 @@ window.addEventListener('DOMContentLoaded', function () {
             return result.json();
         })
             .then((datas) => {
-            console.log('data=', datas);
             buildPage(datas[0]);
-            // buildProjects(datas.projects);
         });
     });
-    // callSiteElements();
-    callProjects();
+    callSiteContent();
 });
