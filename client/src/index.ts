@@ -68,20 +68,7 @@ window.addEventListener('DOMContentLoaded', function () {
   function buildPage(siteElements: SiteElements): void {
     body?.insertBefore(buildHeader(siteElements.header), script);
 
-    // console.log(typeof siteElements.section);
     body?.insertBefore(buildSection(siteElements.section), script);
-    // buildNav(siteElements.nav);
-
-    // console.log(siteElements);
-    // const pageTitle: HTMLHeadingElement = document.createElement('h1');
-    // pageTitle.innerText = siteElements.pageTitle;
-    // const subTitle: HTMLHeadingElement = document.createElement('h2');
-    // subTitle.innerText = siteElements.subTitle;
-    // siteElements.pageSections.forEach((paragraphe) => {
-    //   const sectionTitle: HTMLHeadingElement = document.createElement('h3');
-    // });
-    // header?.appendChild(pageTitle);
-    // header?.appendChild(subTitle);
   }
 
   function buildHeader(headerElements: Header): HTMLElement {
@@ -157,7 +144,7 @@ window.addEventListener('DOMContentLoaded', function () {
     return container;
   }
 
-  const callProjects = async (): Promise<void> => {
+  const callSiteContent = async (): Promise<void> => {
     fetch(`http://127.0.0.1:1234/api`, {
       method: 'GET',
       headers: {
@@ -168,12 +155,9 @@ window.addEventListener('DOMContentLoaded', function () {
         return result.json();
       })
       .then((datas) => {
-        console.log('data=', datas);
         buildPage(datas[0]);
-        // buildProjects(datas.projects);
       });
   };
 
-  // callSiteElements();
-  callProjects();
+  callSiteContent();
 });
