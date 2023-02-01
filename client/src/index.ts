@@ -14,15 +14,18 @@ window.addEventListener('DOMContentLoaded', function () {
   type Nav = { title: string };
   type SiteElements = {
     header: Header;
-    section: Section;
+    section: Section[];
     nav: Nav;
   };
+
   type Section = {
     id: number;
     name: string;
     type: 'text' | 'projectList' | 'contactForm';
-    content: string | Project[];
+    text?: string;
+    projectList?: Project[];
   };
+
   type Status = 'Fini' | 'En cours' | 'Stand-By';
   type Techno =
     | 'HTML'
@@ -65,7 +68,8 @@ window.addEventListener('DOMContentLoaded', function () {
   function buildPage(siteElements: SiteElements): void {
     body?.insertBefore(buildHeader(siteElements.header), script);
 
-    buildSection(siteElements.section);
+    // console.log(typeof siteElements.section);
+    body?.insertBefore(buildSection(siteElements.section), script);
     // buildNav(siteElements.nav);
 
     // console.log(siteElements);
@@ -81,19 +85,36 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   function buildHeader(headerElements: Header): HTMLElement {
+    const header: HTMLElement = document.createElement('header');
+
     const pageTitle: HTMLHeadingElement = document.createElement('h1');
     pageTitle.innerText = headerElements.title;
     const subTitle: HTMLHeadingElement = document.createElement('h2');
     subTitle.innerText = headerElements.subtitle;
 
-    const header: HTMLElement = document.createElement('header');
     header.appendChild(pageTitle);
     header.appendChild(subTitle);
 
     return header;
   }
 
-  function buildSection(sectionElements: Section): void {}
+  function buildSection(sectionElements: Section[]): HTMLElement {
+    const section: HTMLElement = document.createElement('section');
+
+    sectionElements.forEach((sectionElement) => {
+      const name: HTMLHeadingElement = document.createElement('h3');
+      name.innerText = sectionElement.name;
+      section.appendChild(name);
+      if (sectionElement.text) {
+        const content: HTMLParagraphElement = document.createElement('p');
+        content.innerText = sectionElement.text;
+
+        section.appendChild(content);
+      }
+    });
+
+    return section;
+  }
 
   function buildProjects(projects: Project[]): void {
     projects.forEach((project) => {

@@ -10,17 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 window.addEventListener('DOMContentLoaded', function () {
     console.log('JS lancé');
-    // let onload: boolean = true;
-    const bouton = document.querySelector('button');
     const script = document.querySelector('script');
-    // const header: HTMLElement | null = document.querySelector('header');
-    const section = document.querySelector('section');
     const body = document.querySelector('body');
-    // const section: HTMLElement | null = document.querySelector('section');
-    const storyTitle = 'Mon histoire';
-    const projectsTitle = 'Mes projets';
-    const contactTitle = 'Contact';
-    const projectList = document.getElementById('projectList');
     console.log('lancement fetch');
     ///////////// COUCOU SERVEUR /////////////////////////
     fetch(`http://127.0.0.1:1234/`, {
@@ -36,14 +27,10 @@ window.addEventListener('DOMContentLoaded', function () {
         console.log(r);
     });
     ///////////////////////////////////////////
-    // function buildPage(datas: (Element | Project)[]): void {
-    //   buildProjects(datas);
-    // }
     function buildPage(siteElements) {
-        // console.log(siteElements);
-        // body?.appendChild(buildHeader(siteElements.header));
         body === null || body === void 0 ? void 0 : body.insertBefore(buildHeader(siteElements.header), script);
-        buildSection(siteElements.section);
+        // console.log(typeof siteElements.section);
+        body === null || body === void 0 ? void 0 : body.insertBefore(buildSection(siteElements.section), script);
         // buildNav(siteElements.nav);
         // console.log(siteElements);
         // const pageTitle: HTMLHeadingElement = document.createElement('h1');
@@ -57,16 +44,29 @@ window.addEventListener('DOMContentLoaded', function () {
         // header?.appendChild(subTitle);
     }
     function buildHeader(headerElements) {
+        const header = document.createElement('header');
         const pageTitle = document.createElement('h1');
         pageTitle.innerText = headerElements.title;
         const subTitle = document.createElement('h2');
         subTitle.innerText = headerElements.subtitle;
-        const header = document.createElement('header');
         header.appendChild(pageTitle);
         header.appendChild(subTitle);
         return header;
     }
-    function buildSection(sectionElements) { }
+    function buildSection(sectionElements) {
+        const section = document.createElement('section');
+        sectionElements.forEach((sectionElement) => {
+            const name = document.createElement('h3');
+            name.innerText = sectionElement.name;
+            section.appendChild(name);
+            if (sectionElement.text) {
+                const content = document.createElement('p');
+                content.innerText = sectionElement.text;
+                section.appendChild(content);
+            }
+        });
+        return section;
+    }
     function buildProjects(projects) {
         projects.forEach((project) => {
             var _a, _b;
@@ -94,7 +94,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 });
                 container.appendChild(technoList);
             }
-            projectList === null || projectList === void 0 ? void 0 : projectList.appendChild(container);
         });
     }
     const callProjects = () => __awaiter(this, void 0, void 0, function* () {
