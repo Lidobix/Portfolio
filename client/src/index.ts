@@ -1,21 +1,12 @@
 window.addEventListener('DOMContentLoaded', function () {
   console.log('JS lancé');
-  // let onload: boolean = true;
-  const bouton: HTMLButtonElement | null = document.querySelector('button');
-  const script: HTMLScriptElement | null = document.querySelector('script');
-  // const header: HTMLElement | null = document.querySelector('header');
-  const section: HTMLElement | null = document.querySelector('section');
-  const body: HTMLBodyElement | null = document.querySelector('body');
-  // const section: HTMLElement | null = document.querySelector('section');
-  const storyTitle: string = 'Mon histoire';
-  const projectsTitle: string = 'Mes projets';
-  const contactTitle: string = 'Contact';
 
-  const projectList: HTMLElement | null =
-    document.getElementById('projectList');
+  const script: HTMLScriptElement | null = document.querySelector('script');
+
+  const body: HTMLBodyElement | null = document.querySelector('body');
 
   type ProjectSubtype = 'Projet perso' | "projet d'études";
-  // type ElementSubtype = 'idPicture' | 'story';
+
   type Header = {
     title: string;
     subtitle: string;
@@ -42,15 +33,6 @@ window.addEventListener('DOMContentLoaded', function () {
     | 'Angular'
     | 'React'
     | 'NODE_JS';
-
-  // type Element = {
-  //   type: 'element';
-  //   // subtype: ElementSubtype;
-  //   // description?: string;
-  //   pageTitle: string;
-  //   subTitle: string;
-  //   pageSections: Section[];
-  // };
 
   type Project = {
     id: number;
@@ -144,8 +126,6 @@ window.addEventListener('DOMContentLoaded', function () {
         });
         container.appendChild(technoList);
       }
-
-      projectList?.appendChild(container);
     });
   }
 
