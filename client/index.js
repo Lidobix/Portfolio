@@ -12,7 +12,8 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log('JS lancé');
     // let onload: boolean = true;
     const bouton = document.querySelector('button');
-    const header = document.querySelector('header');
+    const script = document.querySelector('script');
+    // const header: HTMLElement | null = document.querySelector('header');
     const section = document.querySelector('section');
     const body = document.querySelector('body');
     // const section: HTMLElement | null = document.querySelector('section');
@@ -39,7 +40,11 @@ window.addEventListener('DOMContentLoaded', function () {
     //   buildProjects(datas);
     // }
     function buildPage(siteElements) {
-        console.log(siteElements);
+        // console.log(siteElements);
+        // body?.appendChild(buildHeader(siteElements.header));
+        body === null || body === void 0 ? void 0 : body.insertBefore(buildHeader(siteElements.header), script);
+        buildSection(siteElements.section);
+        // buildNav(siteElements.nav);
         // console.log(siteElements);
         // const pageTitle: HTMLHeadingElement = document.createElement('h1');
         // pageTitle.innerText = siteElements.pageTitle;
@@ -51,6 +56,17 @@ window.addEventListener('DOMContentLoaded', function () {
         // header?.appendChild(pageTitle);
         // header?.appendChild(subTitle);
     }
+    function buildHeader(headerElements) {
+        const pageTitle = document.createElement('h1');
+        pageTitle.innerText = headerElements.title;
+        const subTitle = document.createElement('h2');
+        subTitle.innerText = headerElements.subtitle;
+        const header = document.createElement('header');
+        header.appendChild(pageTitle);
+        header.appendChild(subTitle);
+        return header;
+    }
+    function buildSection(sectionElements) { }
     function buildProjects(projects) {
         projects.forEach((project) => {
             var _a, _b;

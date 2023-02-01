@@ -2,7 +2,8 @@ window.addEventListener('DOMContentLoaded', function () {
   console.log('JS lancé');
   // let onload: boolean = true;
   const bouton: HTMLButtonElement | null = document.querySelector('button');
-  const header: HTMLElement | null = document.querySelector('header');
+  const script: HTMLScriptElement | null = document.querySelector('script');
+  // const header: HTMLElement | null = document.querySelector('header');
   const section: HTMLElement | null = document.querySelector('section');
   const body: HTMLBodyElement | null = document.querySelector('body');
   // const section: HTMLElement | null = document.querySelector('section');
@@ -26,6 +27,7 @@ window.addEventListener('DOMContentLoaded', function () {
     nav: Nav;
   };
   type Section = {
+    id: number;
     name: string;
     type: 'text' | 'projectList' | 'contactForm';
     content: string | Project[];
@@ -51,6 +53,7 @@ window.addEventListener('DOMContentLoaded', function () {
   // };
 
   type Project = {
+    id: number;
     title: string;
     type: 'project';
     subtype: ProjectSubtype;
@@ -77,11 +80,11 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   ///////////////////////////////////////////
 
-  // function buildPage(datas: (Element | Project)[]): void {
-  //   buildProjects(datas);
-  // }
   function buildPage(siteElements: SiteElements): void {
-    console.log(siteElements);
+    body?.insertBefore(buildHeader(siteElements.header), script);
+
+    buildSection(siteElements.section);
+    // buildNav(siteElements.nav);
 
     // console.log(siteElements);
     // const pageTitle: HTMLHeadingElement = document.createElement('h1');
@@ -94,6 +97,21 @@ window.addEventListener('DOMContentLoaded', function () {
     // header?.appendChild(pageTitle);
     // header?.appendChild(subTitle);
   }
+
+  function buildHeader(headerElements: Header): HTMLElement {
+    const pageTitle: HTMLHeadingElement = document.createElement('h1');
+    pageTitle.innerText = headerElements.title;
+    const subTitle: HTMLHeadingElement = document.createElement('h2');
+    subTitle.innerText = headerElements.subtitle;
+
+    const header: HTMLElement = document.createElement('header');
+    header.appendChild(pageTitle);
+    header.appendChild(subTitle);
+
+    return header;
+  }
+
+  function buildSection(sectionElements: Section): void {}
 
   function buildProjects(projects: Project[]): void {
     projects.forEach((project) => {
