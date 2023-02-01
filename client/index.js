@@ -56,34 +56,38 @@ window.addEventListener('DOMContentLoaded', function () {
     function buildSection(sectionElements) {
         const section = document.createElement('section');
         sectionElements.forEach((sectionElement) => {
-            const name = document.createElement('h3');
-            name.innerText = sectionElement.name;
-            section.appendChild(name);
+            const title = document.createElement('h3');
+            title.innerText = sectionElement.name;
+            section.appendChild(title);
             if (sectionElement.text) {
                 const content = document.createElement('p');
                 content.innerText = sectionElement.text;
                 section.appendChild(content);
             }
+            if (sectionElement.projectList) {
+                section.appendChild(buildProjects(sectionElement.projectList));
+            }
         });
         return section;
     }
     function buildProjects(projects) {
+        const container = document.createElement('div');
         projects.forEach((project) => {
             var _a, _b;
-            const container = document.createElement('div');
+            const card = document.createElement('div');
             const projectTitle = document.createElement('h3');
             projectTitle.innerText = `${project.title}`;
-            container.appendChild(projectTitle);
+            card.appendChild(projectTitle);
             const status = document.createElement('p');
             status.innerText = `${project.subtype} - ${project.status}`;
-            container.appendChild(status);
+            card.appendChild(status);
             const description = document.createElement('p');
             description.innerText = `${project.description}`;
-            container.appendChild(description);
+            card.appendChild(description);
             const view = document.createElement('img');
             view.classList.add('view');
             view.src = 'assets/screen.png';
-            container.appendChild(view);
+            card.appendChild(view);
             if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
                 const technoList = document.createElement('div');
                 (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
@@ -92,9 +96,11 @@ window.addEventListener('DOMContentLoaded', function () {
                     logo.src = `assets/images/${techno.toLowerCase()}.png`;
                     technoList.appendChild(logo);
                 });
-                container.appendChild(technoList);
+                card.appendChild(technoList);
             }
+            container.appendChild(card);
         });
+        return container;
     }
     const callProjects = () => __awaiter(this, void 0, void 0, function* () {
         fetch(`http://127.0.0.1:1234/api`, {

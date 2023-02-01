@@ -102,40 +102,45 @@ window.addEventListener('DOMContentLoaded', function () {
     const section: HTMLElement = document.createElement('section');
 
     sectionElements.forEach((sectionElement) => {
-      const name: HTMLHeadingElement = document.createElement('h3');
-      name.innerText = sectionElement.name;
-      section.appendChild(name);
+      const title: HTMLHeadingElement = document.createElement('h3');
+      title.innerText = sectionElement.name;
+      section.appendChild(title);
+
       if (sectionElement.text) {
         const content: HTMLParagraphElement = document.createElement('p');
         content.innerText = sectionElement.text;
-
         section.appendChild(content);
+      }
+
+      if (sectionElement.projectList) {
+        section.appendChild(buildProjects(sectionElement.projectList));
       }
     });
 
     return section;
   }
 
-  function buildProjects(projects: Project[]): void {
+  function buildProjects(projects: Project[]): HTMLElement {
+    const container: HTMLDivElement = document.createElement('div');
     projects.forEach((project) => {
-      const container: HTMLDivElement = document.createElement('div');
+      const card: HTMLDivElement = document.createElement('div');
 
       const projectTitle: HTMLHeadElement = document.createElement('h3');
       projectTitle.innerText = `${project.title}`;
-      container.appendChild(projectTitle);
+      card.appendChild(projectTitle);
 
       const status: HTMLParagraphElement = document.createElement('p');
       status.innerText = `${project.subtype} - ${project.status}`;
-      container.appendChild(status);
+      card.appendChild(status);
 
       const description: HTMLParagraphElement = document.createElement('p');
       description.innerText = `${project.description}`;
-      container.appendChild(description);
+      card.appendChild(description);
 
       const view: HTMLImageElement = document.createElement('img');
       view.classList.add('view');
       view.src = 'assets/screen.png';
-      container.appendChild(view);
+      card.appendChild(view);
 
       if (project.technos?.length) {
         const technoList: HTMLDivElement = document.createElement('div');
@@ -145,9 +150,11 @@ window.addEventListener('DOMContentLoaded', function () {
           logo.src = `assets/images/${techno.toLowerCase()}.png`;
           technoList.appendChild(logo);
         });
-        container.appendChild(technoList);
+        card.appendChild(technoList);
       }
+      container.appendChild(card);
     });
+    return container;
   }
 
   const callProjects = async (): Promise<void> => {
