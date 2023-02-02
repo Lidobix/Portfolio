@@ -60,18 +60,24 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     function buildProjects(projects) {
         const container = document.createElement('div');
+        container.id = 'projectList';
         projects.forEach((project) => {
             var _a, _b;
             const card = document.createElement('div');
+            card.classList.add('projectCard');
             const projectTitle = document.createElement('h3');
             projectTitle.innerText = `${project.title}`;
             card.appendChild(projectTitle);
+            const quickDescription = document.createElement('div');
+            quickDescription.classList.add('quickDescription');
+            const type = document.createElement('p');
+            type.innerText = `${project.type}`;
+            quickDescription.appendChild(type);
+            // card.appendChild(type);
             const status = document.createElement('p');
             status.innerText = `${project.subtype} - ${project.status}`;
-            card.appendChild(status);
-            const description = document.createElement('p');
-            description.innerText = `${project.description}`;
-            card.appendChild(description);
+            quickDescription.appendChild(status);
+            card.appendChild(quickDescription);
             const view = document.createElement('img');
             view.classList.add('view');
             view.src = 'assets/screen.png';

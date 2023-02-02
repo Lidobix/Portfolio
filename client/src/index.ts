@@ -40,7 +40,8 @@ window.addEventListener('DOMContentLoaded', function () {
   type Project = {
     id: number;
     title: string;
-    type: 'project';
+    // type?: 'project';
+    type: string;
     subtype: ProjectSubtype;
     status: Status;
     description: string;
@@ -109,20 +110,27 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function buildProjects(projects: Project[]): HTMLElement {
     const container: HTMLDivElement = document.createElement('div');
+    container.id = 'projectList';
     projects.forEach((project) => {
       const card: HTMLDivElement = document.createElement('div');
+      card.classList.add('projectCard');
 
       const projectTitle: HTMLHeadElement = document.createElement('h3');
       projectTitle.innerText = `${project.title}`;
       card.appendChild(projectTitle);
 
+      const quickDescription: HTMLDivElement = document.createElement('div');
+      quickDescription.classList.add('quickDescription');
+
+      const type: HTMLParagraphElement = document.createElement('p');
+      type.innerText = `${project.type}`;
+      quickDescription.appendChild(type);
+      // card.appendChild(type);
+
       const status: HTMLParagraphElement = document.createElement('p');
       status.innerText = `${project.subtype} - ${project.status}`;
-      card.appendChild(status);
-
-      const description: HTMLParagraphElement = document.createElement('p');
-      description.innerText = `${project.description}`;
-      card.appendChild(description);
+      quickDescription.appendChild(status);
+      card.appendChild(quickDescription);
 
       const view: HTMLImageElement = document.createElement('img');
       view.classList.add('view');
