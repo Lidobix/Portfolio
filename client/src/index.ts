@@ -24,6 +24,9 @@ window.addEventListener('DOMContentLoaded', function () {
     type: 'text' | 'projectList' | 'contactForm';
     text?: string;
     projectList?: Project[];
+    contactForm?: boolean;
+    display: boolean;
+    form?: string;
   };
 
   type Status = 'Fini' | 'En cours' | 'Stand-By';
@@ -70,6 +73,24 @@ window.addEventListener('DOMContentLoaded', function () {
     body?.insertBefore(buildHeader(siteElements.header), script);
 
     body?.insertBefore(buildSection(siteElements.section), script);
+
+    // body?.insertBefore(
+    //   buildForm(
+    //     siteElements.section[
+    //       siteElements.section.findIndex(
+    //         (element) => element.contactForm != null
+    //       )
+    //     ]
+    //   ),
+    //   script
+    // );
+  }
+
+  function buildForm(): HTMLElement {
+    const form: HTMLElement = document.createElement('form');
+
+    console.log('form:', form);
+    return form;
   }
 
   function buildHeader(headerElements: Header): HTMLElement {
@@ -90,18 +111,23 @@ window.addEventListener('DOMContentLoaded', function () {
     const section: HTMLElement = document.createElement('section');
 
     sectionElements.forEach((sectionElement) => {
-      const title: HTMLHeadingElement = document.createElement('h3');
-      title.innerText = sectionElement.name;
-      section.appendChild(title);
+      if (sectionElement.display) {
+        const title: HTMLHeadingElement = document.createElement('h3');
+        title.innerText = sectionElement.name;
+        section.appendChild(title);
 
-      if (sectionElement.text) {
-        const content: HTMLParagraphElement = document.createElement('p');
-        content.innerText = sectionElement.text;
-        section.appendChild(content);
-      }
+        if (sectionElement.text) {
+          const content: HTMLParagraphElement = document.createElement('p');
+          content.innerText = sectionElement.text;
+          section.appendChild(content);
+        }
 
-      if (sectionElement.projectList) {
-        section.appendChild(buildProjects(sectionElement.projectList));
+        if (sectionElement.projectList) {
+          section.appendChild(buildProjects(sectionElement.projectList));
+        }
+        if (sectionElement.contactForm) {
+          section.appendChild(buildForm());
+        }
       }
     });
 
