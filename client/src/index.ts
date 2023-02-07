@@ -11,7 +11,9 @@ window.addEventListener('DOMContentLoaded', function () {
     title: string;
     subtitle: string;
   };
+
   type Nav = { title: string };
+
   type SiteElements = {
     header: Header;
     section: Section[];
@@ -21,16 +23,14 @@ window.addEventListener('DOMContentLoaded', function () {
   type Section = {
     id: number;
     name: string;
-    type: 'text' | 'projectList' | 'contactForm';
     text?: string;
     projectList?: Project[];
-    // contactForm?: FormField[];
-    contactForm?: string;
     display: boolean;
     htmlForm?: string;
   };
 
   type Status = 'Fini' | 'En cours' | 'Stand-By';
+
   type Techno =
     | 'HTML'
     | 'CSS'
@@ -55,12 +55,12 @@ window.addEventListener('DOMContentLoaded', function () {
     display: boolean;
   };
 
-  type FormField = {
-    name: string;
-    input: string;
-    type: string;
-    label: string;
-  };
+  // type FormField = {
+  //   name: string;
+  //   input: string;
+  //   type: string;
+  //   label: string;
+  // };
 
   console.log('lancement fetch');
 
@@ -152,7 +152,7 @@ window.addEventListener('DOMContentLoaded', function () {
         if (sectionElement.projectList) {
           section.appendChild(buildProjects(sectionElement.projectList));
         }
-        if (sectionElement.contactForm && sectionElement.htmlForm) {
+        if (sectionElement.htmlForm) {
           section.appendChild(buildForm(sectionElement.htmlForm));
         }
       }

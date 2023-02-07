@@ -41,13 +41,10 @@ window.addEventListener('DOMContentLoaded', function () {
         //   script
         // );
     }
-    function buildForm(htmlForm
-    // formElements: FormField[]
-    ) {
+    function buildForm(htmlForm) {
         const form = document.createElement('form');
         form.innerHTML = htmlForm;
         form.method = 'POST';
-        // console.log('formElements', formElements);
         console.log('html', htmlForm);
         // formElements.forEach((element) => {
         // const card: HTMLElement = document.createElement('div');
@@ -89,7 +86,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (sectionElement.projectList) {
                     section.appendChild(buildProjects(sectionElement.projectList));
                 }
-                if (sectionElement.contactForm && sectionElement.htmlForm) {
+                if (sectionElement.htmlForm) {
                     section.appendChild(buildForm(sectionElement.htmlForm));
                 }
             }
