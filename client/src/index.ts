@@ -24,9 +24,10 @@ window.addEventListener('DOMContentLoaded', function () {
     type: 'text' | 'projectList' | 'contactForm';
     text?: string;
     projectList?: Project[];
-    contactForm?: boolean;
+    // contactForm?: FormField[];
+    contactForm?: string;
     display: boolean;
-    form?: string;
+    htmlForm?: string;
   };
 
   type Status = 'Fini' | 'En cours' | 'Stand-By';
@@ -51,7 +52,16 @@ window.addEventListener('DOMContentLoaded', function () {
     technos?: Techno[];
     image?: string;
     link?: string;
+    display: boolean;
   };
+
+  type FormField = {
+    name: string;
+    input: string;
+    type: string;
+    label: string;
+  };
+
   console.log('lancement fetch');
 
   ///////////// COUCOU SERVEUR /////////////////////////
@@ -86,10 +96,27 @@ window.addEventListener('DOMContentLoaded', function () {
     // );
   }
 
-  function buildForm(): HTMLElement {
-    const form: HTMLElement = document.createElement('form');
+  function buildForm(htmlForm: string): HTMLElement {
+    const form: HTMLFormElement = document.createElement('form');
+    form.innerHTML = htmlForm;
+    form.method = 'POST';
+    console.log('html', htmlForm);
 
-    console.log('form:', form);
+    // formElements.forEach((element) => {
+    // const card: HTMLElement = document.createElement('div');
+    // const label: HTMLLabelElement = document.createElement('label');
+    // label.htmlFor = element.name;
+    // label.innerText = element.label;
+    // const input: HTMLInputElement = document.createElement(element.input);
+    // input.type = element.type;
+    // input.name = element.name;
+    // input.required = true;
+
+    // card.appendChild(label);
+    // card.appendChild(input);
+    // form.appendChild();
+    // });
+
     return form;
   }
 
@@ -125,8 +152,8 @@ window.addEventListener('DOMContentLoaded', function () {
         if (sectionElement.projectList) {
           section.appendChild(buildProjects(sectionElement.projectList));
         }
-        if (sectionElement.contactForm) {
-          section.appendChild(buildForm());
+        if (sectionElement.contactForm && sectionElement.htmlForm) {
+          section.appendChild(buildForm(sectionElement.htmlForm));
         }
       }
     });
@@ -138,42 +165,43 @@ window.addEventListener('DOMContentLoaded', function () {
     const container: HTMLDivElement = document.createElement('div');
     container.id = 'projectList';
     projects.forEach((project) => {
-      const card: HTMLDivElement = document.createElement('div');
-      card.classList.add('projectCard');
+      if (project.display) {
+        const card: HTMLDivElement = document.createElement('div');
+        card.classList.add('projectCard');
 
-      const projectTitle: HTMLHeadElement = document.createElement('h3');
-      projectTitle.innerText = `${project.title}`;
-      card.appendChild(projectTitle);
+        const projectTitle: HTMLHeadElement = document.createElement('h3');
+        projectTitle.innerText = `${project.title}`;
+        card.appendChild(projectTitle);
 
-      const quickDescription: HTMLDivElement = document.createElement('div');
-      quickDescription.classList.add('quickDescription');
+        const quickDescription: HTMLDivElement = document.createElement('div');
+        quickDescription.classList.add('quickDescription');
 
-      const type: HTMLParagraphElement = document.createElement('p');
-      type.innerText = `${project.type}`;
-      quickDescription.appendChild(type);
-      // card.appendChild(type);
+        const type: HTMLParagraphElement = document.createElement('p');
+        type.innerText = `${project.type}`;
+        quickDescription.appendChild(type);
 
-      const status: HTMLParagraphElement = document.createElement('p');
-      status.innerText = `${project.subtype} - ${project.status}`;
-      quickDescription.appendChild(status);
-      card.appendChild(quickDescription);
+        const status: HTMLParagraphElement = document.createElement('p');
+        status.innerText = `${project.subtype} - ${project.status}`;
+        quickDescription.appendChild(status);
+        card.appendChild(quickDescription);
 
-      const view: HTMLImageElement = document.createElement('img');
-      view.classList.add('view');
-      view.src = 'assets/screen.png';
-      card.appendChild(view);
+        const view: HTMLImageElement = document.createElement('img');
+        view.classList.add('view');
+        view.src = 'assets/screen.png';
+        card.appendChild(view);
 
-      if (project.technos?.length) {
-        const technoList: HTMLDivElement = document.createElement('div');
-        project.technos?.forEach((techno) => {
-          const logo: HTMLImageElement = document.createElement('img');
-          logo.classList.add('logoTechno');
-          logo.src = `assets/images/${techno.toLowerCase()}.png`;
-          technoList.appendChild(logo);
-        });
-        card.appendChild(technoList);
+        if (project.technos?.length) {
+          const technoList: HTMLDivElement = document.createElement('div');
+          project.technos?.forEach((techno) => {
+            const logo: HTMLImageElement = document.createElement('img');
+            logo.classList.add('logoTechno');
+            logo.src = `assets/images/${techno.toLowerCase()}.png`;
+            technoList.appendChild(logo);
+          });
+          card.appendChild(technoList);
+        }
+        container.appendChild(card);
       }
-      container.appendChild(card);
     });
     return container;
   }

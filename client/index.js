@@ -41,9 +41,27 @@ window.addEventListener('DOMContentLoaded', function () {
         //   script
         // );
     }
-    function buildForm() {
+    function buildForm(htmlForm
+    // formElements: FormField[]
+    ) {
         const form = document.createElement('form');
-        console.log('form:', form);
+        form.innerHTML = htmlForm;
+        form.method = 'POST';
+        // console.log('formElements', formElements);
+        console.log('html', htmlForm);
+        // formElements.forEach((element) => {
+        // const card: HTMLElement = document.createElement('div');
+        // const label: HTMLLabelElement = document.createElement('label');
+        // label.htmlFor = element.name;
+        // label.innerText = element.label;
+        // const input: HTMLInputElement = document.createElement(element.input);
+        // input.type = element.type;
+        // input.name = element.name;
+        // input.required = true;
+        // card.appendChild(label);
+        // card.appendChild(input);
+        // form.appendChild();
+        // });
         return form;
     }
     function buildHeader(headerElements) {
@@ -71,8 +89,8 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (sectionElement.projectList) {
                     section.appendChild(buildProjects(sectionElement.projectList));
                 }
-                if (sectionElement.contactForm) {
-                    section.appendChild(buildForm());
+                if (sectionElement.contactForm && sectionElement.htmlForm) {
+                    section.appendChild(buildForm(sectionElement.htmlForm));
                 }
             }
         });
@@ -83,36 +101,37 @@ window.addEventListener('DOMContentLoaded', function () {
         container.id = 'projectList';
         projects.forEach((project) => {
             var _a, _b;
-            const card = document.createElement('div');
-            card.classList.add('projectCard');
-            const projectTitle = document.createElement('h3');
-            projectTitle.innerText = `${project.title}`;
-            card.appendChild(projectTitle);
-            const quickDescription = document.createElement('div');
-            quickDescription.classList.add('quickDescription');
-            const type = document.createElement('p');
-            type.innerText = `${project.type}`;
-            quickDescription.appendChild(type);
-            // card.appendChild(type);
-            const status = document.createElement('p');
-            status.innerText = `${project.subtype} - ${project.status}`;
-            quickDescription.appendChild(status);
-            card.appendChild(quickDescription);
-            const view = document.createElement('img');
-            view.classList.add('view');
-            view.src = 'assets/screen.png';
-            card.appendChild(view);
-            if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
-                const technoList = document.createElement('div');
-                (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
-                    const logo = document.createElement('img');
-                    logo.classList.add('logoTechno');
-                    logo.src = `assets/images/${techno.toLowerCase()}.png`;
-                    technoList.appendChild(logo);
-                });
-                card.appendChild(technoList);
+            if (project.display) {
+                const card = document.createElement('div');
+                card.classList.add('projectCard');
+                const projectTitle = document.createElement('h3');
+                projectTitle.innerText = `${project.title}`;
+                card.appendChild(projectTitle);
+                const quickDescription = document.createElement('div');
+                quickDescription.classList.add('quickDescription');
+                const type = document.createElement('p');
+                type.innerText = `${project.type}`;
+                quickDescription.appendChild(type);
+                const status = document.createElement('p');
+                status.innerText = `${project.subtype} - ${project.status}`;
+                quickDescription.appendChild(status);
+                card.appendChild(quickDescription);
+                const view = document.createElement('img');
+                view.classList.add('view');
+                view.src = 'assets/screen.png';
+                card.appendChild(view);
+                if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
+                    const technoList = document.createElement('div');
+                    (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
+                        const logo = document.createElement('img');
+                        logo.classList.add('logoTechno');
+                        logo.src = `assets/images/${techno.toLowerCase()}.png`;
+                        technoList.appendChild(logo);
+                    });
+                    card.appendChild(technoList);
+                }
+                container.appendChild(card);
             }
-            container.appendChild(card);
         });
         return container;
     }
