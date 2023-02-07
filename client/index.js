@@ -12,6 +12,12 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log('JS lancé');
     const script = document.querySelector('script');
     const body = document.querySelector('body');
+    // type FormField = {
+    //   name: string;
+    //   input: string;
+    //   type: string;
+    //   label: string;
+    // };
     console.log('lancement fetch');
     ///////////// COUCOU SERVEUR /////////////////////////
     fetch(`http://127.0.0.1:1234/`, {
@@ -45,7 +51,6 @@ window.addEventListener('DOMContentLoaded', function () {
         const form = document.createElement('form');
         form.innerHTML = htmlForm;
         form.method = 'POST';
-        console.log('html', htmlForm);
         // formElements.forEach((element) => {
         // const card: HTMLElement = document.createElement('div');
         // const label: HTMLLabelElement = document.createElement('label');
@@ -101,7 +106,7 @@ window.addEventListener('DOMContentLoaded', function () {
             if (project.display) {
                 const card = document.createElement('div');
                 card.classList.add('projectCard');
-                const projectTitle = document.createElement('h3');
+                const projectTitle = document.createElement('h4');
                 projectTitle.innerText = `${project.title}`;
                 card.appendChild(projectTitle);
                 const quickDescription = document.createElement('div');
@@ -109,16 +114,19 @@ window.addEventListener('DOMContentLoaded', function () {
                 const type = document.createElement('p');
                 type.innerText = `${project.type}`;
                 quickDescription.appendChild(type);
+                // card.appendChild(type);
                 const status = document.createElement('p');
                 status.innerText = `${project.subtype} - ${project.status}`;
                 quickDescription.appendChild(status);
+                // card.appendChild(status);
                 card.appendChild(quickDescription);
                 const view = document.createElement('img');
-                view.classList.add('view');
+                view.classList.add('projectView');
                 view.src = 'assets/screen.png';
                 card.appendChild(view);
                 if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
                     const technoList = document.createElement('div');
+                    technoList.classList.add('technoList');
                     (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
                         const logo = document.createElement('img');
                         logo.classList.add('logoTechno');

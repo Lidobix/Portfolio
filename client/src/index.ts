@@ -100,7 +100,6 @@ window.addEventListener('DOMContentLoaded', function () {
     const form: HTMLFormElement = document.createElement('form');
     form.innerHTML = htmlForm;
     form.method = 'POST';
-    console.log('html', htmlForm);
 
     // formElements.forEach((element) => {
     // const card: HTMLElement = document.createElement('div');
@@ -169,7 +168,7 @@ window.addEventListener('DOMContentLoaded', function () {
         const card: HTMLDivElement = document.createElement('div');
         card.classList.add('projectCard');
 
-        const projectTitle: HTMLHeadElement = document.createElement('h3');
+        const projectTitle: HTMLHeadElement = document.createElement('h4');
         projectTitle.innerText = `${project.title}`;
         card.appendChild(projectTitle);
 
@@ -179,19 +178,22 @@ window.addEventListener('DOMContentLoaded', function () {
         const type: HTMLParagraphElement = document.createElement('p');
         type.innerText = `${project.type}`;
         quickDescription.appendChild(type);
+        // card.appendChild(type);
 
         const status: HTMLParagraphElement = document.createElement('p');
         status.innerText = `${project.subtype} - ${project.status}`;
         quickDescription.appendChild(status);
+        // card.appendChild(status);
         card.appendChild(quickDescription);
 
         const view: HTMLImageElement = document.createElement('img');
-        view.classList.add('view');
+        view.classList.add('projectView');
         view.src = 'assets/screen.png';
         card.appendChild(view);
 
         if (project.technos?.length) {
           const technoList: HTMLDivElement = document.createElement('div');
+          technoList.classList.add('technoList');
           project.technos?.forEach((techno) => {
             const logo: HTMLImageElement = document.createElement('img');
             logo.classList.add('logoTechno');

@@ -1,17 +1,23 @@
 body{
-
+    background-color: aquamarine;
+    font-size: 1.3em;
     padding: 5%;
 }
 h1{
     color:blue;
 }
-
+h4{
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1vh;
+    font-size: 1.2em;
+}
 .logoTechno{
     width:20px;
 }
 
-.view{
-    width:100px;
+.projectView{
+    width: 100%;
 }
 
 
@@ -20,12 +26,27 @@ h1{
     flex-direction: column;
 }
 .projectCard{
-    /* min-width: 100%; */
-    /* display: flex;
-    flex-direction: column; */
+    
+     /* min-width: 100%;  */
+     display: flex; 
+    flex-direction: column; 
+    background-color: darkgoldenrod;
+    margin-bottom: 2vh;
+    padding: 1vw 1vh
     
 }
+
+.technoList {
+    margin: 1vh 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .quickDescription{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+
+.quickDescription > p {
+    margin: 0 0 1.2vh 0;
 }
