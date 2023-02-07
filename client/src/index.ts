@@ -195,10 +195,14 @@ window.addEventListener('DOMContentLoaded', function () {
           const technoList: HTMLDivElement = document.createElement('div');
           technoList.classList.add('technoList');
           project.technos?.forEach((techno) => {
+            const div: HTMLElement = document.createElement('div');
             const logo: HTMLImageElement = document.createElement('img');
-            logo.classList.add('logoTechno');
+            div.classList.add('logoTechno');
+
             logo.src = `assets/images/${techno.toLowerCase()}.png`;
-            technoList.appendChild(logo);
+
+            div.appendChild(logo);
+            technoList.appendChild(div);
           });
           card.appendChild(technoList);
         }

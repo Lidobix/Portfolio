@@ -128,10 +128,12 @@ window.addEventListener('DOMContentLoaded', function () {
                     const technoList = document.createElement('div');
                     technoList.classList.add('technoList');
                     (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
+                        const div = document.createElement('div');
                         const logo = document.createElement('img');
-                        logo.classList.add('logoTechno');
+                        div.classList.add('logoTechno');
                         logo.src = `assets/images/${techno.toLowerCase()}.png`;
-                        technoList.appendChild(logo);
+                        div.appendChild(logo);
+                        technoList.appendChild(div);
                     });
                     card.appendChild(technoList);
                 }
