@@ -123,10 +123,12 @@ window.addEventListener('DOMContentLoaded', function () {
                 quickDescription.appendChild(status);
                 // card.appendChild(status);
                 card.appendChild(quickDescription);
-                const view = document.createElement('img');
-                view.classList.add('projectView');
-                view.src = 'assets/screen.png';
-                card.appendChild(view);
+                if (project.image) {
+                    const view = document.createElement('img');
+                    view.classList.add('projectView');
+                    view.src = project.image;
+                    card.appendChild(view);
+                }
                 if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
                     const technoList = document.createElement('div');
                     technoList.classList.add('technoList');

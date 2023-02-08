@@ -189,10 +189,12 @@ window.addEventListener('DOMContentLoaded', function () {
         // card.appendChild(status);
         card.appendChild(quickDescription);
 
-        const view: HTMLImageElement = document.createElement('img');
-        view.classList.add('projectView');
-        view.src = 'assets/screen.png';
-        card.appendChild(view);
+        if (project.image) {
+          const view: HTMLImageElement = document.createElement('img');
+          view.classList.add('projectView');
+          view.src = project.image;
+          card.appendChild(view);
+        }
 
         if (project.technos?.length) {
           const technoList: HTMLDivElement = document.createElement('div');
