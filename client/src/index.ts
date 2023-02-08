@@ -168,9 +168,12 @@ window.addEventListener('DOMContentLoaded', function () {
         const card: HTMLDivElement = document.createElement('div');
         card.classList.add('projectCard');
 
+        const titleContainer: HTMLElement = document.createElement('div');
+        titleContainer.classList.add('projectTitleContainer');
         const projectTitle: HTMLHeadElement = document.createElement('h4');
         projectTitle.innerText = `${project.title}`;
-        card.appendChild(projectTitle);
+        titleContainer.appendChild(projectTitle);
+        card.appendChild(titleContainer);
 
         const quickDescription: HTMLDivElement = document.createElement('div');
         quickDescription.classList.add('quickDescription');
