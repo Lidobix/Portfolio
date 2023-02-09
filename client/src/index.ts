@@ -12,15 +12,15 @@ window.addEventListener('DOMContentLoaded', function () {
     subtitle: string;
   };
 
-  type Nav = { title: string; anchor: string }[];
+  type NavElement = { name: string; anchor: string };
 
   type SiteElements = {
     header: Header;
-    section: Section[];
-    nav: Nav;
+    section: SectionElement[];
+    nav: NavElement[];
   };
 
-  type Section = {
+  type SectionElement = {
     id: number;
     name: string;
     text?: string;
@@ -100,13 +100,24 @@ window.addEventListener('DOMContentLoaded', function () {
     return header;
   }
 
-  function buildSection(sectionElements: Section[]): HTMLElement {
+  function buildSection(sectionElements: SectionElement[]): HTMLElement {
     const section: HTMLElement = document.createElement('section');
+    const nav: NavElement[] = [];
 
     sectionElements.forEach((sectionElement) => {
       if (sectionElement.display) {
         const title: HTMLHeadingElement = document.createElement('h3');
         title.innerText = sectionElement.name;
+
+        const anchorCalc: string = sectionElement.name
+          .toLowerCase()
+          .split(' ')
+          .sort((a, b) => b.length - a.length)[0];
+        title.id = anchorCalc;
+        nav.push({
+          name: sectionElement.name,
+          anchor: anchorCalc,
+        });
         section.appendChild(title);
 
         if (sectionElement.text) {

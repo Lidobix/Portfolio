@@ -50,10 +50,21 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     function buildSection(sectionElements) {
         const section = document.createElement('section');
+        const nav = [];
         sectionElements.forEach((sectionElement) => {
             if (sectionElement.display) {
                 const title = document.createElement('h3');
                 title.innerText = sectionElement.name;
+                const anchor = sectionElement.name
+                    .toLowerCase()
+                    .split(' ')
+                    .sort((a, b) => b.length - a.length)[0];
+                title.id = anchor;
+                nav.push({
+                    name: sectionElement.name,
+                    anchor: anchor,
+                });
+                console.log(nav);
                 section.appendChild(title);
                 if (sectionElement.text) {
                     const content = document.createElement('p');
