@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', function () {
     subtitle: string;
   };
 
-  type Nav = { title: string };
+  type Nav = { title: string; anchor: string }[];
 
   type SiteElements = {
     header: Header;
