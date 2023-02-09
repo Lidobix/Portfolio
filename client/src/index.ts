@@ -147,12 +147,10 @@ window.addEventListener('DOMContentLoaded', function () {
         const type: HTMLParagraphElement = document.createElement('p');
         type.innerText = `${project.type}`;
         quickDescription.appendChild(type);
-        // card.appendChild(type);
 
         const status: HTMLParagraphElement = document.createElement('p');
-        status.innerText = `${project.subtype} - ${project.status}`;
+        status.innerText = `${project.subtype} (${project.status})`;
         quickDescription.appendChild(status);
-        // card.appendChild(status);
         card.appendChild(quickDescription);
 
         if (project.image) {

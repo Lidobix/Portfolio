@@ -12,12 +12,6 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log('JS lancé');
     const script = document.querySelector('script');
     const body = document.querySelector('body');
-    // type FormField = {
-    //   name: string;
-    //   input: string;
-    //   type: string;
-    //   label: string;
-    // };
     console.log('lancement fetch');
     ///////////// COUCOU SERVEUR /////////////////////////
     fetch(`http://127.0.0.1:1234/`, {
@@ -36,34 +30,11 @@ window.addEventListener('DOMContentLoaded', function () {
     function buildPage(siteElements) {
         body === null || body === void 0 ? void 0 : body.insertBefore(buildHeader(siteElements.header), script);
         body === null || body === void 0 ? void 0 : body.insertBefore(buildSection(siteElements.section), script);
-        // body?.insertBefore(
-        //   buildForm(
-        //     siteElements.section[
-        //       siteElements.section.findIndex(
-        //         (element) => element.contactForm != null
-        //       )
-        //     ]
-        //   ),
-        //   script
-        // );
     }
     function buildForm(htmlForm) {
         const form = document.createElement('form');
         form.innerHTML = htmlForm;
         form.method = 'POST';
-        // formElements.forEach((element) => {
-        // const card: HTMLElement = document.createElement('div');
-        // const label: HTMLLabelElement = document.createElement('label');
-        // label.htmlFor = element.name;
-        // label.innerText = element.label;
-        // const input: HTMLInputElement = document.createElement(element.input);
-        // input.type = element.type;
-        // input.name = element.name;
-        // input.required = true;
-        // card.appendChild(label);
-        // card.appendChild(input);
-        // form.appendChild();
-        // });
         return form;
     }
     function buildHeader(headerElements) {
@@ -117,11 +88,9 @@ window.addEventListener('DOMContentLoaded', function () {
                 const type = document.createElement('p');
                 type.innerText = `${project.type}`;
                 quickDescription.appendChild(type);
-                // card.appendChild(type);
                 const status = document.createElement('p');
-                status.innerText = `${project.subtype} - ${project.status}`;
+                status.innerText = `${project.subtype} (${project.status})`;
                 quickDescription.appendChild(status);
-                // card.appendChild(status);
                 card.appendChild(quickDescription);
                 if (project.image) {
                     const view = document.createElement('img');
