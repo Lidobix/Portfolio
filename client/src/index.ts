@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   const body: HTMLBodyElement | null = document.querySelector('body');
 
-  type ProjectSubtype = 'Projet perso' | "projet d'études";
+  type ProjectSubtype = 'Projet perso' | "Projet d'études" | 'Projet pro';
 
   type Header = {
     title: string;
@@ -53,6 +53,8 @@ window.addEventListener('DOMContentLoaded', function () {
     link?: string;
     display: boolean;
   };
+
+  const nav: NavElement[] = [];
 
   console.log('lancement fetch');
 
@@ -102,7 +104,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function buildSection(sectionElements: SectionElement[]): HTMLElement {
     const section: HTMLElement = document.createElement('section');
-    const nav: NavElement[] = [];
 
     sectionElements.forEach((sectionElement) => {
       if (sectionElement.display) {

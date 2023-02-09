@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log('JS lancé');
     const script = document.querySelector('script');
     const body = document.querySelector('body');
+    const nav = [];
     console.log('lancement fetch');
     ///////////// COUCOU SERVEUR /////////////////////////
     fetch(`http://127.0.0.1:1234/`, {
@@ -50,21 +51,19 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     function buildSection(sectionElements) {
         const section = document.createElement('section');
-        const nav = [];
         sectionElements.forEach((sectionElement) => {
             if (sectionElement.display) {
                 const title = document.createElement('h3');
                 title.innerText = sectionElement.name;
-                const anchor = sectionElement.name
+                const anchorCalc = sectionElement.name
                     .toLowerCase()
                     .split(' ')
                     .sort((a, b) => b.length - a.length)[0];
-                title.id = anchor;
+                title.id = anchorCalc;
                 nav.push({
                     name: sectionElement.name,
-                    anchor: anchor,
+                    anchor: anchorCalc,
                 });
-                console.log(nav);
                 section.appendChild(title);
                 if (sectionElement.text) {
                     const content = document.createElement('p');
