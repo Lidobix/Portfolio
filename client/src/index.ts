@@ -79,6 +79,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function buildForm(htmlForm: string): HTMLElement {
     const form: HTMLFormElement = document.createElement('form');
+    form.classList.add('card');
     form.innerHTML = htmlForm;
     form.method = 'POST';
 
@@ -132,7 +133,7 @@ window.addEventListener('DOMContentLoaded', function () {
     projects.forEach((project) => {
       if (project.display) {
         const card: HTMLDivElement = document.createElement('div');
-        card.classList.add('projectCard');
+        card.classList.add('card');
 
         const titleContainer: HTMLElement = document.createElement('div');
         titleContainer.classList.add('projectTitleContainer');

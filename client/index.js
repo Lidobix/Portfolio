@@ -33,6 +33,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     function buildForm(htmlForm) {
         const form = document.createElement('form');
+        form.classList.add('card');
         form.innerHTML = htmlForm;
         form.method = 'POST';
         return form;
@@ -76,7 +77,7 @@ window.addEventListener('DOMContentLoaded', function () {
             var _a, _b;
             if (project.display) {
                 const card = document.createElement('div');
-                card.classList.add('projectCard');
+                card.classList.add('card');
                 const titleContainer = document.createElement('div');
                 titleContainer.classList.add('projectTitleContainer');
                 const projectTitle = document.createElement('h4');
