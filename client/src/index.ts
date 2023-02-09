@@ -44,7 +44,6 @@ window.addEventListener('DOMContentLoaded', function () {
   type Project = {
     id: number;
     title: string;
-    // type?: 'project';
     type: string;
     subtype: ProjectSubtype;
     status: Status;
@@ -54,13 +53,6 @@ window.addEventListener('DOMContentLoaded', function () {
     link?: string;
     display: boolean;
   };
-
-  // type FormField = {
-  //   name: string;
-  //   input: string;
-  //   type: string;
-  //   label: string;
-  // };
 
   console.log('lancement fetch');
 
@@ -83,38 +75,12 @@ window.addEventListener('DOMContentLoaded', function () {
     body?.insertBefore(buildHeader(siteElements.header), script);
 
     body?.insertBefore(buildSection(siteElements.section), script);
-
-    // body?.insertBefore(
-    //   buildForm(
-    //     siteElements.section[
-    //       siteElements.section.findIndex(
-    //         (element) => element.contactForm != null
-    //       )
-    //     ]
-    //   ),
-    //   script
-    // );
   }
 
   function buildForm(htmlForm: string): HTMLElement {
     const form: HTMLFormElement = document.createElement('form');
     form.innerHTML = htmlForm;
     form.method = 'POST';
-
-    // formElements.forEach((element) => {
-    // const card: HTMLElement = document.createElement('div');
-    // const label: HTMLLabelElement = document.createElement('label');
-    // label.htmlFor = element.name;
-    // label.innerText = element.label;
-    // const input: HTMLInputElement = document.createElement(element.input);
-    // input.type = element.type;
-    // input.name = element.name;
-    // input.required = true;
-
-    // card.appendChild(label);
-    // card.appendChild(input);
-    // form.appendChild();
-    // });
 
     return form;
   }
