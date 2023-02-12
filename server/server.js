@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express from 'express';
 import cors from 'cors';
 import { MongoClient } from 'mongodb';
 import * as dotenv from 'dotenv';
@@ -34,11 +34,7 @@ app.get('/', (req, res) => {
 app.get('/api', (req, res) => {
   fetchDatas().then((datas) => {
     console.log('projects=', datas);
-    res.send(
-      datas
-      // siteElements: datas.filter((data) => data.type === 'elements'),
-      // projects: datas.filter((data) => data.type === 'project'),
-    );
+    res.send(datas);
   });
 });
 
