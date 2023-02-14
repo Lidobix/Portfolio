@@ -32,6 +32,7 @@ window.addEventListener('DOMContentLoaded', function () {
         body === null || body === void 0 ? void 0 : body.insertBefore(buildHeader(siteElements.header), script);
         body === null || body === void 0 ? void 0 : body.insertBefore(buildSection(siteElements.section), script);
     }
+    console.log('nav :', nav);
     function buildForm(htmlForm) {
         const form = document.createElement('form');
         form.classList.add('card');
@@ -49,6 +50,7 @@ window.addEventListener('DOMContentLoaded', function () {
         header.appendChild(subTitle);
         return header;
     }
+    function buildNav(navElements) { }
     function buildSection(sectionElements) {
         const section = document.createElement('section');
         sectionElements.forEach((sectionElement) => {
@@ -128,6 +130,7 @@ window.addEventListener('DOMContentLoaded', function () {
         return container;
     }
     const callSiteContent = () => __awaiter(this, void 0, void 0, function* () {
+        console.log('fetch datas');
         fetch(`http://127.0.0.1:1234/api`, {
             method: 'GET',
             headers: {

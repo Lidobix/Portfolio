@@ -78,6 +78,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     body?.insertBefore(buildSection(siteElements.section), script);
   }
+  console.log('nav :', nav);
 
   function buildForm(htmlForm: string): HTMLElement {
     const form: HTMLFormElement = document.createElement('form');
@@ -101,6 +102,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     return header;
   }
+
+  function buildNav(navElements: any): any {}
 
   function buildSection(sectionElements: SectionElement[]): HTMLElement {
     const section: HTMLElement = document.createElement('section');
@@ -195,6 +198,7 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   const callSiteContent = async (): Promise<void> => {
+    console.log('fetch datas');
     fetch(`http://127.0.0.1:1234/api`, {
       method: 'GET',
       headers: {

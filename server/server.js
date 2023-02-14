@@ -17,9 +17,10 @@ function fetchDatas() {
     mongoClient
       .connect()
       .then(() => {
-        mongoClient.db(dbName).collection(dbCol).find({}).toArray();
+        return mongoClient.db(dbName).collection(dbCol).find({}).toArray();
       })
       .then((r) => {
+        console.log(r);
         resolve(r);
       })
       .catch((error) => {
