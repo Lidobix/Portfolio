@@ -51,19 +51,17 @@ window.addEventListener('DOMContentLoaded', function () {
         return header;
     }
     function buildNav(navElements) {
-        const nav = document.createElement('ul');
+        const nav = document.createElement('nav');
+        const ul = document.createElement('ul');
         navElements.forEach((element) => {
             const li = document.createElement('li');
             const a = document.createElement('a');
-            // a.href = `#${element.anchor}`;
             a.href = element.anchor;
-            // const href: any = document.createElement('href');
             a.innerText = element.name;
-            // a.appendChild(href);
             li.appendChild(a);
-            // li.innerText = element.name;
-            nav.appendChild(li);
+            ul.appendChild(li);
         });
+        nav.appendChild(ul);
         return nav;
     }
     function buildSection(sectionElements) {

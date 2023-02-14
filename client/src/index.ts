@@ -106,7 +106,8 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   function buildNav(navElements: NavElement[]): HTMLElement {
-    const nav: HTMLUListElement = document.createElement('ul');
+    const nav: HTMLElement = document.createElement('nav');
+    const ul: HTMLUListElement = document.createElement('ul');
 
     navElements.forEach((element) => {
       const li: HTMLLIElement = document.createElement('li');
@@ -114,8 +115,10 @@ window.addEventListener('DOMContentLoaded', function () {
       a.href = element.anchor;
       a.innerText = element.name;
       li.appendChild(a);
-      nav.appendChild(li);
+      ul.appendChild(li);
     });
+
+    nav.appendChild(ul);
 
     return nav;
   }
