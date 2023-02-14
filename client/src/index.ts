@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', function () {
     display: boolean;
   };
 
-  const nav: NavElement[] = [];
+  const navElements: NavElement[] = [];
 
   console.log('lancement fetch');
 
@@ -75,10 +75,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function buildPage(siteElements: SiteElements): void {
     body?.insertBefore(buildHeader(siteElements.header), script);
-
     body?.insertBefore(buildSection(siteElements.section), script);
+    body?.insertBefore(
+      buildNav(navElements),
+      document.getElementById('section')
+    );
   }
-  console.log('nav :', nav);
 
   function buildForm(htmlForm: string): HTMLElement {
     const form: HTMLFormElement = document.createElement('form');
@@ -103,7 +105,17 @@ window.addEventListener('DOMContentLoaded', function () {
     return header;
   }
 
-  function buildNav(navElements: any): any {}
+  function buildNav(navElements: NavElement[]): HTMLElement {
+    const nav: HTMLUListElement = document.createElement('ul');
+
+    navElements.forEach((element) => {
+      const li: HTMLLIElement = document.createElement('li');
+      li.innerText = element.name;
+      nav.appendChild(li);
+    });
+
+    return nav;
+  }
 
   function buildSection(sectionElements: SectionElement[]): HTMLElement {
     const section: HTMLElement = document.createElement('section');
@@ -118,7 +130,7 @@ window.addEventListener('DOMContentLoaded', function () {
           .split(' ')
           .sort((a, b) => b.length - a.length)[0];
         title.id = anchorCalc;
-        nav.push({
+        navElements.push({
           name: sectionElement.name,
           anchor: anchorCalc,
         });

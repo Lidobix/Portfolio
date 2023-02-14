@@ -20,16 +20,15 @@ function fetchDatas() {
         return mongoClient.db(dbName).collection(dbCol).find({}).toArray();
       })
       .then((r) => {
-        console.log(r);
         resolve(r);
       })
-      .catch((error) => {
-        reject(error);
+      .catch((reason) => {
+        reject(reason);
       });
   });
 }
 app.get('/', (req, res) => {
-  res.json('coucou depuis le serveur!');
+  res.json('Le serveur dit coucou!');
 });
 
 app.get('/api', (req, res) => {

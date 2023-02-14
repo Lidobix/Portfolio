@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log('JS lancé');
     const script = document.querySelector('script');
     const body = document.querySelector('body');
-    const nav = [];
+    const navElements = [];
     console.log('lancement fetch');
     ///////////// COUCOU SERVEUR /////////////////////////
     fetch(`http://127.0.0.1:1234/`, {
@@ -31,8 +31,8 @@ window.addEventListener('DOMContentLoaded', function () {
     function buildPage(siteElements) {
         body === null || body === void 0 ? void 0 : body.insertBefore(buildHeader(siteElements.header), script);
         body === null || body === void 0 ? void 0 : body.insertBefore(buildSection(siteElements.section), script);
+        body === null || body === void 0 ? void 0 : body.insertBefore(buildNav(navElements), document.getElementById('section'));
     }
-    console.log('nav :', nav);
     function buildForm(htmlForm) {
         const form = document.createElement('form');
         form.classList.add('card');
@@ -50,7 +50,15 @@ window.addEventListener('DOMContentLoaded', function () {
         header.appendChild(subTitle);
         return header;
     }
-    function buildNav(navElements) { }
+    function buildNav(navElements) {
+        const nav = document.createElement('ul');
+        navElements.forEach((element) => {
+            const li = document.createElement('li');
+            li.innerText = element.name;
+            nav.appendChild(li);
+        });
+        return nav;
+    }
     function buildSection(sectionElements) {
         const section = document.createElement('section');
         sectionElements.forEach((sectionElement) => {
@@ -62,7 +70,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     .split(' ')
                     .sort((a, b) => b.length - a.length)[0];
                 title.id = anchorCalc;
-                nav.push({
+                navElements.push({
                     name: sectionElement.name,
                     anchor: anchorCalc,
                 });
