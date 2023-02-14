@@ -78,7 +78,7 @@ window.addEventListener('DOMContentLoaded', function () {
     body?.insertBefore(buildSection(siteElements.section), script);
     body?.insertBefore(
       buildNav(navElements),
-      document.getElementById('section')
+      document.querySelector('section')
     );
   }
 
@@ -110,7 +110,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
     navElements.forEach((element) => {
       const li: HTMLLIElement = document.createElement('li');
-      li.innerText = element.name;
+      const a: HTMLAnchorElement = document.createElement('a');
+      a.href = element.anchor;
+      a.innerText = element.name;
+      li.appendChild(a);
       nav.appendChild(li);
     });
 
@@ -132,7 +135,7 @@ window.addEventListener('DOMContentLoaded', function () {
         title.id = anchorCalc;
         navElements.push({
           name: sectionElement.name,
-          anchor: anchorCalc,
+          anchor: `#${anchorCalc}`,
         });
         section.appendChild(title);
 

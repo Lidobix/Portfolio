@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', function () {
     function buildPage(siteElements) {
         body === null || body === void 0 ? void 0 : body.insertBefore(buildHeader(siteElements.header), script);
         body === null || body === void 0 ? void 0 : body.insertBefore(buildSection(siteElements.section), script);
-        body === null || body === void 0 ? void 0 : body.insertBefore(buildNav(navElements), document.getElementById('section'));
+        body === null || body === void 0 ? void 0 : body.insertBefore(buildNav(navElements), document.querySelector('section'));
     }
     function buildForm(htmlForm) {
         const form = document.createElement('form');
@@ -54,7 +54,14 @@ window.addEventListener('DOMContentLoaded', function () {
         const nav = document.createElement('ul');
         navElements.forEach((element) => {
             const li = document.createElement('li');
-            li.innerText = element.name;
+            const a = document.createElement('a');
+            // a.href = `#${element.anchor}`;
+            a.href = element.anchor;
+            // const href: any = document.createElement('href');
+            a.innerText = element.name;
+            // a.appendChild(href);
+            li.appendChild(a);
+            // li.innerText = element.name;
             nav.appendChild(li);
         });
         return nav;
@@ -72,7 +79,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 title.id = anchorCalc;
                 navElements.push({
                     name: sectionElement.name,
-                    anchor: anchorCalc,
+                    anchor: `#${anchorCalc}`,
                 });
                 section.appendChild(title);
                 if (sectionElement.text) {
