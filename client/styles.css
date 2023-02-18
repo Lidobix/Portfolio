@@ -183,10 +183,37 @@ form {
 
     display: flex;
     flex-direction: column;
+    font-size: 0.9em;
 }
 
-form  > label {
-
+form > label {
+    
     color:rgb(164,179,179);
     font-size: 0.9em;
+
+}
+
+form :nth-child(even){
+    font-family: "Oxygen", sans-serif;
+    
+    margin-top: 0.5vh;
+    margin-bottom: 1vh;
+
+}
+
+form > input {
+    height: 3vh;
+}
+
+form > input[type="submit"]{
+    margin-top: 1.5vh;
+    align-self: center;
+    width: 50%;
+    font-size: 1em;
+    height: auto;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
 }
