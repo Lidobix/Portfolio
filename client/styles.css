@@ -176,3 +176,17 @@ nav > div > div {
 li {
     list-style-type: none;
 }
+
+
+form {
+
+
+    display: flex;
+    flex-direction: column;
+}
+
+form  > label {
+
+    color:rgb(164,179,179);
+    font-size: 0.9em;
+}
