@@ -118,7 +118,14 @@ window.addEventListener('DOMContentLoaded', function () {
       ul.appendChild(li);
     });
 
-    nav.appendChild(ul);
+    const div: HTMLElement = document.createElement('div');
+
+    for (let i = 0; i < 3; i++) {
+      const bullet: HTMLElement = document.createElement('div');
+      div.appendChild(bullet);
+    }
+    nav.appendChild(div);
+    // nav.appendChild(ul);
 
     return nav;
   }

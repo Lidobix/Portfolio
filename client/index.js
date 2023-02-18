@@ -61,7 +61,13 @@ window.addEventListener('DOMContentLoaded', function () {
             li.appendChild(a);
             ul.appendChild(li);
         });
-        nav.appendChild(ul);
+        const div = document.createElement('div');
+        for (let i = 0; i < 3; i++) {
+            const bullet = document.createElement('div');
+            div.appendChild(bullet);
+        }
+        nav.appendChild(div);
+        // nav.appendChild(ul);
         return nav;
     }
     function buildSection(sectionElements) {

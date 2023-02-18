@@ -5,11 +5,12 @@ background-color: rgb(34,39,46);
     font-size: 1.3em;
     padding: 2vh 3vw;
     font-family: "Oxygen", sans-serif;
+    overflow-x: hidden;
 }
 
 h1 {
-    margin-top: 0;
     /* color: rgb(55,155,246) */
+    margin-top: 0;
     color:rgb(164,179,179);
 }
 
@@ -120,11 +121,57 @@ h4{
     margin: 0 0 1.2vh 0;
     color:rgb(164,179,179);
 }
-
-nav {
-    position: absolute;
+header {
+    /* position: absolute; */
+    /* position:relative; */
+    position: -webkit-sticky;
+    position: sticky;
+    display: inline-block;
+    vertical-align: top;
+    /* top: 50px; */
+    left: 0;
+    width: 70vw;
 }
 
+
+ul {
+    position: absolute;
+    top:0;
+    left: 100vw;
+}
+
+nav {
+    display: inline-block;
+    position: -webkit-sticky;
+    position: sticky;
+    /* width: 10vw; */
+    left: 22vw;
+    /* top:50px; */
+    vertical-align: top;
+    /* left: 0; */
+    /* display: block; */
+}
+
+nav > div {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+nav > div > div {
+    /*position: absolute;
+    */width: 10vw;
+    height: 1vh;
+    margin-bottom: 1vh;
+    background-color:rgb(164,179,179);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
 
 li {
     list-style-type: none;
