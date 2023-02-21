@@ -1,7 +1,5 @@
 body{
-    /* background-color: #2d333b; */
-background-color: rgb(34,39,46);
-    /* border: 1px solid black; */
+    background-color: rgb(34,39,46);
     font-size: 1.3em;
     padding: 2vh 3vw;
     font-family: "Oxygen", sans-serif;
@@ -9,7 +7,6 @@ background-color: rgb(34,39,46);
 }
 
 h1 {
-    /* color: rgb(55,155,246) */
     margin-top: 0;
     color:rgb(164,179,179);
 }
@@ -20,8 +17,8 @@ h2 {
 
 h3 {    
     color:rgb(173,186,199);
-    /* border:1px solid white; */
 }
+
 p {    
     font-size: 0.9em;
     color:rgb(173,186,199);
@@ -36,7 +33,8 @@ h3::after{
     left: 0px;
     margin-top: 35px;
 }
-h4{
+
+h4 {
     margin: 0;
     font-size: 1.2em;
     color:rgb(164,179,179);
@@ -55,15 +53,18 @@ h4{
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+
 .projectTitleContainer > h4 {
     color: white;
 }
+
 .logoTechno {
     width: 25px;
     height: 25px;
     margin-left: 6px;
     margin-right: 6px;
 }
+
 .logoTechno > img{
      max-width: 25px;
      max-height: 25px;
@@ -74,11 +75,11 @@ h4{
     border: 3px solid rgb(63,71,81);
 }
 
-
 #projectList{
     display: flex;
     flex-direction: column;
 }
+
 .card{
     background-color: #373e47;
     border: 3px solid rgb(63,71,81);
@@ -94,10 +95,8 @@ h4{
 }
 
 .technoList {
-    /* margin: 1vh 0; */
     margin-top: 2vh;
     display: flex;
-    /* height: 20px; */
     align-self: center;
     padding: 5px 5px;
     border-radius: 15px;
@@ -122,13 +121,10 @@ h4{
     color:rgb(164,179,179);
 }
 header {
-    /* position: absolute; */
-    /* position:relative; */
     position: -webkit-sticky;
     position: sticky;
     display: inline-block;
     vertical-align: top;
-    /* top: 50px; */
     left: 0;
     width: 70vw;
 }
@@ -187,15 +183,12 @@ form {
 }
 
 form > label {
-    
     color:rgb(164,179,179);
-    font-size: 0.9em;
-
+    /* font-size: 0.9em; */
 }
 
 form :nth-child(even){
     font-family: "Oxygen", sans-serif;
-    
     margin-top: 0.5vh;
     margin-bottom: 1vh;
 
