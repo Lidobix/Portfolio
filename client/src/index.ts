@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', function () {
     htmlForm?: string;
   };
 
-  type Status = 'Fini' | 'En cours' | 'Stand-By';
+  // type Status = 'Fini' | 'En cours' | 'Stand-By';
 
   type Techno =
     | 'HTML'
@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', function () {
     title: string;
     type: string;
     subtype: ProjectSubtype;
-    status: Status;
+    status: 'Fini' | 'En cours' | 'Stand-By';
     description: string;
     technos?: Techno[];
     image?: string;
@@ -49,7 +49,6 @@ window.addEventListener('DOMContentLoaded', function () {
   };
 
   type Site = {
-    objet: any;
     body: HTMLElement | null;
     script: HTMLScriptElement | null;
     siteElements: SiteElements;
@@ -63,7 +62,6 @@ window.addEventListener('DOMContentLoaded', function () {
   };
 
   const site: Site = {
-    objet: this,
     body: this.document.querySelector('body'),
     script: this.document.querySelector('script'),
     siteElements: {} as SiteElements,
