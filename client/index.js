@@ -14,19 +14,22 @@ window.addEventListener('DOMContentLoaded', function () {
         script: this.document.querySelector('script'),
         siteElements: {},
         buildSite: function () {
-            var _a, _b;
+            var _a, _b, _c, _d;
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
-                const headerWrapper = document.createElement('div');
-                headerWrapper.id = 'headerWrapper';
-                headerWrapper.appendChild(this.buildHeader(this.siteElements.header));
-                // this.body?.insertBefore(
-                //   this.buildHeader(this.siteElements.header),
-                //   this.script
-                // );
-                (_a = this.body) === null || _a === void 0 ? void 0 : _a.insertBefore(headerWrapper, this.script);
-                (_b = this.body) === null || _b === void 0 ? void 0 : _b.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
-                headerWrapper.appendChild(this.buildNav(this.siteElements.nav));
+                (_a = this.body) === null || _a === void 0 ? void 0 : _a.insertBefore(this.buildHeader(this.siteElements.header), this.script);
+                if (document.querySelector('header')) {
+                    // document
+                    //   .querySelector('header')
+                    //   ?.appendChild(this.buildNav(this.siteElements.nav));
+                    (_b = document.querySelector('header')) === null || _b === void 0 ? void 0 : _b.appendChild(this.buildNavToggle());
+                }
+                // const headerWrapper: HTMLDivElement = document.createElement('div');
+                // headerWrapper.id = 'headerWrapper';
+                // headerWrapper.appendChild(this.buildHeader(this.siteElements.header));
+                // this.body?.insertBefore(headerWrapper, this.script);
+                (_c = this.body) === null || _c === void 0 ? void 0 : _c.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
+                (_d = this.body) === null || _d === void 0 ? void 0 : _d.insertBefore(this.buildNav(this.siteElements.nav), this.script);
             });
         },
         buildHeader: (headerElements) => {
@@ -72,12 +75,7 @@ window.addEventListener('DOMContentLoaded', function () {
         },
         buildNav: (navElements) => {
             const ul = document.createElement('ul');
-            // const container: HTMLElement | null =
-            //   this.document.getElementById('headerWrapper');
             const nav = document.createElement('nav');
-            // if (container) {
-            //   container.appendChild(nav);
-            // }
             navElements.forEach((element) => {
                 const li = document.createElement('li');
                 const a = document.createElement('a');
@@ -87,13 +85,16 @@ window.addEventListener('DOMContentLoaded', function () {
                 ul.appendChild(li);
                 nav.appendChild(ul);
             });
-            const div = document.createElement('div');
+            return nav;
+        },
+        buildNavToggle: () => {
+            const navToggle = document.createElement('div');
+            navToggle.classList.add('navToggle');
             for (let i = 0; i < 3; i++) {
                 const bullet = document.createElement('div');
-                div.appendChild(bullet);
+                navToggle.appendChild(bullet);
             }
-            nav.appendChild(div);
-            return nav;
+            return navToggle;
         },
         buildForm: (htmlForm) => {
             const form = document.createElement('form');

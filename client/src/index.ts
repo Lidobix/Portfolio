@@ -55,6 +55,7 @@ window.addEventListener('DOMContentLoaded', function () {
     buildHeader: Function;
     buildSection: Function;
     buildNav: Function;
+    buildNavToggle: Function;
     buildForm: Function;
     buildProjects: Function;
   };
@@ -67,17 +68,34 @@ window.addEventListener('DOMContentLoaded', function () {
     buildSite: async function (): Promise<void> {
       await this.fetchElements();
 
-      const headerWrapper: HTMLDivElement = document.createElement('div');
-      headerWrapper.id = 'headerWrapper';
-      headerWrapper.appendChild(this.buildHeader(this.siteElements.header));
+      this.body?.insertBefore(
+        this.buildHeader(this.siteElements.header),
+        this.script
+      );
+      if (document.querySelector('header')) {
+        // document
+        //   .querySelector('header')
+        //   ?.appendChild(this.buildNav(this.siteElements.nav));
+        document.querySelector('header')?.appendChild(this.buildNavToggle());
+      }
+      // const headerWrapper: HTMLDivElement = document.createElement('div');
+      // headerWrapper.id = 'headerWrapper';
+      // headerWrapper.appendChild(this.buildHeader(this.siteElements.header));
 
-      this.body?.insertBefore(headerWrapper, this.script);
+      // this.body?.insertBefore(headerWrapper, this.script);
 
       this.body?.insertBefore(
         this.buildSection(this, this.siteElements.section),
         this.script
       );
-      headerWrapper.appendChild(this.buildNav(this.siteElements.nav));
+      this.body?.insertBefore(
+        this.buildNav(this.siteElements.nav),
+        this.script
+      );
+
+      // querySelector('header')
+      //   .appendChild(this.buildNav(this.siteElements.nav));
+      // headerWrapper.appendChild(this.buildNav(this.siteElements.nav));
     },
 
     buildHeader: (headerElements: Header): HTMLElement => {
@@ -152,15 +170,19 @@ window.addEventListener('DOMContentLoaded', function () {
         nav.appendChild(ul);
       });
 
-      const div: HTMLElement = document.createElement('div');
+      return nav;
+    },
 
+    buildNavToggle: (): HTMLElement => {
+      const navToggle: HTMLElement = document.createElement('div');
+
+      navToggle.classList.add('navToggle');
       for (let i = 0; i < 3; i++) {
         const bullet: HTMLElement = document.createElement('div');
-        div.appendChild(bullet);
+        navToggle.appendChild(bullet);
       }
-      nav.appendChild(div);
 
-      return nav;
+      return navToggle;
     },
 
     buildForm: (htmlForm: string): HTMLElement => {

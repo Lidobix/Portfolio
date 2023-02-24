@@ -8,13 +8,21 @@ body{
 
 h1 {
     margin-top: 0;
+    margin-bottom: 0;
     /* font-size: 1.3em; */
-
+    border: 1px solid red;
     color:rgb(164,179,179);
 }
 
 h2 {
-    color: rgb(55,155,246)
+    color: rgb(55,155,246);
+    font-size: 1.4em;
+    grid-column-start:1 ;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    border: 1px solid wheat;
+    margin-bottom: 0;
 }
 
 h3 {    
@@ -125,65 +133,60 @@ h4 {
 header {
     /* position: -webkit-sticky;
     position: sticky; */
-    display: inline-block;
+    /* display: inline-block; */
     /* display: flex; */
     /* vertical-align: top; */
     /* left: 0;
     width: 70vw; */
     /* display: block; */
-    /* border: 2px solid green; */
-    grid-column-start:1 ;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
- 
-}
+    border: 2px solid green;
 
-#headerWrapper {
     display: grid;
     grid-template-columns: 2;
     grid-template-rows:1;
     -moz-column-gap: 50px;
     column-gap: 10px;
-    /* border: 2px solid red */
+ 
 }
 
+#headerWrapper {
 
-nav {
-    margin-top: 1vh;
-    grid-column-start:2 ;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 3;
-    /* border: 2px solid white; */
-
+    /* border: 2px solid red */
 }
 
 ul {
     position: absolute;
-    display: none;
+    /* display: none; */
     top:0;
-    left: 100vw;
+    /* left: 1vw; */
 }
 
-nav {
+.navToggle {
     /* border: 1px solid white; */
-    display: inline-block;
-    position: -webkit-sticky;
-    position: sticky;
+    /* display: inline-block; */
+    /* position: -webkit-sticky;
+    position: sticky; */
     left: 22vw;
-    vertical-align: top;
+
+    /* vertical-align: top; */
+    /* margin-top: 1.5vh; */
+    grid-column-start:2 ;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    border: 2px solid white;
 }
 
-nav > div {
-    margin-top: 0.5vh; 
+.navToggle {
     display: flex;
     flex-direction: column;
-    gap: 0.5vh;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6vh;
 }
 
 
-nav > div > div {
+.navToggle > div {
     
     /*position: absolute;
     */width: 1vh;
