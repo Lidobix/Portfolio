@@ -121,14 +121,37 @@ h4 {
     color:rgb(164,179,179);
 }
 header {
-    position: -webkit-sticky;
-    position: sticky;
-    display: inline-block;
-    vertical-align: top;
-    left: 0;
-    width: 70vw;
+    /* position: -webkit-sticky;
+    position: sticky; */
+    /* display: inline-block; */
+    /* display: flex; */
+    /* vertical-align: top; */
+    /* left: 0;
+    width: 70vw; */
+    display: block;
+    border: 2px solid green;
+    grid-column-start:1 ;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
 }
 
+#headerWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 100px);
+    border: 2px solid red;
+}
+
+
+nav {
+grid-column-start:2 ;
+grid-column-end: 3;
+grid-row-start: 1;
+grid-row-end: 3;
+border: 2px solid white;
+
+}
 
 ul {
     position: absolute;

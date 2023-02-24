@@ -10,21 +10,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 window.addEventListener('DOMContentLoaded', function () {
     const site = {
-        objet: this,
         body: this.document.querySelector('body'),
         script: this.document.querySelector('script'),
         siteElements: {},
         buildSite: function () {
-            var _a, _b, _c;
+            var _a, _b;
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
-                console.log(this.siteElements);
                 const headerWrapper = document.createElement('div');
-                headerWrapper.classList.add();
+                headerWrapper.id = 'headerWrapper';
                 headerWrapper.appendChild(this.buildHeader(this.siteElements.header));
+                // this.body?.insertBefore(
+                //   this.buildHeader(this.siteElements.header),
+                //   this.script
+                // );
                 (_a = this.body) === null || _a === void 0 ? void 0 : _a.insertBefore(headerWrapper, this.script);
                 (_b = this.body) === null || _b === void 0 ? void 0 : _b.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
-                (_c = this.body) === null || _c === void 0 ? void 0 : _c.insertBefore(this.buildNav(this.siteElements.nav), document.querySelector('section'));
+                headerWrapper.appendChild(this.buildNav(this.siteElements.nav));
             });
         },
         buildHeader: (headerElements) => {
@@ -69,8 +71,13 @@ window.addEventListener('DOMContentLoaded', function () {
             return section;
         },
         buildNav: (navElements) => {
-            const nav = document.createElement('nav');
             const ul = document.createElement('ul');
+            // const container: HTMLElement | null =
+            //   this.document.getElementById('headerWrapper');
+            const nav = document.createElement('nav');
+            // if (container) {
+            //   container.appendChild(nav);
+            // }
             navElements.forEach((element) => {
                 const li = document.createElement('li');
                 const a = document.createElement('a');
@@ -86,7 +93,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 div.appendChild(bullet);
             }
             nav.appendChild(div);
-            // nav.appendChild(ul);
             return nav;
         },
         buildForm: (htmlForm) => {

@@ -23,8 +23,6 @@ window.addEventListener('DOMContentLoaded', function () {
     htmlForm?: string;
   };
 
-  // type Status = 'Fini' | 'En cours' | 'Stand-By';
-
   type Techno =
     | 'HTML'
     | 'CSS'
@@ -68,21 +66,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
     buildSite: async function (): Promise<void> {
       await this.fetchElements();
-      console.log(this.siteElements);
+
       const headerWrapper: HTMLDivElement = document.createElement('div');
-      headerWrapper.classList.add();
+      headerWrapper.id = 'headerWrapper';
       headerWrapper.appendChild(this.buildHeader(this.siteElements.header));
+
       this.body?.insertBefore(headerWrapper, this.script);
 
       this.body?.insertBefore(
         this.buildSection(this, this.siteElements.section),
         this.script
       );
-
-      this.body?.insertBefore(
-        this.buildNav(this.siteElements.nav),
-        document.querySelector('section')
-      );
+      headerWrapper.appendChild(this.buildNav(this.siteElements.nav));
     },
 
     buildHeader: (headerElements: Header): HTMLElement => {
@@ -143,8 +138,9 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildNav: (navElements: NavElement[]): HTMLElement => {
-      const nav: HTMLElement = document.createElement('nav');
       const ul: HTMLUListElement = document.createElement('ul');
+
+      const nav: HTMLElement = document.createElement('nav');
 
       navElements.forEach((element) => {
         const li: HTMLLIElement = document.createElement('li');
