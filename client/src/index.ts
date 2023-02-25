@@ -47,8 +47,8 @@ window.addEventListener('DOMContentLoaded', function () {
   };
 
   type Site = {
-    body: HTMLElement | null;
-    script: HTMLScriptElement | null;
+    body: HTMLElement;
+    script: HTMLScriptElement;
     siteElements: SiteElements;
     buildSite: Function;
     fetchElements: Function;
@@ -62,14 +62,14 @@ window.addEventListener('DOMContentLoaded', function () {
   };
 
   const site: Site = {
-    body: this.document.querySelector('body'),
-    script: this.document.querySelector('script'),
+    body: this.document.querySelector('body')!,
+    script: this.document.querySelector('script')!,
     siteElements: {} as SiteElements,
 
     buildSite: async function (): Promise<void> {
       await this.fetchElements();
 
-      this.body?.insertBefore(
+      this.body.insertBefore(
         this.buildHeader(this.siteElements.header),
         this.script
       );
@@ -77,24 +77,20 @@ window.addEventListener('DOMContentLoaded', function () {
         document.querySelector('header')?.appendChild(this.buildNavToggle());
       }
 
-      this.body?.insertBefore(
+      this.body.insertBefore(
         this.buildSection(this, this.siteElements.section),
         this.script
       );
-      this.body?.insertBefore(
-        this.buildNav(this.siteElements.nav),
-        this.script
-      );
+      this.body.insertBefore(this.buildNav(this.siteElements.nav), this.script);
 
       document.addEventListener('scroll', () => {
         const ypos: number = window.scrollY;
-        const h2 = document.querySelector('h2');
-        if (h2 != null) {
-          if (ypos > 100) {
-            h2.style.fontSize = '0.9em';
-          } else {
-            h2.style.fontSize = '1.4em';
-          }
+        const h2: HTMLHeadingElement = document.querySelector('h2')!;
+
+        if (ypos > 100) {
+          h2.style.fontSize = '0.9em';
+        } else {
+          h2.style.fontSize = '1.4em';
         }
       });
     },
@@ -175,9 +171,14 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildNavToggle: (): HTMLElement => {
-      const navToggle: HTMLElement = document.createElement('div');
+      const navToggle: HTMLElement = document.createElement('div')!;
 
       navToggle.classList.add('navToggle');
+
+      navToggle.addEventListener('click', () => {
+        console.log('ttt');
+      });
+
       for (let i = 0; i < 3; i++) {
         const bullet: HTMLElement = document.createElement('div');
         navToggle.appendChild(bullet);

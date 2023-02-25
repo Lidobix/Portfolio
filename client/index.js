@@ -14,25 +14,23 @@ window.addEventListener('DOMContentLoaded', function () {
         script: this.document.querySelector('script'),
         siteElements: {},
         buildSite: function () {
-            var _a, _b, _c, _d;
+            var _a;
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
-                (_a = this.body) === null || _a === void 0 ? void 0 : _a.insertBefore(this.buildHeader(this.siteElements.header), this.script);
+                this.body.insertBefore(this.buildHeader(this.siteElements.header), this.script);
                 if (document.querySelector('header')) {
-                    (_b = document.querySelector('header')) === null || _b === void 0 ? void 0 : _b.appendChild(this.buildNavToggle());
+                    (_a = document.querySelector('header')) === null || _a === void 0 ? void 0 : _a.appendChild(this.buildNavToggle());
                 }
-                (_c = this.body) === null || _c === void 0 ? void 0 : _c.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
-                (_d = this.body) === null || _d === void 0 ? void 0 : _d.insertBefore(this.buildNav(this.siteElements.nav), this.script);
+                this.body.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
+                this.body.insertBefore(this.buildNav(this.siteElements.nav), this.script);
                 document.addEventListener('scroll', () => {
                     const ypos = window.scrollY;
                     const h2 = document.querySelector('h2');
-                    if (h2 != null) {
-                        if (ypos > 100) {
-                            h2.style.fontSize = '0.9em';
-                        }
-                        else {
-                            h2.style.fontSize = '1.4em';
-                        }
+                    if (ypos > 100) {
+                        h2.style.fontSize = '0.9em';
+                    }
+                    else {
+                        h2.style.fontSize = '1.4em';
                     }
                 });
             });
@@ -95,6 +93,9 @@ window.addEventListener('DOMContentLoaded', function () {
         buildNavToggle: () => {
             const navToggle = document.createElement('div');
             navToggle.classList.add('navToggle');
+            navToggle.addEventListener('click', () => {
+                console.log('ttt');
+            });
             for (let i = 0; i < 3; i++) {
                 const bullet = document.createElement('div');
                 navToggle.appendChild(bullet);
