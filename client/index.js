@@ -19,17 +19,22 @@ window.addEventListener('DOMContentLoaded', function () {
                 yield this.fetchElements();
                 (_a = this.body) === null || _a === void 0 ? void 0 : _a.insertBefore(this.buildHeader(this.siteElements.header), this.script);
                 if (document.querySelector('header')) {
-                    // document
-                    //   .querySelector('header')
-                    //   ?.appendChild(this.buildNav(this.siteElements.nav));
                     (_b = document.querySelector('header')) === null || _b === void 0 ? void 0 : _b.appendChild(this.buildNavToggle());
                 }
-                // const headerWrapper: HTMLDivElement = document.createElement('div');
-                // headerWrapper.id = 'headerWrapper';
-                // headerWrapper.appendChild(this.buildHeader(this.siteElements.header));
-                // this.body?.insertBefore(headerWrapper, this.script);
                 (_c = this.body) === null || _c === void 0 ? void 0 : _c.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
                 (_d = this.body) === null || _d === void 0 ? void 0 : _d.insertBefore(this.buildNav(this.siteElements.nav), this.script);
+                document.addEventListener('scroll', () => {
+                    const ypos = window.scrollY;
+                    const h2 = document.querySelector('h2');
+                    if (h2 != null) {
+                        if (ypos > 100) {
+                            h2.style.fontSize = '0.9em';
+                        }
+                        else {
+                            h2.style.fontSize = '1.4em';
+                        }
+                    }
+                });
             });
         },
         buildHeader: (headerElements) => {

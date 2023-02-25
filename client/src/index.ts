@@ -58,6 +58,7 @@ window.addEventListener('DOMContentLoaded', function () {
     buildNavToggle: Function;
     buildForm: Function;
     buildProjects: Function;
+    scrollEvent?: Function;
   };
 
   const site: Site = {
@@ -73,16 +74,8 @@ window.addEventListener('DOMContentLoaded', function () {
         this.script
       );
       if (document.querySelector('header')) {
-        // document
-        //   .querySelector('header')
-        //   ?.appendChild(this.buildNav(this.siteElements.nav));
         document.querySelector('header')?.appendChild(this.buildNavToggle());
       }
-      // const headerWrapper: HTMLDivElement = document.createElement('div');
-      // headerWrapper.id = 'headerWrapper';
-      // headerWrapper.appendChild(this.buildHeader(this.siteElements.header));
-
-      // this.body?.insertBefore(headerWrapper, this.script);
 
       this.body?.insertBefore(
         this.buildSection(this, this.siteElements.section),
@@ -93,9 +86,17 @@ window.addEventListener('DOMContentLoaded', function () {
         this.script
       );
 
-      // querySelector('header')
-      //   .appendChild(this.buildNav(this.siteElements.nav));
-      // headerWrapper.appendChild(this.buildNav(this.siteElements.nav));
+      document.addEventListener('scroll', () => {
+        const ypos: number = window.scrollY;
+        const h2 = document.querySelector('h2');
+        if (h2 != null) {
+          if (ypos > 100) {
+            h2.style.fontSize = '0.9em';
+          } else {
+            h2.style.fontSize = '1.4em';
+          }
+        }
+      });
     },
 
     buildHeader: (headerElements: Header): HTMLElement => {
