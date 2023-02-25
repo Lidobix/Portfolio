@@ -50,6 +50,7 @@ window.addEventListener('DOMContentLoaded', function () {
     body: HTMLElement;
     script: HTMLScriptElement;
     siteElements: SiteElements;
+    navToggled: boolean;
     buildSite: Function;
     fetchElements: Function;
     buildHeader: Function;
@@ -65,7 +66,7 @@ window.addEventListener('DOMContentLoaded', function () {
     body: this.document.querySelector('body')!,
     script: this.document.querySelector('script')!,
     siteElements: {} as SiteElements,
-
+    navToggled: false,
     buildSite: async function (): Promise<void> {
       await this.fetchElements();
 
@@ -73,15 +74,15 @@ window.addEventListener('DOMContentLoaded', function () {
         this.buildHeader(this.siteElements.header),
         this.script
       );
-      if (document.querySelector('header')) {
-        document.querySelector('header')?.appendChild(this.buildNavToggle());
-      }
 
       this.body.insertBefore(
         this.buildSection(this, this.siteElements.section),
         this.script
       );
       this.body.insertBefore(this.buildNav(this.siteElements.nav), this.script);
+      if (document.querySelector('header')) {
+        document.querySelector('header')?.appendChild(this.buildNavToggle());
+      }
 
       document.addEventListener('scroll', () => {
         const ypos: number = window.scrollY;
@@ -173,10 +174,13 @@ window.addEventListener('DOMContentLoaded', function () {
     buildNavToggle: (): HTMLElement => {
       const navToggle: HTMLElement = document.createElement('div')!;
 
+      const nav: HTMLElement = document.querySelector('nav')!;
       navToggle.classList.add('navToggle');
 
       navToggle.addEventListener('click', () => {
-        console.log('ttt');
+        nav.style.display === 'none' || nav.style.display === ''
+          ? (nav.style.display = 'block')
+          : (nav.style.display = 'none');
       });
 
       for (let i = 0; i < 3; i++) {

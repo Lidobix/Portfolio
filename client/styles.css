@@ -170,7 +170,7 @@ header {
  
 }
 
-ul {
+nav {
     display: none;
     position: absolute;
     /* display: none; */
@@ -193,6 +193,8 @@ ul {
     grid-row-end: 2;
     /* border: 2px solid white; */
 }
+
+
 
 .navToggle {
     display: flex;

@@ -13,16 +13,17 @@ window.addEventListener('DOMContentLoaded', function () {
         body: this.document.querySelector('body'),
         script: this.document.querySelector('script'),
         siteElements: {},
+        navToggled: false,
         buildSite: function () {
             var _a;
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
                 this.body.insertBefore(this.buildHeader(this.siteElements.header), this.script);
+                this.body.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
+                this.body.insertBefore(this.buildNav(this.siteElements.nav), this.script);
                 if (document.querySelector('header')) {
                     (_a = document.querySelector('header')) === null || _a === void 0 ? void 0 : _a.appendChild(this.buildNavToggle());
                 }
-                this.body.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
-                this.body.insertBefore(this.buildNav(this.siteElements.nav), this.script);
                 document.addEventListener('scroll', () => {
                     const ypos = window.scrollY;
                     const h2 = document.querySelector('h2');
@@ -92,9 +93,12 @@ window.addEventListener('DOMContentLoaded', function () {
         },
         buildNavToggle: () => {
             const navToggle = document.createElement('div');
+            const nav = document.querySelector('nav');
             navToggle.classList.add('navToggle');
             navToggle.addEventListener('click', () => {
-                console.log('ttt');
+                nav.style.display === 'none' || nav.style.display === ''
+                    ? (nav.style.display = 'block')
+                    : (nav.style.display = 'none');
             });
             for (let i = 0; i < 3; i++) {
                 const bullet = document.createElement('div');
