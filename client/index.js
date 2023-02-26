@@ -34,6 +34,33 @@ window.addEventListener('DOMContentLoaded', function () {
                         h2.style.fontSize = '1.4em';
                     }
                 });
+                document.addEventListener('click', (e) => {
+                    const nav = document.querySelector('nav');
+                    console.log('click sur document');
+                    const targetEvent = e.target;
+                    console.log('1', this.navToggled);
+                    if (targetEvent.classList.contains('navToggle')) {
+                        console.log('click sur navToggle', this.navToggled);
+                        if (!this.navToggled) {
+                            console.log('on affiche');
+                            this.navToggled = true;
+                            nav.style.display = 'block';
+                            console.log('2', this.navToggled);
+                            // return;
+                        }
+                        else {
+                            console.log('on ferme');
+                            this.navToggled = false;
+                            nav.style.display = 'none';
+                            console.log('3', this.navToggled);
+                        }
+                    }
+                    else {
+                        this.navToggled = false;
+                        nav.style.display = 'none';
+                    }
+                    console.log('4', this.navToggled);
+                });
             });
         },
         buildHeader: (headerElements) => {
@@ -95,13 +122,21 @@ window.addEventListener('DOMContentLoaded', function () {
             const navToggle = document.createElement('div');
             const nav = document.querySelector('nav');
             navToggle.classList.add('navToggle');
-            navToggle.addEventListener('click', () => {
-                nav.style.display === 'none' || nav.style.display === ''
-                    ? (nav.style.display = 'block')
-                    : (nav.style.display = 'none');
+            navToggle.addEventListener('click', (e) => {
+                // const targetEvent: HTMLElement = e.target as HTMLElement;
+                // if (targetEvent.classList.contains('navToggle')) {
+                // }
+                // if (!site.navToggled) {
+                //   site.navToggled = true;
+                //   nav.style.display = 'block';
+                // }
+                // nav.style.display === 'none' || nav.style.display === ''
+                //   ? (nav.style.display = 'block')
+                //   : (nav.style.display = 'none');
             });
             for (let i = 0; i < 3; i++) {
                 const bullet = document.createElement('div');
+                bullet.classList.add('navToggle');
                 navToggle.appendChild(bullet);
             }
             return navToggle;

@@ -172,29 +172,16 @@ header {
 
 nav {
     display: none;
-    position: absolute;
-    /* display: none; */
-    top:0;
-    /* left: 1vw; */
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    top:18vh;
+    transition: all 0.4s ease-out;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
 }
-
-.navToggle {
-    /* border: 1px solid white; */
-    /* display: inline-block; */
-    /* position: -webkit-sticky;
-    position: sticky; */
-    left: 22vw;
-
-    /* vertical-align: top; */
-    /* margin-top: 1.5vh; */
-    grid-column-start:2 ;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    /* border: 2px solid white; */
-}
-
-
 
 .navToggle {
     display: flex;
@@ -202,8 +189,13 @@ nav {
     justify-content: center;
     align-items: center;
     gap: 0.6vh;
+    left: 22vw;
+    grid-column-start:2 ;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    /* border: 2px solid white; */
 }
-
 
 .navToggle > div {
     
@@ -220,12 +212,18 @@ nav {
     -o-border-radius: 10px;
 }
 
+ul {
+
+    margin:0;
+    padding: 0;
+}
+
 li {
     list-style-type: none;
     background-color: #373e47;
     border-color: 1px solid #373e47;
     text-align: center;
-    padding: 3vh ;
+    padding: 1.5vh 7vw;
 }
 
 a {
