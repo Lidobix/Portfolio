@@ -24,42 +24,64 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (document.querySelector('header')) {
                     (_a = document.querySelector('header')) === null || _a === void 0 ? void 0 : _a.appendChild(this.buildNavToggle());
                 }
+                const nav = document.querySelector('nav');
+                const h2 = document.querySelector('h2');
+                const headerStyle = window.getComputedStyle(document.querySelector('header'));
+                h2.addEventListener('animationstart', () => {
+                    console.log('top');
+                    nav.style.top =
+                        parseFloat(headerStyle.height) +
+                            parseFloat(headerStyle.marginBottom) +
+                            parseFloat(headerStyle.marginTop) +
+                            parseFloat(headerStyle.paddingBottom) +
+                            parseFloat(headerStyle.paddingTop) +
+                            'px';
+                });
                 document.addEventListener('scroll', () => {
                     const ypos = window.scrollY;
                     const h2 = document.querySelector('h2');
+                    // const nav: HTMLElement = document.querySelector('nav')!;
+                    // const headerStyle = window.getComputedStyle(
+                    //   document.querySelector('header')!
+                    // );
                     if (ypos > 100) {
                         h2.style.fontSize = '0.9em';
+                        // nav.style.top =
+                        //   parseFloat(headerStyle.height) +
+                        //   parseFloat(headerStyle.marginBottom) +
+                        //   parseFloat(headerStyle.marginTop) +
+                        //   parseFloat(headerStyle.paddingBottom) +
+                        //   parseFloat(headerStyle.paddingTop) +
+                        ('px');
                     }
                     else {
                         h2.style.fontSize = '1.4em';
+                        // nav.style.top =
+                        //   parseFloat(headerStyle.height) +
+                        //   parseFloat(headerStyle.marginBottom) +
+                        //   parseFloat(headerStyle.marginTop) +
+                        //   parseFloat(headerStyle.paddingBottom) +
+                        //   parseFloat(headerStyle.paddingTop) +
+                        //   'px';
                     }
+                    console.log(`header height: ${parseFloat(headerStyle.height) +
+                        parseFloat(headerStyle.marginBottom) +
+                        parseFloat(headerStyle.marginTop) +
+                        parseFloat(headerStyle.paddingBottom) +
+                        parseFloat(headerStyle.paddingTop) +
+                        'px'}, nav top: `);
                 });
                 document.addEventListener('click', (e) => {
                     const nav = document.querySelector('nav');
-                    console.log('click sur document');
                     const targetEvent = e.target;
-                    console.log('1', this.navToggled);
-                    if (targetEvent.classList.contains('navToggle')) {
-                        console.log('click sur navToggle', this.navToggled);
-                        if (!this.navToggled) {
-                            console.log('on affiche');
-                            this.navToggled = true;
-                            nav.style.display = 'block';
-                            console.log('2', this.navToggled);
-                            // return;
-                        }
-                        else {
-                            console.log('on ferme');
-                            this.navToggled = false;
-                            nav.style.display = 'none';
-                            console.log('3', this.navToggled);
-                        }
+                    if (targetEvent.classList.contains('navToggle') && !this.navToggled) {
+                        this.navToggled = true;
+                        nav.style.display = 'block';
                     }
                     else {
                         this.navToggled = false;
                         nav.style.display = 'none';
                     }
-                    console.log('4', this.navToggled);
                 });
             });
         },
