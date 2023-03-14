@@ -1,3 +1,4 @@
+import { Validator } from './types';
 window.addEventListener('DOMContentLoaded', function () {
   type ProjectSubtype = 'Projet perso' | "Projet d'études" | 'Projet pro';
 
@@ -6,6 +7,8 @@ window.addEventListener('DOMContentLoaded', function () {
     subtitle: string;
   };
 
+  const coin: Validator = { test: false };
+  console.log('coin:', coin);
   type NavElement = { name: string; anchor: string };
 
   type SiteElements = {
