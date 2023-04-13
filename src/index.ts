@@ -1,70 +1,76 @@
-import { Validator } from './types';
+// import {
+//   Header,
+//   Site,
+//   SiteElements,
+//   SectionElement,
+//   NavElement,
+//   Project,
+// } from './types';
+
+type ProjectSubtype = 'Projet perso' | "Projet d'études" | 'Projet pro';
+
+type Header = {
+  title: string;
+  subtitle: string;
+};
+
+type NavElement = { name: string; anchor: string };
+
+type SiteElements = {
+  header: Header;
+  section: SectionElement[];
+  nav: NavElement[];
+};
+
+type SectionElement = {
+  id: number;
+  name: string;
+  text?: string;
+  projectList?: Project[];
+  display: boolean;
+  htmlForm?: string;
+};
+
+type Techno =
+  | 'HTML'
+  | 'CSS'
+  | 'JavaScript'
+  | 'TypeScript'
+  | 'WebSocket'
+  | 'Angular'
+  | 'React'
+  | 'NODE_JS';
+
+type Project = {
+  id: number;
+  title: string;
+  type: string;
+  subtype: ProjectSubtype;
+  status: 'Fini' | 'En cours' | 'Stand-By';
+  description: string;
+  technos?: Techno[];
+  image?: string;
+  link?: string;
+  display: boolean;
+};
+
+type Site = {
+  body: HTMLElement;
+  script: HTMLScriptElement;
+  siteElements: SiteElements;
+  navToggled: boolean;
+  buildSite: Function;
+  fetchElements: Function;
+  buildHeader: Function;
+  buildSection: Function;
+  buildNav: Function;
+  buildNavToggle: Function;
+  buildForm: Function;
+  buildProjects: Function;
+  scrollEvent?: Function;
+};
+
 window.addEventListener('DOMContentLoaded', function () {
-  type ProjectSubtype = 'Projet perso' | "Projet d'études" | 'Projet pro';
-
-  type Header = {
-    title: string;
-    subtitle: string;
-  };
-
-  const coin: Validator = { test: false };
-  console.log('coin:', coin);
-  type NavElement = { name: string; anchor: string };
-
-  type SiteElements = {
-    header: Header;
-    section: SectionElement[];
-    nav: NavElement[];
-  };
-
-  type SectionElement = {
-    id: number;
-    name: string;
-    text?: string;
-    projectList?: Project[];
-    display: boolean;
-    htmlForm?: string;
-  };
-
-  type Techno =
-    | 'HTML'
-    | 'CSS'
-    | 'JavaScript'
-    | 'TypeScript'
-    | 'WebSocket'
-    | 'Angular'
-    | 'React'
-    | 'NODE_JS';
-
-  type Project = {
-    id: number;
-    title: string;
-    type: string;
-    subtype: ProjectSubtype;
-    status: 'Fini' | 'En cours' | 'Stand-By';
-    description: string;
-    technos?: Techno[];
-    image?: string;
-    link?: string;
-    display: boolean;
-  };
-
-  type Site = {
-    body: HTMLElement;
-    script: HTMLScriptElement;
-    siteElements: SiteElements;
-    navToggled: boolean;
-    buildSite: Function;
-    fetchElements: Function;
-    buildHeader: Function;
-    buildSection: Function;
-    buildNav: Function;
-    buildNavToggle: Function;
-    buildForm: Function;
-    buildProjects: Function;
-    scrollEvent?: Function;
-  };
-
   const site: Site = {
     body: this.document.querySelector('body')!,
     script: this.document.querySelector('script')!,
@@ -322,7 +328,9 @@ window.addEventListener('DOMContentLoaded', function () {
       return container;
     },
     fetchElements: (): Promise<SiteElements> => {
-      return fetch(`http://127.0.0.1:1234/api`, {
+      // return fetch(`http://127.0.0.1:3000/portfolio/home`, {
+
+      return fetch('https://lidobix.alwaysdata.net/portfolio/home', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

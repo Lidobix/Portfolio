@@ -1,3 +1,12 @@
+"use strict";
+// import {
+//   Header,
+//   Site,
+//   SiteElements,
+//   SectionElement,
+//   NavElement,
+//   Project,
+// } from './types';
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,8 +17,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 window.addEventListener('DOMContentLoaded', function () {
-    const coin = { test: false };
-    console.log('coin:', coin);
     const site = {
         body: this.document.querySelector('body'),
         script: this.document.querySelector('script'),
@@ -219,7 +226,8 @@ window.addEventListener('DOMContentLoaded', function () {
             return container;
         },
         fetchElements: () => {
-            return fetch(`http://127.0.0.1:1234/api`, {
+            // return fetch(`http://127.0.0.1:3000/portfolio/home`, {
+            return fetch('https://lidobix.alwaysdata.net/portfolio/home', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -236,4 +244,3 @@ window.addEventListener('DOMContentLoaded', function () {
     };
     site.buildSite();
 });
-export {};
