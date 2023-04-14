@@ -1,5 +1,6 @@
 body{
-    background-color: rgb(34,39,46);
+    /* background-color: rgb(34,39,46); */
+    background-color: hsl(0, 0%, 100%);
     font-size: 1.3em;
     margin:0;
     /* padding: 2vh 3vw; */;
@@ -13,6 +14,7 @@ h1 {
     /* font-size: 1.3em; */
     /* border: 1px solid red; */
     color:rgb(164,179,179);
+    
 }
 
 h2 {
@@ -22,8 +24,8 @@ h2 {
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    /*border: 1px solid wheat;
-    */margin-bottom: 0;
+    
+    margin-bottom: 0;
     transition: all 0.6s ease-out;
     -webkit-transition: all 0.6s ease-out;
     -moz-transition: all 0.6s ease-out;
@@ -32,12 +34,13 @@ h2 {
 }
 
 h3 {    
-    color:rgb(173,186,199);
+    /* color:rgb(173,186,199); */
+    color: black;
 }
 
 p {    
     font-size: 0.9em;
-    color:rgb(173,186,199);
+    /* color:rgb(173,186,199); */
 }
 
 h3::after{
@@ -54,31 +57,17 @@ h3::after{
 h4 {
     margin: 0;
     font-size: 1.2em;
-    color:rgb(164,179,179);
+    color:black;
+    text-transform: uppercase;
+    font-weight: bolder;
 }
 
 section {
 
-    padding: 2vh 3vw;
+    padding: 2vh 7vw;
 }
 
-.projectTitleContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(52,125,57);
-    height: 5vh;
-    margin-bottom: 2vh;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
 
-.projectTitleContainer > h4 {
-    color: white;
-}
 
 .logoTechno {
     width: 25px;
@@ -94,54 +83,76 @@ section {
 
 .projectView{
     width: 100%;
-    border: 3px solid rgb(63,71,81);
+    /* border: 3px solid rgb(63,71,81); */
 }
 
 #projectList{
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
+    gap: 30px;
 }
 
 .card{
-    background-color: #373e47;
-    border: 3px solid rgb(63,71,81);
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2vh;
-    padding: 5%;
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 15px;
-    -o-border-radius: 15px;
+      background-color:  white;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      box-shadow: none;
+      overflow: hidden;
+        border-radius: 13px;
+      -webkit-border-radius: 13px;
+      -moz-border-radius: 13px;
+      -ms-border-radius: 13px;
+      -o-border-radius: 13px; 
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      
+      
+}
+
+
+.cardDescription {
+padding: 20px
+
+
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+
+.card img {
+  max-width: 100%;
+  transform-origin: center;
+  transform: scale(var(--img-scale));
+  transition: transform 0.4s ease-in-out;
+
 }
 
 .technoList {
-    margin-top: 2vh;
+    margin-top: 30px;
     display: flex;
     align-self: center;
+ 
     padding: 5px 5px;
+ 
+    flex-wrap: wrap;
     border-radius: 15px;
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;  
-    justify-content: space-evenly;
-    background-color: #EFE9F4;
+border: 1px solid rgba(0, 0, 0, 0.384);
+
+    background-color: #ffffff;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
+
+    justify-content: center;
 }
 
-.quickDescription{
-    display: flex;
-    flex-direction: column;
-}
 
-.quickDescription > p {
-    margin: 0 0 1.2vh 0;
-    color:rgb(164,179,179);
-}
 header {
     /*position: -webkit-sticky;
     position: sticky;
