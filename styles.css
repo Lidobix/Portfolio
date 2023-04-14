@@ -1,6 +1,6 @@
 body{
     /* background-color: rgb(34,39,46); */
-    background-color: #2cd4f1;
+    background-color: hsl(0, 0%, 100%);
     font-size: 1.3em;
     margin:0;
     /* padding: 2vh 3vw; */;
@@ -67,23 +67,7 @@ section {
     padding: 2vh 7vw;
 }
 
-/* .projectTitleContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(52,125,57);
-    height: 5vh;
-    margin-bottom: 2vh;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
 
-.projectTitleContainer > h4 {
-    color: white;
-} */
 
 .logoTechno {
     width: 25px;
@@ -115,14 +99,12 @@ section {
       flex-direction: column;
       box-shadow: none;
       overflow: hidden;
-         border-radius: 13px;
+        border-radius: 13px;
       -webkit-border-radius: 13px;
       -moz-border-radius: 13px;
       -ms-border-radius: 13px;
       -o-border-radius: 13px; 
-       box-shadow: 5px 5px 5px black;
-      box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-      box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
       
       
 }
@@ -159,9 +141,9 @@ figure {
  
     flex-wrap: wrap;
     border-radius: 15px;
+border: 1px solid rgba(0, 0, 0, 0.384);
 
-
-    background-color: #4438eb;
+    background-color: #ffffff;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
