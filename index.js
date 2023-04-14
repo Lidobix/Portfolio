@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', function () {
                         //   parseFloat(headerStyle.marginTop) +
                         //   parseFloat(headerStyle.paddingBottom) +
                         //   parseFloat(headerStyle.paddingTop) +
-                        ('px');
+                        // ('px');
                     }
                     else {
                         h2.style.fontSize = '1.4em';
@@ -212,13 +212,13 @@ window.addEventListener('DOMContentLoaded', function () {
                     type.innerText = `${project.type}`;
                     description.appendChild(type);
                     // quickDescription.appendChild(type);
-                    const status = document.createElement('p');
-                    status.innerText = `${project.subtype} (${project.status})`;
+                    // const detail: HTMLParagraphElement = document.createElement('p');
+                    // detail.innerText = `${project.description}`;
                     // quickDescription.appendChild(status);
-                    description.appendChild(status);
+                    // description.appendChild(detail);
                     // quickDescription.appendChild(status);
                     // card.appendChild(quickDescription);
-                    card.appendChild(description);
+                    // card.appendChild(description);
                     if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
                         const technoList = document.createElement('div');
                         technoList.classList.add('technoList');
@@ -230,7 +230,14 @@ window.addEventListener('DOMContentLoaded', function () {
                             div.appendChild(logo);
                             technoList.appendChild(div);
                         });
-                        card.appendChild(technoList);
+                        description.appendChild(technoList);
+                        card.appendChild(description);
+                    }
+                    if (project.link) {
+                        card.addEventListener('click', (e) => {
+                            console.log(project.link);
+                            window.location.href = project.link;
+                        });
                     }
                     container.appendChild(card);
                 }

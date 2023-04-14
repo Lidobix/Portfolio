@@ -98,7 +98,6 @@ window.addEventListener('DOMContentLoaded', function () {
         document.querySelector('header')!
       );
       h2.addEventListener('animationstart', () => {
-        console.log('top');
         nav.style.top =
           parseFloat(headerStyle.height) +
           parseFloat(headerStyle.marginBottom) +
@@ -123,7 +122,7 @@ window.addEventListener('DOMContentLoaded', function () {
           //   parseFloat(headerStyle.marginTop) +
           //   parseFloat(headerStyle.paddingBottom) +
           //   parseFloat(headerStyle.paddingTop) +
-          ('px');
+          // ('px');
         } else {
           h2.style.fontSize = '1.4em';
           // nav.style.top =
@@ -282,40 +281,25 @@ window.addEventListener('DOMContentLoaded', function () {
 
           if (project.image) {
             const figure: HTMLElement = document.createElement('figure');
-            // figure.style = `url(${project.image})`;
+
             const view: HTMLImageElement = document.createElement('img');
-            // view.classList.add('projectView');
+
             view.src = project.image;
             figure.appendChild(view);
-            // card.appendChild(view);
+
             card.appendChild(figure);
           }
           const description: HTMLDivElement = document.createElement('div');
           description.classList.add('cardDescription');
-          // const titleContainer: HTMLElement = document.createElement('div');
-          // titleContainer.classList.add('projectTitleContainer');
+
           const projectTitle: HTMLHeadElement = document.createElement('h4');
           projectTitle.innerText = `${project.title}`;
-          // titleContainer.appendChild(projectTitle);
-          description.appendChild(projectTitle);
-          // card.appendChild(titleContainer);
 
-          // const quickDescription: HTMLDivElement =
-          //   document.createElement('div');
-          // quickDescription.classList.add('quickDescription');
+          description.appendChild(projectTitle);
 
           const type: HTMLParagraphElement = document.createElement('p');
           type.innerText = `${project.type}`;
           description.appendChild(type);
-          // quickDescription.appendChild(type);
-
-          const status: HTMLParagraphElement = document.createElement('p');
-          status.innerText = `${project.subtype} (${project.status})`;
-          // quickDescription.appendChild(status);
-          description.appendChild(status);
-          // quickDescription.appendChild(status);
-          // card.appendChild(quickDescription);
-          card.appendChild(description);
 
           if (project.technos?.length) {
             const technoList: HTMLDivElement = document.createElement('div');
@@ -330,16 +314,21 @@ window.addEventListener('DOMContentLoaded', function () {
               div.appendChild(logo);
               technoList.appendChild(div);
             });
-            card.appendChild(technoList);
+            description.appendChild(technoList);
+            card.appendChild(description);
           }
+          if (project.link) {
+            card.addEventListener('click', (e) => {
+              window.location.href = project.link!;
+            });
+          }
+
           container.appendChild(card);
         }
       });
       return container;
     },
     fetchElements: (): Promise<SiteElements> => {
-      // return fetch(`http://127.0.0.1:3000/portfolio/home`, {
-
       return fetch('https://lidobix.alwaysdata.net/portfolio/home', {
         method: 'GET',
         headers: {
