@@ -186,27 +186,39 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (project.display) {
                     const card = document.createElement('div');
                     card.classList.add('card');
-                    const titleContainer = document.createElement('div');
-                    titleContainer.classList.add('projectTitleContainer');
+                    if (project.image) {
+                        const figure = document.createElement('figure');
+                        // figure.style = `url(${project.image})`;
+                        const view = document.createElement('img');
+                        // view.classList.add('projectView');
+                        view.src = project.image;
+                        figure.appendChild(view);
+                        // card.appendChild(view);
+                        card.appendChild(figure);
+                    }
+                    const description = document.createElement('div');
+                    description.classList.add('cardDescription');
+                    // const titleContainer: HTMLElement = document.createElement('div');
+                    // titleContainer.classList.add('projectTitleContainer');
                     const projectTitle = document.createElement('h4');
                     projectTitle.innerText = `${project.title}`;
-                    titleContainer.appendChild(projectTitle);
-                    card.appendChild(titleContainer);
-                    const quickDescription = document.createElement('div');
-                    quickDescription.classList.add('quickDescription');
+                    // titleContainer.appendChild(projectTitle);
+                    description.appendChild(projectTitle);
+                    // card.appendChild(titleContainer);
+                    // const quickDescription: HTMLDivElement =
+                    //   document.createElement('div');
+                    // quickDescription.classList.add('quickDescription');
                     const type = document.createElement('p');
                     type.innerText = `${project.type}`;
-                    quickDescription.appendChild(type);
+                    description.appendChild(type);
+                    // quickDescription.appendChild(type);
                     const status = document.createElement('p');
                     status.innerText = `${project.subtype} (${project.status})`;
-                    quickDescription.appendChild(status);
-                    card.appendChild(quickDescription);
-                    if (project.image) {
-                        const view = document.createElement('img');
-                        view.classList.add('projectView');
-                        view.src = project.image;
-                        card.appendChild(view);
-                    }
+                    // quickDescription.appendChild(status);
+                    description.appendChild(status);
+                    // quickDescription.appendChild(status);
+                    // card.appendChild(quickDescription);
+                    card.appendChild(description);
                     if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
                         const technoList = document.createElement('div');
                         technoList.classList.add('technoList');

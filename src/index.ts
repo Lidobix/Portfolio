@@ -280,32 +280,42 @@ window.addEventListener('DOMContentLoaded', function () {
           const card: HTMLDivElement = document.createElement('div');
           card.classList.add('card');
 
-          const titleContainer: HTMLElement = document.createElement('div');
-          titleContainer.classList.add('projectTitleContainer');
+          if (project.image) {
+            const figure: HTMLElement = document.createElement('figure');
+            // figure.style = `url(${project.image})`;
+            const view: HTMLImageElement = document.createElement('img');
+            // view.classList.add('projectView');
+            view.src = project.image;
+            figure.appendChild(view);
+            // card.appendChild(view);
+            card.appendChild(figure);
+          }
+          const description: HTMLDivElement = document.createElement('div');
+          description.classList.add('cardDescription');
+          // const titleContainer: HTMLElement = document.createElement('div');
+          // titleContainer.classList.add('projectTitleContainer');
           const projectTitle: HTMLHeadElement = document.createElement('h4');
           projectTitle.innerText = `${project.title}`;
-          titleContainer.appendChild(projectTitle);
-          card.appendChild(titleContainer);
+          // titleContainer.appendChild(projectTitle);
+          description.appendChild(projectTitle);
+          // card.appendChild(titleContainer);
 
-          const quickDescription: HTMLDivElement =
-            document.createElement('div');
-          quickDescription.classList.add('quickDescription');
+          // const quickDescription: HTMLDivElement =
+          //   document.createElement('div');
+          // quickDescription.classList.add('quickDescription');
 
           const type: HTMLParagraphElement = document.createElement('p');
           type.innerText = `${project.type}`;
-          quickDescription.appendChild(type);
+          description.appendChild(type);
+          // quickDescription.appendChild(type);
 
           const status: HTMLParagraphElement = document.createElement('p');
           status.innerText = `${project.subtype} (${project.status})`;
-          quickDescription.appendChild(status);
-          card.appendChild(quickDescription);
-
-          if (project.image) {
-            const view: HTMLImageElement = document.createElement('img');
-            view.classList.add('projectView');
-            view.src = project.image;
-            card.appendChild(view);
-          }
+          // quickDescription.appendChild(status);
+          description.appendChild(status);
+          // quickDescription.appendChild(status);
+          // card.appendChild(quickDescription);
+          card.appendChild(description);
 
           if (project.technos?.length) {
             const technoList: HTMLDivElement = document.createElement('div');
