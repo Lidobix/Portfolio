@@ -174,13 +174,14 @@ header {
     *//*background-color: rgb(34,39,46);
     */
     /* background-color: #086a61; */
-background: linear-gradient(to bottom right , #086a61,82%, rgb(247, 247, 138))
+background: linear-gradient(-220deg, #086a61,82%, rgb(247, 247, 138))
     /*position: -webkit-sticky;
     *//*position: sticky;
     */
     /* top:0; */
     /*width: 100vw;
     */;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     height: 200px;
     /* z-index: 2; */
     /* display: grid;
