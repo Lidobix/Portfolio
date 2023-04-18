@@ -65,7 +65,7 @@ h4 {
 }
 
 section {
-
+/* margin-top: 120px; */
     padding: 2vh 7vw;
 }
 
@@ -156,6 +156,8 @@ border: 1px solid rgba(0, 0, 0, 0.384);
 
 
 header {
+    padding-top: 120px;
+    padding-left: 10px;
     /*position: -webkit-sticky;
     position: sticky;
     *//*display: inline-block;
@@ -165,57 +167,83 @@ header {
     width: 70vw;
     *//*display: block;
     *//*border: 2px solid green;
-    */padding: 2vh 2vw;
-    /*padding-top: 2vh;
+    *//*padding: 2vh 2vw;
+    *//*padding-top: 2vh;
     padding-right: 2vw;
-    */left: 0;
-    background-color: rgb(34,39,46);
-    position: -webkit-sticky;
-    position: sticky;
-    top:0;
+    *//*left: 0;
+    *//*background-color: rgb(34,39,46);
+    */
+    /* background-color: #086a61; */
+background: linear-gradient(to bottom right , #086a61,82%, rgb(247, 247, 138))
+    /*position: -webkit-sticky;
+    *//*position: sticky;
+    */
+    /* top:0; */
     /*width: 100vw;
-    */z-index: 2;
-    display: grid;
+    */;
+    height: 200px;
+    /* z-index: 2; */
+    /* display: grid;
     grid-template-columns: 2;
     grid-template-rows:1;
     -moz-column-gap: 50px;
-    column-gap: 10px;
- 
+    column-gap: 10px; */
+   
+    width: 100%;
+  
 }
 
+
+
 nav {
+    /* position: absolute; */
     display: none;
-    position: fixed;
-    z-index: 3;
-    width: 100%;
-    top:18vh;
-    transition: all 0.2s ease-out;
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    -ms-transition: all 0.2s ease-out;
-    -o-transition: all 0.2s ease-out;
+    /* position: -webkit-sticky; */
+    /* position: sticky; */
+    /* top: 0; */
+    /* z-index: 3; */
+    /* width: ; */
+    /*top:18vh;
+    */
+    /* transition: all 0.2s ease-out;
+    -webkit-transition:;
+    -moz-transition:;
+    -ms-transition:;
+    -o-transition:; */
+    /* grid-column-start:1 ;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 3; */
 }
 
 .navToggle {
+    
+    /* position: fixed; */
     display: flex;
+    /* height: 50px; */
+    /* position: -webkit-sticky; */
+    position: fixed;
+    top:20px;
+right: 20px;    
+    /* height: 15px; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.6vh;
-    left: 22vw;
-    grid-column-start:2 ;
+    /* left: 22vw; */
+    /* grid-column-start:2 ;
     grid-column-end: 3;
     grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row-end: 2; */
     /* border: 2px solid white; */
 }
 
 .navToggle > div {
     
     /*position: absolute;
-    */width: 1vh;
+    */width: 4vh;
     
-    height: 1vh;
+    height: 0.7vh;
     /* margin-bottom: 1vh; */
     background-color:rgb(164,179,179);
     border-radius: 10px;
@@ -233,7 +261,8 @@ ul {
 
 li {
     list-style-type: none;
-    background-color: #373e47;
+    /* background-color: #373e47; */
+    background-color: #086a61;
     border-color: 1px solid #373e47;
     text-align: center;
     padding: 1.5vh 7vw;

@@ -88,7 +88,10 @@ window.addEventListener('DOMContentLoaded', function () {
         this.buildSection(this, this.siteElements.section),
         this.script
       );
-      this.body.insertBefore(this.buildNav(this.siteElements.nav), this.script);
+      // this.body.insertBefore(this.buildNav(this.siteElements.nav), this.script);
+      document
+        .querySelector('header')!
+        .appendChild(this.buildNav(this.siteElements.nav));
       if (document.querySelector('header')) {
         document.querySelector('header')?.appendChild(this.buildNavToggle());
       }
@@ -97,59 +100,59 @@ window.addEventListener('DOMContentLoaded', function () {
       const headerStyle = window.getComputedStyle(
         document.querySelector('header')!
       );
-      h2.addEventListener('animationstart', () => {
-        nav.style.top =
-          parseFloat(headerStyle.height) +
-          parseFloat(headerStyle.marginBottom) +
-          parseFloat(headerStyle.marginTop) +
-          parseFloat(headerStyle.paddingBottom) +
-          parseFloat(headerStyle.paddingTop) +
-          'px';
-      });
-      document.addEventListener('scroll', () => {
-        const ypos: number = window.scrollY;
-        const h2: HTMLHeadingElement = document.querySelector('h2')!;
-        // const nav: HTMLElement = document.querySelector('nav')!;
-        // const headerStyle = window.getComputedStyle(
-        //   document.querySelector('header')!
-        // );
+      // h2.addEventListener('animationstart', () => {
+      //   nav.style.top =
+      //     parseFloat(headerStyle.height) +
+      //     parseFloat(headerStyle.marginBottom) +
+      //     parseFloat(headerStyle.marginTop) +
+      //     parseFloat(headerStyle.paddingBottom) +
+      //     parseFloat(headerStyle.paddingTop) +
+      //     'px';
+      // });
+      // document.addEventListener('scroll', () => {
+      // const ypos: number = window.scrollY;
+      // const h2: HTMLHeadingElement = document.querySelector('h2')!;
+      // const nav: HTMLElement = document.querySelector('nav')!;
+      // const headerStyle = window.getComputedStyle(
+      //   document.querySelector('header')!
+      // );
 
-        if (ypos > 100) {
-          h2.style.fontSize = '0.9em';
-          // nav.style.top =
-          //   parseFloat(headerStyle.height) +
-          //   parseFloat(headerStyle.marginBottom) +
-          //   parseFloat(headerStyle.marginTop) +
-          //   parseFloat(headerStyle.paddingBottom) +
-          //   parseFloat(headerStyle.paddingTop) +
-          // ('px');
-        } else {
-          h2.style.fontSize = '1.4em';
-          // nav.style.top =
-          //   parseFloat(headerStyle.height) +
-          //   parseFloat(headerStyle.marginBottom) +
-          //   parseFloat(headerStyle.marginTop) +
-          //   parseFloat(headerStyle.paddingBottom) +
-          //   parseFloat(headerStyle.paddingTop) +
-          //   'px';
-        }
-        console.log(
-          `header height: ${
-            parseFloat(headerStyle.height) +
-            parseFloat(headerStyle.marginBottom) +
-            parseFloat(headerStyle.marginTop) +
-            parseFloat(headerStyle.paddingBottom) +
-            parseFloat(headerStyle.paddingTop) +
-            'px'
-          }, nav top: `
-        );
-      });
+      // if (ypos > 100) {
+      // h2.style.fontSize = '0.9em';
+      // nav.style.top =
+      //   parseFloat(headerStyle.height) +
+      //   parseFloat(headerStyle.marginBottom) +
+      //   parseFloat(headerStyle.marginTop) +
+      //   parseFloat(headerStyle.paddingBottom) +
+      //   parseFloat(headerStyle.paddingTop) +
+      // ('px');
+      // } else {
+      // h2.style.fontSize = '1.4em';
+      // nav.style.top =
+      //   parseFloat(headerStyle.height) +
+      //   parseFloat(headerStyle.marginBottom) +
+      //   parseFloat(headerStyle.marginTop) +
+      //   parseFloat(headerStyle.paddingBottom) +
+      //   parseFloat(headerStyle.paddingTop) +
+      //   'px';
+      // }
+      // console.log(
+      //   `header height: ${
+      //     parseFloat(headerStyle.height) +
+      //     parseFloat(headerStyle.marginBottom) +
+      //     parseFloat(headerStyle.marginTop) +
+      //     parseFloat(headerStyle.paddingBottom) +
+      //     parseFloat(headerStyle.paddingTop) +
+      //     'px'
+      //   }, nav top: `
+      // );
+      // });
 
       document.addEventListener('click', (e) => {
         const nav: HTMLElement = document.querySelector('nav')!;
         const targetEvent: HTMLElement = e.target as HTMLElement;
 
-        if (targetEvent.classList.contains('navToggle') && !this.navToggled) {
+        if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
           this.navToggled = true;
           nav.style.display = 'block';
         } else {
@@ -255,7 +258,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
       for (let i = 0; i < 3; i++) {
         const bullet: HTMLElement = document.createElement('div');
-        bullet.classList.add('navToggle');
+        bullet.classList.add('navTrigger');
         navToggle.appendChild(bullet);
       }
 
