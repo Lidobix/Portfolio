@@ -4,7 +4,9 @@ body{
     font-size: 1.3em;
     margin:0;
     /* padding: 2vh 3vw; */;
-    font-family: "Oxygen", sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+    /* font-family: 'PT Sans', sans-serif; */
+
     overflow-x: hidden;
 }
 
