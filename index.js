@@ -1,12 +1,4 @@
 "use strict";
-// import {
-//   Header,
-//   Site,
-//   SiteElements,
-//   SectionElement,
-//   NavElement,
-//   Project,
-// } from './types';
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -107,21 +99,7 @@ window.addEventListener('DOMContentLoaded', function () {
         },
         buildNavToggle: () => {
             const navToggle = document.createElement('div');
-            const nav = document.querySelector('nav');
-            // navToggle.classList.add('navToggle');
             navToggle.id = 'navToggle';
-            navToggle.addEventListener('click', (e) => {
-                // const targetEvent: HTMLElement = e.target as HTMLElement;
-                // if (targetEvent.classList.contains('navToggle')) {
-                // }
-                // if (!site.navToggled) {
-                //   site.navToggled = true;
-                //   nav.style.display = 'block';
-                // }
-                // nav.style.display === 'none' || nav.style.display === ''
-                //   ? (nav.style.display = 'block')
-                //   : (nav.style.display = 'none');
-            });
             for (let i = 0; i < 3; i++) {
                 const bullet = document.createElement('div');
                 bullet.classList.add('navTrigger');
