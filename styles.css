@@ -1,11 +1,8 @@
 body{
-    /* background-color: rgb(34,39,46); */
-    background-color: hsl(0, 0%, 100%);
+    background-color: white;
     font-size: 1.3em;
     margin:0;
-    /* padding: 2vh 3vw; */;
     font-family: 'Roboto Condensed', sans-serif;
-    /* font-family: 'PT Sans', sans-serif; */
 
     overflow-x: hidden;
 }
@@ -13,20 +10,16 @@ body{
 h1 {
     margin-top: 0;
     margin-bottom: 0;
-    
     font-size: 3.5em;
-    /* border: 1px solid red; */
-    color:rgb(164,179,179);
-    color:rgb(27, 23, 37);
+    /* color:rgb(164,179,179); */
     color: white;
-    /* font-weight: bolder; */
     
 }
 
 h2 {
-    color: rgb(55,155,246);
+    /* color: rgb(55,155,246);
     color:#704E2E;
-    color:#A72608;
+    color:#A72608; */
     color:rgb(27, 23, 37);
     font-size: 1.4em;
     grid-column-start:1 ;
@@ -43,13 +36,12 @@ h2 {
 }
 
 h3 {    
-    /* color:rgb(173,186,199); */
     color: black;
+    text-transform: uppercase;
 }
 
 p {    
     font-size: 0.9em;
-    /* color:rgb(173,186,199); */
 }
 
 h3::after{
@@ -57,7 +49,7 @@ h3::after{
     position : absolute;
     width : 50%;
     height : 2px;
-    background-color: rgb(236,119,92);
+    background-color: rgba(253, 215, 70,1);
     left: 0px;
     margin-top: 35px;
     z-index: 1;
@@ -180,6 +172,7 @@ nav {
  position: fixed;
  display: block;
  width:200px;
+ z-index: 8;
  top:10px;
  left: 100%;
  transition:300ms ease-in-out;
@@ -240,9 +233,7 @@ li {
 a {
     text-decoration: none;
     color:rgb(173,186,199);
-    /* color:rgb(27, 23, 37); */
-    /* color:aqua; */
-    /* color:inherit */
+  
 
 }
 
@@ -256,7 +247,7 @@ form {
 
 form > label {
     color:rgb(164,179,179);
-    /* font-size: 0.9em; */
+    
 }
 
 form :nth-child(even){
