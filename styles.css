@@ -57,7 +57,7 @@ h4 {
 }
 
 section {
-    padding: 2vh 7vw;
+    padding: 20px;
 }
 
 .logoTechno {
@@ -166,13 +166,13 @@ nav {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.6vh;
+    gap: 4px;
  
 }
 
 #navToggle > div {
     width: 32px;
-    height: 0.7vh;
+    height: 5px;
     background-color:rgb(164,179,179);
     background-color:rgb(27, 23, 37);
     border-radius: 10px;
@@ -192,7 +192,7 @@ li {
     background-color: #086a61;
     border: 1px solid rgb(27, 23, 37);
     text-align: center;
-    padding: 1.5vh 7vw;
+    padding: 13px 7px;
 }
 
 a {
