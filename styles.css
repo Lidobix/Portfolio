@@ -16,11 +16,16 @@ h1 {
     /* font-size: 1.3em; */
     /* border: 1px solid red; */
     color:rgb(164,179,179);
+    color:rgb(27, 23, 37);
+    /* font-weight: bolder; */
     
 }
 
 h2 {
     color: rgb(55,155,246);
+    color:#704E2E;
+    color:#A72608;
+    color:rgb(27, 23, 37);
     font-size: 1.4em;
     grid-column-start:1 ;
     grid-column-end: 3;
@@ -156,8 +161,8 @@ border: 1px solid rgba(0, 0, 0, 0.384);
 
 
 header {
-    padding-top: 120px;
-    padding-left: 10px;
+    padding-top: 180px;
+    padding-left: 20px;
     /*position: -webkit-sticky;
     position: sticky;
     *//*display: inline-block;
@@ -182,7 +187,7 @@ background: linear-gradient(-220deg, #086a61,82%, rgb(247, 247, 138))
     /*width: 100vw;
     */;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    height: 200px;
+    height: 300px;
     /* z-index: 2; */
     /* display: grid;
     grid-template-columns: 2;
@@ -197,56 +202,51 @@ background: linear-gradient(-220deg, #086a61,82%, rgb(247, 247, 138))
 
 
 nav {
-    /* position: absolute; */
-    display: none;
-    /* position: -webkit-sticky; */
-    /* position: sticky; */
-    /* top: 0; */
-    /* z-index: 3; */
-    /* width: ; */
-    /*top:18vh;
-    */
-    /* transition: all 0.2s ease-out;
-    -webkit-transition:;
-    -moz-transition:;
-    -ms-transition:;
-    -o-transition:; */
-    /* grid-column-start:1 ;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 3; */
+ /*position: absolute;
+ */
+ /* display: none; */
+ position: fixed;
+ display: block;
+ width:200px;
+ top:10px;
+ left: 100%;
+ transition: 300ms ease-in-out;
+ -webkit-transition: 300ms ease-in-out;
+ -moz-transition: 300ms ease-in-out;
+ -ms-transition: 300ms ease-in-out;
+ -o-transition: 300ms ease-in-out;
 }
 
-.navToggle {
-    
-    /* position: fixed; */
-    display: flex;
-    /* height: 50px; */
-    /* position: -webkit-sticky; */
-    position: fixed;
+#navToggle {
+    /*border: 1px solid black;
+    *//*position: fixed;
+    */display: flex;
+    /*height: 50px;
+    *//*position: -webkit-sticky;
+    */position: fixed;
     top:20px;
-right: 20px;    
-    /* height: 15px; */
-    flex-direction: column;
+    right: 20px;
+    /*height: 15px;
+    */flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.6vh;
-    /* left: 22vw; */
-    /* grid-column-start:2 ;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2; */
-    /* border: 2px solid white; */
+    transition: 300ms ease-in-out;
+    -webkit-transition: 300ms ease-in-out;
+    -moz-transition: 300ms ease-in-out;
+    -ms-transition: 300ms ease-in-out;
+    -o-transition: 300ms ease-in-out;
 }
 
-.navToggle > div {
+#navToggle > div {
     
     /*position: absolute;
-    */width: 4vh;
+    */width: 32px;
     
     height: 0.7vh;
     /* margin-bottom: 1vh; */
     background-color:rgb(164,179,179);
+    background-color:rgb(27, 23, 37);
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;

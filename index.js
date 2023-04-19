@@ -87,13 +87,24 @@ window.addEventListener('DOMContentLoaded', function () {
                 document.addEventListener('click', (e) => {
                     const nav = document.querySelector('nav');
                     const targetEvent = e.target;
+                    const navStyle = window.getComputedStyle(document.querySelector('nav'));
+                    const toggle = window.document.getElementById('navToggle');
                     if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
+                        console.log(nav.style.width);
+                        console.log(navStyle.width);
+                        nav.style.left =
+                            screen.width - parseFloat(navStyle.width) - 40 - 32 + 'px';
+                        // nav.style.right = '72px';
+                        // toggle.style.right = '200px';
                         this.navToggled = true;
-                        nav.style.display = 'block';
+                        // nav.style.display = 'block';
                     }
                     else {
+                        nav.style.left = '100%';
+                        // nav.style.right = 'auto';
+                        // toggle.style.right = '20px';
                         this.navToggled = false;
-                        nav.style.display = 'none';
+                        // nav.style.display = 'none';
                     }
                 });
             });
@@ -156,7 +167,8 @@ window.addEventListener('DOMContentLoaded', function () {
         buildNavToggle: () => {
             const navToggle = document.createElement('div');
             const nav = document.querySelector('nav');
-            navToggle.classList.add('navToggle');
+            // navToggle.classList.add('navToggle');
+            navToggle.id = 'navToggle';
             navToggle.addEventListener('click', (e) => {
                 // const targetEvent: HTMLElement = e.target as HTMLElement;
                 // if (targetEvent.classList.contains('navToggle')) {
