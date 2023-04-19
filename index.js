@@ -28,62 +28,12 @@ window.addEventListener('DOMContentLoaded', function () {
                 yield this.fetchElements();
                 this.body.insertBefore(this.buildHeader(this.siteElements.header), this.script);
                 this.body.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
-                // this.body.insertBefore(this.buildNav(this.siteElements.nav), this.script);
                 document
                     .querySelector('header')
                     .appendChild(this.buildNav(this.siteElements.nav));
                 if (document.querySelector('header')) {
                     (_a = document.querySelector('header')) === null || _a === void 0 ? void 0 : _a.appendChild(this.buildNavToggle());
                 }
-                const nav = document.querySelector('nav');
-                const h2 = document.querySelector('h2');
-                const headerStyle = window.getComputedStyle(document.querySelector('header'));
-                // h2.addEventListener('animationstart', () => {
-                //   nav.style.top =
-                //     parseFloat(headerStyle.height) +
-                //     parseFloat(headerStyle.marginBottom) +
-                //     parseFloat(headerStyle.marginTop) +
-                //     parseFloat(headerStyle.paddingBottom) +
-                //     parseFloat(headerStyle.paddingTop) +
-                //     'px';
-                // });
-                // document.addEventListener('scroll', () => {
-                // const ypos: number = window.scrollY;
-                // const h2: HTMLHeadingElement = document.querySelector('h2')!;
-                // const nav: HTMLElement = document.querySelector('nav')!;
-                // const headerStyle = window.getComputedStyle(
-                //   document.querySelector('header')!
-                // );
-                // if (ypos > 100) {
-                // h2.style.fontSize = '0.9em';
-                // nav.style.top =
-                //   parseFloat(headerStyle.height) +
-                //   parseFloat(headerStyle.marginBottom) +
-                //   parseFloat(headerStyle.marginTop) +
-                //   parseFloat(headerStyle.paddingBottom) +
-                //   parseFloat(headerStyle.paddingTop) +
-                // ('px');
-                // } else {
-                // h2.style.fontSize = '1.4em';
-                // nav.style.top =
-                //   parseFloat(headerStyle.height) +
-                //   parseFloat(headerStyle.marginBottom) +
-                //   parseFloat(headerStyle.marginTop) +
-                //   parseFloat(headerStyle.paddingBottom) +
-                //   parseFloat(headerStyle.paddingTop) +
-                //   'px';
-                // }
-                // console.log(
-                //   `header height: ${
-                //     parseFloat(headerStyle.height) +
-                //     parseFloat(headerStyle.marginBottom) +
-                //     parseFloat(headerStyle.marginTop) +
-                //     parseFloat(headerStyle.paddingBottom) +
-                //     parseFloat(headerStyle.paddingTop) +
-                //     'px'
-                //   }, nav top: `
-                // );
-                // });
                 document.addEventListener('click', (e) => {
                     const nav = document.querySelector('nav');
                     const targetEvent = e.target;
