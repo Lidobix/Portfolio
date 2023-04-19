@@ -213,12 +213,12 @@ form > label {
 
 form :nth-child(even){
     font-family: "Oxygen", sans-serif;
-    margin-top: 0.5vh;
-    margin-bottom: 1vh;
+    margin-top: 10px;
+    margin-bottom: 6px;
 }
 
 form > input {
-    height: 4vh;
+    height: 30px;
     font-size: 0.9em;
 }
 
@@ -227,7 +227,7 @@ form > textarea {
 }
 
 form > input[type="submit"]{
-    margin-top: 1.5vh;
+    margin-top: 15px;
     align-self: center;
     width: 50%;
     background-color: #086a61;
