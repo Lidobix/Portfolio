@@ -1,12 +1,3 @@
-// import {
-//   Header,
-//   Site,
-//   SiteElements,
-//   SectionElement,
-//   NavElement,
-//   Project,
-// } from './types';
-
 type ProjectSubtype = 'Projet perso' | "Projet d'études" | 'Projet pro';
 
 type Header = {
@@ -189,22 +180,7 @@ window.addEventListener('DOMContentLoaded', function () {
     buildNavToggle: (): HTMLElement => {
       const navToggle: HTMLElement = document.createElement('div')!;
 
-      const nav: HTMLElement = document.querySelector('nav')!;
-      // navToggle.classList.add('navToggle');
       navToggle.id = 'navToggle';
-
-      navToggle.addEventListener('click', (e) => {
-        // const targetEvent: HTMLElement = e.target as HTMLElement;
-        // if (targetEvent.classList.contains('navToggle')) {
-        // }
-        // if (!site.navToggled) {
-        //   site.navToggled = true;
-        //   nav.style.display = 'block';
-        // }
-        // nav.style.display === 'none' || nav.style.display === ''
-        //   ? (nav.style.display = 'block')
-        //   : (nav.style.display = 'none');
-      });
 
       for (let i = 0; i < 3; i++) {
         const bullet: HTMLElement = document.createElement('div');
