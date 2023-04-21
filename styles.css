@@ -84,6 +84,7 @@ section {
 
 .card{
     background-color:  white;
+    border: 2px solid rgba(0, 0, 0, 0.4);
     color: black;
     display: flex;
     flex-direction: column;
@@ -106,6 +107,7 @@ section {
 }
  .cardDescription > a {
     background-color: #086a61;
+    background-color: rgba(0,106,97,1);
     color: white;
     font-size: 0.9em;
     padding: 2px 12px;
