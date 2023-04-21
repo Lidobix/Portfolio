@@ -194,11 +194,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
     buildForm: (htmlForm: string): HTMLElement => {
       const form: HTMLFormElement = document.createElement('form');
-      form.classList.add('card');
+
       form.innerHTML = htmlForm;
       form.method = 'POST';
-
-      return form;
+      const formContainer: HTMLElement = document.createElement('div');
+      formContainer.classList.add('card');
+      formContainer.appendChild(form);
+      return formContainer;
     },
 
     buildProjects: (projects: Project[]): HTMLElement => {

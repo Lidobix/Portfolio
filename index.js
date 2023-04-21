@@ -100,6 +100,7 @@ window.addEventListener('DOMContentLoaded', function () {
         buildNavToggle: () => {
             const navToggle = document.createElement('div');
             navToggle.id = 'navToggle';
+            navToggle.classList.add('mobile');
             for (let i = 0; i < 3; i++) {
                 const bullet = document.createElement('div');
                 bullet.classList.add('navTrigger');
@@ -109,10 +110,12 @@ window.addEventListener('DOMContentLoaded', function () {
         },
         buildForm: (htmlForm) => {
             const form = document.createElement('form');
-            form.classList.add('card');
             form.innerHTML = htmlForm;
             form.method = 'POST';
-            return form;
+            const formContainer = document.createElement('div');
+            formContainer.classList.add('card');
+            formContainer.appendChild(form);
+            return formContainer;
         },
         buildProjects: (projects) => {
             const container = document.createElement('div');
