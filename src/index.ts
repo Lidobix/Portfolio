@@ -229,6 +229,17 @@ window.addEventListener('DOMContentLoaded', function () {
           const type: HTMLParagraphElement = document.createElement('p');
           type.innerText = `${project.type}`;
           description.appendChild(type);
+          if (project.link) {
+            const aHref: HTMLAnchorElement = document.createElement('a');
+            aHref.classList.add('mobile');
+            aHref.innerText = 'Visiter';
+            aHref.href = project.link;
+            description.appendChild(aHref);
+
+            // card.addEventListener('click', (e) => {
+            //   window.location.href = project.link!;
+            // });
+          }
 
           if (project.technos?.length) {
             const technoList: HTMLDivElement = document.createElement('div');
@@ -245,11 +256,6 @@ window.addEventListener('DOMContentLoaded', function () {
             });
             description.appendChild(technoList);
             card.appendChild(description);
-          }
-          if (project.link) {
-            card.addEventListener('click', (e) => {
-              window.location.href = project.link!;
-            });
           }
 
           container.appendChild(card);

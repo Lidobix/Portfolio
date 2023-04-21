@@ -84,10 +84,12 @@ section {
 
 .card{
     background-color:  white;
+    border: 2px solid rgba(0, 0, 0, 0.4);
     color: black;
     display: flex;
     flex-direction: column;
     box-shadow: none;
+    height: 400px;
     overflow: hidden;
     border-radius: 13px;
     -webkit-border-radius: 13px;
@@ -98,7 +100,25 @@ section {
 }
 
 .cardDescription {
-    padding: 20px
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+;
+}
+ .cardDescription > a {
+    background-color: #086a61;
+    background-color: rgba(0,106,97,1);
+    color: white;
+    font-size: 0.9em;
+    padding: 2px 12px;
+    width: -webkit-min-content;
+    width: -moz-min-content;
+    width: min-content;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 figure {
