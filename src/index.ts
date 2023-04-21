@@ -181,6 +181,7 @@ window.addEventListener('DOMContentLoaded', function () {
       const navToggle: HTMLElement = document.createElement('div')!;
 
       navToggle.id = 'navToggle';
+      navToggle.classList.add('mobile');
 
       for (let i = 0; i < 3; i++) {
         const bullet: HTMLElement = document.createElement('div');
