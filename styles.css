@@ -103,8 +103,8 @@ section {
     padding: 20px;
     display: flex;
     flex-direction: column;
-;
 }
+
  .cardDescription > a {
     background-color: #086a61;
     background-color: rgba(0,106,97,1);
@@ -220,12 +220,15 @@ a {
     color:rgb(173,186,199);
 }
 
+
+
 form {
-    padding:20px;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
     font-size: 0.9em;
+    flex: 1;
+    margin: 20px;
 }
 
 form > label {
