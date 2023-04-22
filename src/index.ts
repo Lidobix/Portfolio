@@ -1,65 +1,11 @@
-type ProjectSubtype = 'Projet perso' | "Projet d'études" | 'Projet pro';
-
-type Header = {
-  title: string;
-  subtitle: string;
-};
-
-type NavElement = { name: string; anchor: string };
-
-type SiteElements = {
-  header: Header;
-  section: SectionElement[];
-  nav: NavElement[];
-};
-
-type SectionElement = {
-  id: number;
-  name: string;
-  text?: string;
-  projectList?: Project[];
-  display: boolean;
-  htmlForm?: string;
-};
-
-type Techno =
-  | 'HTML'
-  | 'CSS'
-  | 'JavaScript'
-  | 'TypeScript'
-  | 'WebSocket'
-  | 'Angular'
-  | 'React'
-  | 'NODE_JS';
-
-type Project = {
-  id: number;
-  title: string;
-  type: string;
-  subtype: ProjectSubtype;
-  status: 'Fini' | 'En cours' | 'Stand-By';
-  description: string;
-  technos?: Techno[];
-  image?: string;
-  link?: string;
-  display: boolean;
-};
-
-type Site = {
-  body: HTMLElement;
-  script: HTMLScriptElement;
-  siteElements: SiteElements;
-  navToggled: boolean;
-  buildSite: Function;
-  fetchElements: Function;
-  buildHeader: Function;
-  buildSection: Function;
-  buildNav: Function;
-  buildNavToggle: Function;
-  buildForm: Function;
-  buildProjects: Function;
-  scrollEvent?: Function;
-};
+import {
+  Header,
+  NavElement,
+  SiteElements,
+  SectionElement,
+  Project,
+  Site,
+} from './types';
 
 window.addEventListener('DOMContentLoaded', function () {
   const site: Site = {
@@ -238,10 +184,6 @@ window.addEventListener('DOMContentLoaded', function () {
             aHref.innerText = 'Visiter';
             aHref.href = project.link;
             description.appendChild(aHref);
-
-            // card.addEventListener('click', (e) => {
-            //   window.location.href = project.link!;
-            // });
           }
 
           if (project.technos?.length) {
