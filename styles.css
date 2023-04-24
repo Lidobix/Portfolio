@@ -246,6 +246,7 @@ form > input {
 
 form > textarea {
     font-size: 0.9em;
+    resize: none;
 }
 
 form > input[type="submit"]{

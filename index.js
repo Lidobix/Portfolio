@@ -112,8 +112,13 @@ window.addEventListener('DOMContentLoaded', function () {
             const form = document.createElement('form');
             form.innerHTML = htmlForm;
             form.method = 'POST';
+            form.action = 'http://localhost:3000/portfolio/contact';
             const formContainer = document.createElement('div');
             formContainer.classList.add('card');
+            const submitButton = document.getElementById('submitButton');
+            submitButton.addEventListener('click', () => {
+                const modale = document.createElement('div');
+            });
             formContainer.appendChild(form);
             return formContainer;
         },
