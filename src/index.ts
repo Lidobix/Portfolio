@@ -197,8 +197,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
       form.innerHTML = htmlForm;
       form.method = 'POST';
+      form.action = 'http://localhost:3000/portfolio/contact';
       const formContainer: HTMLElement = document.createElement('div');
       formContainer.classList.add('card');
+
+      const submitButton = document.getElementById(
+        'submitButton'
+      )! as HTMLButtonElement;
+
+      submitButton.addEventListener('click', () => {});
+
       formContainer.appendChild(form);
       return formContainer;
     },
