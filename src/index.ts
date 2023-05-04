@@ -22,11 +22,7 @@ window.addEventListener('DOMContentLoaded', function () {
       );
 
       this.body.insertBefore(
-        this.buildSection(
-          this,
-          this.siteElements.section
-          // this.sendMailReaction
-        ),
+        this.buildSection(this, this.siteElements.section),
         this.script
       );
 
@@ -69,7 +65,6 @@ window.addEventListener('DOMContentLoaded', function () {
     buildSection: (
       levelUp: Site,
       sectionElements: SectionElement[]
-      // sendMailReaction: Function
     ): HTMLElement => {
       const section: HTMLElement = document.createElement('section');
       sectionElements.forEach((sectionElement) => {
@@ -103,8 +98,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
           if (sectionElement.htmlForm) {
             section.appendChild(levelUp.buildForm(sectionElement.htmlForm));
-            levelUp.sendMailReaction();
-            // sendMailReaction();
           }
         }
       });
@@ -216,14 +209,7 @@ window.addEventListener('DOMContentLoaded', function () {
       });
       return container;
     },
-    sendMailReaction: (): void => {
-      const submitButton = document.getElementById(
-        'submitButton'
-      )! as HTMLButtonElement;
 
-      const modale: HTMLElement = document.createElement('div');
-      modale.innerText = 'AAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHH';
-    },
     fetchElements: (): Promise<SiteElements> => {
       return fetch('https://lidobix.alwaysdata.net/portfolio/home', {
         method: 'GET',
