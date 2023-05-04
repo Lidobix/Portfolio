@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', function () {
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
                 this.body.insertBefore(this.buildHeader(this.siteElements.header), this.script);
-                this.body.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
+                this.body.insertBefore(this.buildSection(this, this.siteElements.section, this.sendMailReaction), this.script);
                 document
                     .querySelector('header')
                     .appendChild(this.buildNav(this.siteElements.nav));
@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', function () {
             header.appendChild(subTitle);
             return header;
         },
-        buildSection: (levelUp, sectionElements) => {
+        buildSection: (levelUp, sectionElements, sendMailReaction) => {
             const section = document.createElement('section');
             sectionElements.forEach((sectionElement) => {
                 if (sectionElement.display) {
@@ -77,6 +77,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     }
                     if (sectionElement.htmlForm) {
                         section.appendChild(levelUp.buildForm(sectionElement.htmlForm));
+                        sendMailReaction();
                     }
                 }
             });
@@ -114,10 +115,6 @@ window.addEventListener('DOMContentLoaded', function () {
             form.action = 'http://localhost:3000/portfolio/contact';
             const formContainer = document.createElement('div');
             formContainer.classList.add('card');
-            const submitButton = document.getElementById('submitButton');
-            submitButton.addEventListener('click', () => {
-                const modale = document.createElement('div');
-            });
             formContainer.appendChild(form);
             return formContainer;
         },
@@ -150,9 +147,6 @@ window.addEventListener('DOMContentLoaded', function () {
                         aHref.innerText = 'Visiter';
                         aHref.href = project.link;
                         description.appendChild(aHref);
-                        // card.addEventListener('click', (e) => {
-                        //   window.location.href = project.link!;
-                        // });
                     }
                     if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
                         const technoList = document.createElement('div');
@@ -172,6 +166,10 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             });
             return container;
+        },
+        sendMailReaction: () => {
+            const submitButton = document.getElementById('submitButton');
+            console.log('coucou');
         },
         fetchElements: () => {
             return fetch('https://lidobix.alwaysdata.net/portfolio/home', {

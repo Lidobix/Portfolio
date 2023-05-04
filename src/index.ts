@@ -107,7 +107,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     buildNav: (navElements: NavElement[]): HTMLElement => {
       const ul: HTMLUListElement = document.createElement('ul');
-
       const nav: HTMLElement = document.createElement('nav');
 
       navElements.forEach((element) => {
@@ -146,12 +145,6 @@ window.addEventListener('DOMContentLoaded', function () {
       form.action = 'http://localhost:3000/portfolio/contact';
       const formContainer: HTMLElement = document.createElement('div');
       formContainer.classList.add('card');
-
-      const submitButton = document.getElementById(
-        'submitButton'
-      )! as HTMLButtonElement;
-
-      submitButton.addEventListener('click', () => {});
 
       formContainer.appendChild(form);
       return formContainer;
@@ -216,6 +209,7 @@ window.addEventListener('DOMContentLoaded', function () {
       });
       return container;
     },
+
     fetchElements: (): Promise<SiteElements> => {
       return fetch('https://lidobix.alwaysdata.net/portfolio/home', {
         method: 'GET',

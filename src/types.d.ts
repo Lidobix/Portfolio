@@ -59,5 +59,4 @@ export type Site = {
   buildForm: Function;
   buildProjects: Function;
   scrollEvent?: Function;
-  sendMail: Function;
 };
