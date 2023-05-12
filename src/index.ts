@@ -59,6 +59,22 @@ window.addEventListener('DOMContentLoaded', function () {
       header.appendChild(pageTitle);
       header.appendChild(subTitle);
 
+      if (headerElements.socials.length) {
+        const socialContainer: HTMLElement = document.createElement('div');
+
+        socialContainer.classList.add('socialContainer');
+        headerElements.socials.forEach((element) => {
+          const a: HTMLAnchorElement = document.createElement('a');
+          a.href = element.url;
+          const picto: HTMLImageElement = document.createElement('img');
+          picto.src = element.picto;
+          a.appendChild(picto);
+          socialContainer.appendChild(a);
+        });
+
+        header.appendChild(socialContainer);
+      }
+
       return header;
     },
 

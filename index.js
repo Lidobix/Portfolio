@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', function () {
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
                 this.body.insertBefore(this.buildHeader(this.siteElements.header), this.script);
-                this.body.insertBefore(this.buildSection(this, this.siteElements.section, this.sendMailReaction), this.script);
+                this.body.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
                 document
                     .querySelector('header')
                     .appendChild(this.buildNav(this.siteElements.nav));
@@ -49,9 +49,22 @@ window.addEventListener('DOMContentLoaded', function () {
             subTitle.innerText = headerElements.subtitle;
             header.appendChild(pageTitle);
             header.appendChild(subTitle);
+            if (headerElements.socials.length) {
+                const socialContainer = document.createElement('div');
+                socialContainer.classList.add('socialContainer');
+                headerElements.socials.forEach((element) => {
+                    const a = document.createElement('a');
+                    a.href = element.url;
+                    const picto = document.createElement('img');
+                    picto.src = element.picto;
+                    a.appendChild(picto);
+                    socialContainer.appendChild(a);
+                });
+                header.appendChild(socialContainer);
+            }
             return header;
         },
-        buildSection: (levelUp, sectionElements, sendMailReaction) => {
+        buildSection: (levelUp, sectionElements) => {
             const section = document.createElement('section');
             sectionElements.forEach((sectionElement) => {
                 if (sectionElement.display) {
@@ -77,7 +90,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     }
                     if (sectionElement.htmlForm) {
                         section.appendChild(levelUp.buildForm(sectionElement.htmlForm));
-                        sendMailReaction();
                     }
                 }
             });
@@ -166,10 +178,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             });
             return container;
-        },
-        sendMailReaction: () => {
-            const submitButton = document.getElementById('submitButton');
-            console.log('coucou');
         },
         fetchElements: () => {
             return fetch('https://lidobix.alwaysdata.net/portfolio/home', {
