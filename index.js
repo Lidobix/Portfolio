@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', function () {
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
                 this.body.insertBefore(this.buildHeader(this.siteElements.header), this.script);
-                this.body.insertBefore(this.buildSection(this, this.siteElements.section, this.sendMailReaction), this.script);
+                this.body.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
                 document
                     .querySelector('header')
                     .appendChild(this.buildNav(this.siteElements.nav));
@@ -49,9 +49,22 @@ window.addEventListener('DOMContentLoaded', function () {
             subTitle.innerText = headerElements.subtitle;
             header.appendChild(pageTitle);
             header.appendChild(subTitle);
+            if (headerElements.socials.length) {
+                const socialContainer = document.createElement('div');
+                socialContainer.classList.add('socialContainer');
+                headerElements.socials.forEach((element) => {
+                    const a = document.createElement('a');
+                    a.href = element.url;
+                    const picto = document.createElement('img');
+                    picto.src = element.picto;
+                    a.appendChild(picto);
+                    socialContainer.appendChild(a);
+                });
+                header.appendChild(socialContainer);
+            }
             return header;
         },
-        buildSection: (levelUp, sectionElements, sendMailReaction) => {
+        buildSection: (levelUp, sectionElements) => {
             const section = document.createElement('section');
             sectionElements.forEach((sectionElement) => {
                 if (sectionElement.display) {
@@ -77,7 +90,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     }
                     if (sectionElement.htmlForm) {
                         section.appendChild(levelUp.buildForm(sectionElement.htmlForm));
-                        sendMailReaction();
                     }
                 }
             });
@@ -114,6 +126,7 @@ window.addEventListener('DOMContentLoaded', function () {
             form.method = 'POST';
             form.action = 'http://localhost:3000/portfolio/contact';
             const formContainer = document.createElement('div');
+            formContainer.classList.add('formContainer');
             formContainer.classList.add('card');
             formContainer.appendChild(form);
             return formContainer;
@@ -141,23 +154,23 @@ window.addEventListener('DOMContentLoaded', function () {
                     const type = document.createElement('p');
                     type.innerText = `${project.type}`;
                     description.appendChild(type);
+                    const aHref = document.createElement('a');
+                    aHref.innerText = 'Visiter';
+                    description.appendChild(aHref);
                     if (project.link) {
-                        const aHref = document.createElement('a');
-                        aHref.classList.add('mobile');
-                        aHref.innerText = 'Visiter';
                         aHref.href = project.link;
-                        description.appendChild(aHref);
+                        aHref.classList.add('enabledLink');
+                    }
+                    else {
+                        aHref.classList.add('disabledLink');
                     }
                     if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
                         const technoList = document.createElement('div');
                         technoList.classList.add('technoList');
                         (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
-                            const div = document.createElement('div');
                             const logo = document.createElement('img');
-                            div.classList.add('logoTechno');
                             logo.src = `assets/images/${techno.toLowerCase()}.png`;
-                            div.appendChild(logo);
-                            technoList.appendChild(div);
+                            technoList.appendChild(logo);
                         });
                         description.appendChild(technoList);
                         card.appendChild(description);
@@ -166,10 +179,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             });
             return container;
-        },
-        sendMailReaction: () => {
-            const submitButton = document.getElementById('submitButton');
-            console.log('coucou');
         },
         fetchElements: () => {
             return fetch('https://lidobix.alwaysdata.net/portfolio/home', {

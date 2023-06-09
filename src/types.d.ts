@@ -3,6 +3,7 @@ export type ProjectSubtype = 'Projet perso' | "Projet d'études" | 'Projet pro';
 export type Header = {
   title: string;
   subtitle: string;
+  socials: { picto: string; url: string }[];
 };
 
 export type NavElement = { name: string; anchor: string };
