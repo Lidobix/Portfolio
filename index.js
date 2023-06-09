@@ -126,6 +126,7 @@ window.addEventListener('DOMContentLoaded', function () {
             form.method = 'POST';
             form.action = 'http://localhost:3000/portfolio/contact';
             const formContainer = document.createElement('div');
+            formContainer.classList.add('formContainer');
             formContainer.classList.add('card');
             formContainer.appendChild(form);
             return formContainer;
@@ -153,23 +154,23 @@ window.addEventListener('DOMContentLoaded', function () {
                     const type = document.createElement('p');
                     type.innerText = `${project.type}`;
                     description.appendChild(type);
+                    const aHref = document.createElement('a');
+                    aHref.innerText = 'Visiter';
+                    description.appendChild(aHref);
                     if (project.link) {
-                        const aHref = document.createElement('a');
-                        aHref.classList.add('mobile');
-                        aHref.innerText = 'Visiter';
                         aHref.href = project.link;
-                        description.appendChild(aHref);
+                        aHref.classList.add('enabledLink');
+                    }
+                    else {
+                        aHref.classList.add('disabledLink');
                     }
                     if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
                         const technoList = document.createElement('div');
                         technoList.classList.add('technoList');
                         (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
-                            const div = document.createElement('div');
                             const logo = document.createElement('img');
-                            div.classList.add('logoTechno');
                             logo.src = `assets/images/${techno.toLowerCase()}.png`;
-                            div.appendChild(logo);
-                            technoList.appendChild(div);
+                            technoList.appendChild(logo);
                         });
                         description.appendChild(technoList);
                         card.appendChild(description);

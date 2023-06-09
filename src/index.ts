@@ -160,6 +160,7 @@ window.addEventListener('DOMContentLoaded', function () {
       form.method = 'POST';
       form.action = 'http://localhost:3000/portfolio/contact';
       const formContainer: HTMLElement = document.createElement('div');
+      formContainer.classList.add('formContainer');
       formContainer.classList.add('card');
 
       formContainer.appendChild(form);
@@ -195,26 +196,26 @@ window.addEventListener('DOMContentLoaded', function () {
           const type: HTMLParagraphElement = document.createElement('p');
           type.innerText = `${project.type}`;
           description.appendChild(type);
+
+          const aHref: HTMLAnchorElement = document.createElement('a');
+          aHref.innerText = 'Visiter';
+          description.appendChild(aHref);
           if (project.link) {
-            const aHref: HTMLAnchorElement = document.createElement('a');
-            aHref.classList.add('mobile');
-            aHref.innerText = 'Visiter';
             aHref.href = project.link;
-            description.appendChild(aHref);
+            aHref.classList.add('enabledLink');
+          } else {
+            aHref.classList.add('disabledLink');
           }
 
           if (project.technos?.length) {
             const technoList: HTMLDivElement = document.createElement('div');
             technoList.classList.add('technoList');
             project.technos?.forEach((techno) => {
-              const div: HTMLElement = document.createElement('div');
               const logo: HTMLImageElement = document.createElement('img');
-              div.classList.add('logoTechno');
 
               logo.src = `assets/images/${techno.toLowerCase()}.png`;
 
-              div.appendChild(logo);
-              technoList.appendChild(div);
+              technoList.appendChild(logo);
             });
             description.appendChild(technoList);
             card.appendChild(description);
