@@ -121,15 +121,21 @@ section {
 
 
 figure {
-    margin: 0;
+    width: 100%;
+    margin: auto;
     padding: 0;
     aspect-ratio: 16/9;
     overflow: hidden;
     flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
+
 
 figure > img {
     width: 100%;
+    position: absolute;
 }
 
 .technoList {
