@@ -164,7 +164,12 @@ window.addEventListener('DOMContentLoaded', function () {
                     else {
                         aHref.classList.add('disabledLink');
                     }
+                    const summary = document.createElement('p');
+                    summary.innerText = `${project.description}`;
+                    description.appendChild(summary);
                     if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
+                        const technoListContainer = document.createElement('div');
+                        technoListContainer.classList.add('technoListContainer');
                         const technoList = document.createElement('div');
                         technoList.classList.add('technoList');
                         (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
@@ -172,7 +177,8 @@ window.addEventListener('DOMContentLoaded', function () {
                             logo.src = `assets/images/${techno.toLowerCase()}.png`;
                             technoList.appendChild(logo);
                         });
-                        description.appendChild(technoList);
+                        technoListContainer.appendChild(technoList);
+                        description.appendChild(technoListContainer);
                         card.appendChild(description);
                     }
                     container.appendChild(card);

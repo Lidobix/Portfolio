@@ -207,7 +207,14 @@ window.addEventListener('DOMContentLoaded', function () {
             aHref.classList.add('disabledLink');
           }
 
+          const summary: HTMLParagraphElement = document.createElement('p');
+          summary.innerText = `${project.description}`;
+          description.appendChild(summary);
+
           if (project.technos?.length) {
+            const technoListContainer: HTMLDivElement =
+              document.createElement('div');
+            technoListContainer.classList.add('technoListContainer');
             const technoList: HTMLDivElement = document.createElement('div');
             technoList.classList.add('technoList');
             project.technos?.forEach((techno) => {
@@ -217,7 +224,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
               technoList.appendChild(logo);
             });
-            description.appendChild(technoList);
+            technoListContainer.appendChild(technoList);
+            description.appendChild(technoListContainer);
             card.appendChild(description);
           }
 
