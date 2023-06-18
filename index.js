@@ -28,14 +28,12 @@ window.addEventListener('DOMContentLoaded', function () {
                 document.addEventListener('click', (e) => {
                     const nav = document.querySelector('nav');
                     const targetEvent = e.target;
-                    const navStyle = window.getComputedStyle(nav);
                     if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
-                        nav.style.left =
-                            screen.width - parseFloat(navStyle.width) - 40 - 32 + 'px';
+                        nav.style.transform = 'translate(-15rem)';
                         this.navToggled = true;
                     }
                     else {
-                        nav.style.left = '100%';
+                        nav.style.transform = 'translate(15rem)';
                         this.navToggled = false;
                     }
                 });
@@ -112,7 +110,8 @@ window.addEventListener('DOMContentLoaded', function () {
         buildNavToggle: () => {
             const navToggle = document.createElement('div');
             navToggle.id = 'navToggle';
-            navToggle.classList.add('mobile');
+            navToggle.classList.add('mobile', 'navTrigger');
+            // navToggle.classList.add('navTrigger');
             for (let i = 0; i < 3; i++) {
                 const bullet = document.createElement('div');
                 bullet.classList.add('navTrigger');
@@ -164,7 +163,12 @@ window.addEventListener('DOMContentLoaded', function () {
                     else {
                         aHref.classList.add('disabledLink');
                     }
+                    const summary = document.createElement('p');
+                    summary.innerText = `${project.description}`;
+                    description.appendChild(summary);
                     if ((_a = project.technos) === null || _a === void 0 ? void 0 : _a.length) {
+                        const technoListContainer = document.createElement('div');
+                        technoListContainer.classList.add('technoListContainer');
                         const technoList = document.createElement('div');
                         technoList.classList.add('technoList');
                         (_b = project.technos) === null || _b === void 0 ? void 0 : _b.forEach((techno) => {
@@ -172,7 +176,8 @@ window.addEventListener('DOMContentLoaded', function () {
                             logo.src = `assets/images/${techno.toLowerCase()}.png`;
                             technoList.appendChild(logo);
                         });
-                        description.appendChild(technoList);
+                        technoListContainer.appendChild(technoList);
+                        description.appendChild(technoListContainer);
                         card.appendChild(description);
                     }
                     container.appendChild(card);
