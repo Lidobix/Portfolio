@@ -28,14 +28,12 @@ window.addEventListener('DOMContentLoaded', function () {
                 document.addEventListener('click', (e) => {
                     const nav = document.querySelector('nav');
                     const targetEvent = e.target;
-                    const navStyle = window.getComputedStyle(nav);
                     if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
-                        nav.style.left =
-                            screen.width - parseFloat(navStyle.width) - 40 - 32 + 'px';
+                        nav.style.transform = 'translate(-15rem)';
                         this.navToggled = true;
                     }
                     else {
-                        nav.style.left = '100%';
+                        nav.style.transform = 'translate(15rem)';
                         this.navToggled = false;
                     }
                 });
@@ -112,7 +110,8 @@ window.addEventListener('DOMContentLoaded', function () {
         buildNavToggle: () => {
             const navToggle = document.createElement('div');
             navToggle.id = 'navToggle';
-            navToggle.classList.add('mobile');
+            navToggle.classList.add('mobile', 'navTrigger');
+            // navToggle.classList.add('navTrigger');
             for (let i = 0; i < 3; i++) {
                 const bullet = document.createElement('div');
                 bullet.classList.add('navTrigger');

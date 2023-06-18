@@ -36,13 +36,11 @@ window.addEventListener('DOMContentLoaded', function () {
       document.addEventListener('click', (e) => {
         const nav: HTMLElement = document.querySelector('nav')!;
         const targetEvent: HTMLElement = e.target as HTMLElement;
-        const navStyle = window.getComputedStyle(nav!);
         if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
-          nav.style.left =
-            screen.width - parseFloat(navStyle.width) - 40 - 32 + 'px';
+          nav.style.transform = 'translate(-15rem)';
           this.navToggled = true;
         } else {
-          nav.style.left = '100%';
+          nav.style.transform = 'translate(15rem)';
           this.navToggled = false;
         }
       });
@@ -142,7 +140,7 @@ window.addEventListener('DOMContentLoaded', function () {
       const navToggle: HTMLElement = document.createElement('div')!;
 
       navToggle.id = 'navToggle';
-      navToggle.classList.add('mobile');
+      navToggle.classList.add('mobile', 'navTrigger');
 
       for (let i = 0; i < 3; i++) {
         const bullet: HTMLElement = document.createElement('div');
