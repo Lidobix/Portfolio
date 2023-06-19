@@ -67,7 +67,7 @@ section {
     gap: 2rem;
 }
 
-.card{
+.card, .formContainer{
     background-color:  white;
     flex-grow: 1;
     flex-shrink: 1;
@@ -186,6 +186,19 @@ figure > img {
 }
 
 
+
+.previewBackground {
+    background-color: rgba(0, 0, 0, 0.52);
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+}
+
+.notScrollable {
+    overflow: hidden;
+}
+
 header {
     padding-top: 7rem;
     padding-bottom: 1rem;
@@ -202,6 +215,19 @@ header {
     height: 2rem;
 }
 
+.socialContainer > a > img:hover {
+    transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    -o-transform: scale(1.15);
+    transition: 200ms ease-in-out;
+    -webkit-transition: 200ms ease-in-out;
+    -moz-transition: 200ms ease-in-out;
+    -ms-transition: 200ms ease-in-out;
+    -o-transition: 200ms ease-in-out;
+}
+
 .socialContainer  {
     display: flex;
     align-self: flex-end;
@@ -215,7 +241,6 @@ nav {
     width: 11rem;
     z-index: 8;
     top: 1rem;
-
     left: 100%;
     transition:300ms ease-in-out;
     -webkit-transition:300ms ease-in-out;
@@ -268,12 +293,11 @@ a {
 }
 
 .formContainer{
-flex: 1;
+    flex: 1;
     max-width: 100%;
     margin-left: 20rem;
     margin-right: 20rem;
 }
-
 
 form {
     display: flex;
@@ -321,7 +345,6 @@ form > input[type="submit"]{
     -ms-border-radius: 0.1rem;
     -o-border-radius: 0.1rem;
 }
-
 
 @media screen and (max-width: 480px){
     html{

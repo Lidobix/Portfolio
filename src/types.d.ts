@@ -49,7 +49,14 @@ export type Project = {
 export type Site = {
   body: HTMLElement;
   script: HTMLScriptElement;
+  projectPreview: boolean;
   siteElements: SiteElements;
+  sectionPaddingRight: number;
+  headerPaddingRight: number;
+  navToggleRight: number;
+  header: HTMLElement;
+  navToggle: HTMLElement;
+  section: HTMLElement;
   navToggled: boolean;
   buildSite: Function;
   fetchElements: Function;
@@ -59,5 +66,5 @@ export type Site = {
   buildNavToggle: Function;
   buildForm: Function;
   buildProjects: Function;
-  scrollEvent?: Function;
+  buildCardEvents: Function;
 };

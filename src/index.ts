@@ -10,6 +10,13 @@ import {
 window.addEventListener('DOMContentLoaded', function () {
   const site: Site = {
     body: this.document.querySelector('body')!,
+    projectPreview: false,
+    sectionPaddingRight: 0,
+    headerPaddingRight: 0,
+    navToggleRight: 0,
+    header: {} as HTMLElement,
+    section: {} as HTMLElement,
+    navToggle: {} as HTMLElement,
     script: this.document.querySelector('script')!,
     siteElements: {} as SiteElements,
     navToggled: false,
@@ -21,16 +28,23 @@ window.addEventListener('DOMContentLoaded', function () {
         this.script
       );
 
+      this.header = document.querySelector('header')!;
+
       this.body.insertBefore(
         this.buildSection(this, this.siteElements.section),
         this.script
       );
 
+      this.section = document.querySelector('section')!;
+
       document
         .querySelector('header')!
         .appendChild(this.buildNav(this.siteElements.nav));
+
       if (document.querySelector('header')) {
         document.querySelector('header')?.appendChild(this.buildNavToggle());
+
+        this.navToggle = document.getElementById('navToggle')!;
       }
 
       document.addEventListener('click', (e) => {
@@ -42,6 +56,19 @@ window.addEventListener('DOMContentLoaded', function () {
         } else {
           nav.style.transform = 'translate(15rem)';
           this.navToggled = false;
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape' && this.projectPreview) {
+          document.getElementById('preview')?.remove();
+          this.projectPreview = false;
+
+          this.section.style.paddingRight = this.sectionPaddingRight + 'px';
+          this.header.style.paddingRight = this.headerPaddingRight + 'px';
+          this.navToggle.style.right = this.navToggleRight + 'px';
+
+          this.body.classList.remove('notScrollable');
         }
       });
     },
@@ -106,7 +133,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
           if (sectionElement.projectList) {
             section.appendChild(
-              levelUp.buildProjects(sectionElement.projectList)
+              levelUp.buildProjects(sectionElement.projectList, levelUp)
             );
           }
 
@@ -159,13 +186,12 @@ window.addEventListener('DOMContentLoaded', function () {
       form.action = 'http://localhost:3000/portfolio/contact';
       const formContainer: HTMLElement = document.createElement('div');
       formContainer.classList.add('formContainer');
-      formContainer.classList.add('card');
 
       formContainer.appendChild(form);
       return formContainer;
     },
 
-    buildProjects: (projects: Project[]): HTMLElement => {
+    buildProjects: (projects: Project[], levelUp: Site): HTMLElement => {
       const container: HTMLDivElement = document.createElement('div');
       container.id = 'projectList';
       projects.forEach((project) => {
@@ -197,6 +223,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
           const aHref: HTMLAnchorElement = document.createElement('a');
           aHref.innerText = 'Visiter';
+          aHref.id = 'projectLink';
           description.appendChild(aHref);
           if (project.link) {
             aHref.href = project.link;
@@ -227,10 +254,64 @@ window.addEventListener('DOMContentLoaded', function () {
             card.appendChild(description);
           }
 
+          levelUp.buildCardEvents(card, project, levelUp);
+
           container.appendChild(card);
         }
       });
       return container;
+    },
+
+    buildCardEvents: (
+      card: HTMLDivElement,
+      project: Project,
+      levelUp: Site
+    ) => {
+      card.addEventListener('click', (e) => {
+        const targetEvent: HTMLElement = e.target as HTMLElement;
+        if (!targetEvent.classList.contains('enabledLink')) {
+          levelUp.projectPreview = true;
+          const previewBackground: HTMLDivElement =
+            document.createElement('div');
+          previewBackground.id = 'preview';
+          previewBackground.classList.add('previewBackground');
+          previewBackground.style.top = window.scrollY + 'px';
+
+          const bodyStyle: CSSStyleDeclaration = window.getComputedStyle(
+            levelUp.body
+          );
+
+          const scrollBarWidth: number =
+            this.window.innerWidth - parseInt(bodyStyle.width);
+
+          levelUp.sectionPaddingRight = parseInt(
+            this.window.getComputedStyle(document.querySelector('section')!)
+              .paddingRight
+          );
+
+          levelUp.headerPaddingRight = parseInt(
+            this.window.getComputedStyle(document.querySelector('header')!)
+              .paddingRight
+          );
+          levelUp.navToggleRight = parseInt(
+            this.window.getComputedStyle(document.getElementById('navToggle')!)
+              .right
+          );
+
+          levelUp.section.style.paddingRight =
+            levelUp.sectionPaddingRight + scrollBarWidth + 'px';
+
+          levelUp.header.style.paddingRight =
+            levelUp.headerPaddingRight + scrollBarWidth + 'px';
+
+          levelUp.navToggle.style.right =
+            levelUp.navToggleRight + scrollBarWidth + 'px';
+
+          levelUp.body.classList.add('notScrollable');
+
+          levelUp.body.appendChild(previewBackground);
+        }
+      });
     },
 
     fetchElements: (): Promise<SiteElements> => {
