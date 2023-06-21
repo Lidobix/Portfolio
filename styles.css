@@ -295,6 +295,15 @@ nav {
     justify-content: center;
     align-items: center;
     gap: 0.25rem;
+    transition: 100ms ease-in-out;
+    -webkit-transition: 100ms ease-in-out;
+    -moz-transition: 100ms ease-in-out;
+    -ms-transition: 100ms ease-in-out;
+    -o-transition: 100ms ease-in-out;
+}
+
+#navToggle:hover {
+    transform:scale(1.1) ; -webkit-transform:scale(1.1) ; -moz-transform:scale(1.1) ; -ms-transform:scale(1.1) ; -o-transform:scale(1.1) ;
 }
 
 #navToggle > div {
