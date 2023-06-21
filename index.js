@@ -47,24 +47,12 @@ window.addEventListener('DOMContentLoaded', function () {
                         this.navToggled = false;
                     }
                     if (this.projectPreview) {
-                        // document.getElementById('preview')?.remove();
-                        // this.projectPreview = false;
-                        // this.section.style.paddingRight = this.sectionPaddingRight + 'px';
-                        // this.header.style.paddingRight = this.headerPaddingRight + 'px';
-                        // this.navToggle.style.right = this.navToggleRight + 'px';
-                        // this.body.classList.remove('notScrollable');
                         this.closePreview(this);
                     }
                 });
                 document.addEventListener('keydown', (e) => {
                     if (e.code === 'Escape' && this.projectPreview) {
                         this.closePreview(this);
-                        // document.getElementById('preview')?.remove();
-                        // this.projectPreview = false;
-                        // this.section.style.paddingRight = this.sectionPaddingRight + 'px';
-                        // this.header.style.paddingRight = this.headerPaddingRight + 'px';
-                        // this.navToggle.style.right = this.navToggleRight + 'px';
-                        // this.body.classList.remove('notScrollable');
                     }
                 });
             });
@@ -231,7 +219,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     this.setTimeout(() => {
                         levelUp.projectPreview = true;
                     }, 300);
-                    // levelUp.projectPreview = true;
                     const previewBackground = document.createElement('div');
                     previewBackground.id = 'preview';
                     previewBackground.classList.add('previewBackground');
@@ -255,8 +242,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     previewContainer.classList.add('previewContainer');
                     const title = document.createElement('h2');
                     title.innerText = project.title;
-                    // const description: HTMLDivElement = document.createElement('div');
-                    // description.innerText = project.description;
                     const summary = document.createElement('div');
                     const description = document.createElement('p');
                     description.innerText = project.description;
@@ -266,9 +251,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     const imageContainer = document.createElement('div');
                     imageContainer.classList.add('previewImage');
                     imageContainer.style.backgroundImage = `url(${project.image})`;
-                    // const image: HTMLImageElement = document.createElement('img');
-                    // image.src = project.image!;
-                    // imageContainer.appendChild(image);
                     previewContainer.appendChild(imageContainer);
                     previewContainer.appendChild(summary);
                     previewBackground.appendChild(previewContainer);

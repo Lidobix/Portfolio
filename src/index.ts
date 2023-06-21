@@ -280,7 +280,6 @@ window.addEventListener('DOMContentLoaded', function () {
           this.setTimeout(() => {
             levelUp.projectPreview = true;
           }, 300);
-          // levelUp.projectPreview = true;
           const previewBackground: HTMLDivElement =
             document.createElement('div');
 
@@ -325,8 +324,6 @@ window.addEventListener('DOMContentLoaded', function () {
           previewContainer.classList.add('previewContainer');
           const title: HTMLHeadElement = document.createElement('h2');
           title.innerText = project.title;
-          // const description: HTMLDivElement = document.createElement('div');
-          // description.innerText = project.description;
           const summary: HTMLDivElement = document.createElement('div');
           const description: HTMLParagraphElement = document.createElement('p');
           description.innerText = project.description;
@@ -337,9 +334,6 @@ window.addEventListener('DOMContentLoaded', function () {
           imageContainer.classList.add('previewImage');
 
           imageContainer.style.backgroundImage = `url(${project.image})`;
-          // const image: HTMLImageElement = document.createElement('img');
-          // image.src = project.image!;
-          // imageContainer.appendChild(image);
           previewContainer.appendChild(imageContainer);
           previewContainer.appendChild(summary);
 
