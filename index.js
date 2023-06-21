@@ -36,6 +36,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     this.navToggle = document.getElementById('navToggle');
                 }
                 document.addEventListener('click', (e) => {
+                    var _a;
                     const nav = document.querySelector('nav');
                     const targetEvent = e.target;
                     if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
@@ -45,6 +46,14 @@ window.addEventListener('DOMContentLoaded', function () {
                     else {
                         nav.style.transform = 'translate(15rem)';
                         this.navToggled = false;
+                    }
+                    if (this.projectPreview) {
+                        (_a = document.getElementById('preview')) === null || _a === void 0 ? void 0 : _a.remove();
+                        this.projectPreview = false;
+                        this.section.style.paddingRight = this.sectionPaddingRight + 'px';
+                        this.header.style.paddingRight = this.headerPaddingRight + 'px';
+                        this.navToggle.style.right = this.navToggleRight + 'px';
+                        this.body.classList.remove('notScrollable');
                     }
                 });
                 document.addEventListener('keydown', (e) => {
@@ -210,7 +219,10 @@ window.addEventListener('DOMContentLoaded', function () {
             card.addEventListener('click', (e) => {
                 const targetEvent = e.target;
                 if (!targetEvent.classList.contains('enabledLink')) {
-                    levelUp.projectPreview = true;
+                    this.setTimeout(() => {
+                        levelUp.projectPreview = true;
+                    }, 300);
+                    // levelUp.projectPreview = true;
                     const previewBackground = document.createElement('div');
                     previewBackground.id = 'preview';
                     previewBackground.classList.add('previewBackground');

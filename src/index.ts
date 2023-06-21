@@ -57,6 +57,16 @@ window.addEventListener('DOMContentLoaded', function () {
           nav.style.transform = 'translate(15rem)';
           this.navToggled = false;
         }
+        if (this.projectPreview) {
+          document.getElementById('preview')?.remove();
+          this.projectPreview = false;
+
+          this.section.style.paddingRight = this.sectionPaddingRight + 'px';
+          this.header.style.paddingRight = this.headerPaddingRight + 'px';
+          this.navToggle.style.right = this.navToggleRight + 'px';
+
+          this.body.classList.remove('notScrollable');
+        }
       });
 
       document.addEventListener('keydown', (e) => {
@@ -270,7 +280,10 @@ window.addEventListener('DOMContentLoaded', function () {
       card.addEventListener('click', (e) => {
         const targetEvent: HTMLElement = e.target as HTMLElement;
         if (!targetEvent.classList.contains('enabledLink')) {
-          levelUp.projectPreview = true;
+          this.setTimeout(() => {
+            levelUp.projectPreview = true;
+          }, 300);
+          // levelUp.projectPreview = true;
           const previewBackground: HTMLDivElement =
             document.createElement('div');
 
