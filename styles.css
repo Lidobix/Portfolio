@@ -144,7 +144,6 @@ section {
     background-color: rgba(0,106,97,0.5);
 }
 
-
 figure {
     width: 100%;
     margin: 0;
@@ -153,11 +152,9 @@ figure {
     aspect-ratio: 16/9;
     overflow: hidden;
     display: flex;
-    
     justify-content: center;
     position: relative;
 }
-
 
 figure > img {
     width: 100%;
@@ -170,7 +167,6 @@ figure > img {
     justify-content: center;
     align-items: flex-end;
 }
-
 
 .technoList {
     display: flex;
@@ -185,14 +181,53 @@ figure > img {
     -o-border-radius: 0.2rem;
 }
 
-
-
 .previewBackground {
-    background-color: rgba(0, 0, 0, 0.52);
+    background-color: rgba(0, 0, 0, 0.8);
     position: absolute;
     z-index: 10;
     width: 100%;
     height: 100%;
+}
+
+.previewContainer {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    margin-top: 5%;
+    width: 70%;
+    height: 80%;
+    background-color: rgba(49, 44, 44, 1);
+}
+
+.previewImage {
+    display: flex;
+    flex-shrink: 0;
+    padding: 0 1rem;
+    flex-basis: 55%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-origin: content-box;
+    background-color: rgb(25, 23, 23);
+}
+
+.previewSummary {
+    flex-grow: 0;
+    width: 100%;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+
+.previewSummary > h2 {
+    color:white;
+    margin-top: 2.5rem;
+    text-align: center
+}
+
+.previewSummary > p {
+    color: white;
+    margin-top: 4rem;
+    font-size: 1rem;
 }
 
 .notScrollable {

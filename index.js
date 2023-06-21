@@ -230,6 +230,27 @@ window.addEventListener('DOMContentLoaded', function () {
                     levelUp.navToggle.style.right =
                         levelUp.navToggleRight + scrollBarWidth + 'px';
                     levelUp.body.classList.add('notScrollable');
+                    const previewContainer = document.createElement('div');
+                    previewContainer.classList.add('previewContainer');
+                    const title = document.createElement('h2');
+                    title.innerText = project.title;
+                    // const description: HTMLDivElement = document.createElement('div');
+                    // description.innerText = project.description;
+                    const summary = document.createElement('div');
+                    const description = document.createElement('p');
+                    description.innerText = project.description;
+                    summary.classList.add('previewSummary');
+                    summary.appendChild(title);
+                    summary.appendChild(description);
+                    const imageContainer = document.createElement('div');
+                    imageContainer.classList.add('previewImage');
+                    imageContainer.style.backgroundImage = `url(${project.image})`;
+                    // const image: HTMLImageElement = document.createElement('img');
+                    // image.src = project.image!;
+                    // imageContainer.appendChild(image);
+                    previewContainer.appendChild(imageContainer);
+                    previewContainer.appendChild(summary);
+                    previewBackground.appendChild(previewContainer);
                     levelUp.body.appendChild(previewBackground);
                 }
             });
