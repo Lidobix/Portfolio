@@ -36,7 +36,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     this.navToggle = document.getElementById('navToggle');
                 }
                 document.addEventListener('click', (e) => {
-                    var _a;
                     const nav = document.querySelector('nav');
                     const targetEvent = e.target;
                     if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
@@ -48,26 +47,36 @@ window.addEventListener('DOMContentLoaded', function () {
                         this.navToggled = false;
                     }
                     if (this.projectPreview) {
-                        (_a = document.getElementById('preview')) === null || _a === void 0 ? void 0 : _a.remove();
-                        this.projectPreview = false;
-                        this.section.style.paddingRight = this.sectionPaddingRight + 'px';
-                        this.header.style.paddingRight = this.headerPaddingRight + 'px';
-                        this.navToggle.style.right = this.navToggleRight + 'px';
-                        this.body.classList.remove('notScrollable');
+                        // document.getElementById('preview')?.remove();
+                        // this.projectPreview = false;
+                        // this.section.style.paddingRight = this.sectionPaddingRight + 'px';
+                        // this.header.style.paddingRight = this.headerPaddingRight + 'px';
+                        // this.navToggle.style.right = this.navToggleRight + 'px';
+                        // this.body.classList.remove('notScrollable');
+                        this.closePreview(this);
                     }
                 });
                 document.addEventListener('keydown', (e) => {
-                    var _a;
                     if (e.code === 'Escape' && this.projectPreview) {
-                        (_a = document.getElementById('preview')) === null || _a === void 0 ? void 0 : _a.remove();
-                        this.projectPreview = false;
-                        this.section.style.paddingRight = this.sectionPaddingRight + 'px';
-                        this.header.style.paddingRight = this.headerPaddingRight + 'px';
-                        this.navToggle.style.right = this.navToggleRight + 'px';
-                        this.body.classList.remove('notScrollable');
+                        this.closePreview(this);
+                        // document.getElementById('preview')?.remove();
+                        // this.projectPreview = false;
+                        // this.section.style.paddingRight = this.sectionPaddingRight + 'px';
+                        // this.header.style.paddingRight = this.headerPaddingRight + 'px';
+                        // this.navToggle.style.right = this.navToggleRight + 'px';
+                        // this.body.classList.remove('notScrollable');
                     }
                 });
             });
+        },
+        closePreview: (levelUp) => {
+            var _a;
+            (_a = document.getElementById('preview')) === null || _a === void 0 ? void 0 : _a.remove();
+            levelUp.projectPreview = false;
+            levelUp.section.style.paddingRight = levelUp.sectionPaddingRight + 'px';
+            levelUp.header.style.paddingRight = levelUp.headerPaddingRight + 'px';
+            levelUp.navToggle.style.right = levelUp.navToggleRight + 'px';
+            levelUp.body.classList.remove('notScrollable');
         },
         buildHeader: (headerElements) => {
             const header = document.createElement('header');

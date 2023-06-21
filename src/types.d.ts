@@ -57,6 +57,7 @@ export type Site = {
   header: HTMLElement;
   navToggle: HTMLElement;
   section: HTMLElement;
+  closePreview: Function;
   navToggled: boolean;
   buildSite: Function;
   fetchElements: Function;

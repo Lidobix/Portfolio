@@ -58,29 +58,26 @@ window.addEventListener('DOMContentLoaded', function () {
           this.navToggled = false;
         }
         if (this.projectPreview) {
-          document.getElementById('preview')?.remove();
-          this.projectPreview = false;
-
-          this.section.style.paddingRight = this.sectionPaddingRight + 'px';
-          this.header.style.paddingRight = this.headerPaddingRight + 'px';
-          this.navToggle.style.right = this.navToggleRight + 'px';
-
-          this.body.classList.remove('notScrollable');
+          this.closePreview(this);
         }
       });
 
       document.addEventListener('keydown', (e) => {
         if (e.code === 'Escape' && this.projectPreview) {
-          document.getElementById('preview')?.remove();
-          this.projectPreview = false;
-
-          this.section.style.paddingRight = this.sectionPaddingRight + 'px';
-          this.header.style.paddingRight = this.headerPaddingRight + 'px';
-          this.navToggle.style.right = this.navToggleRight + 'px';
-
-          this.body.classList.remove('notScrollable');
+          this.closePreview(this);
         }
       });
+    },
+    closePreview: (levelUp: Site) => {
+      document.getElementById('preview')?.remove();
+
+      levelUp.projectPreview = false;
+
+      levelUp.section.style.paddingRight = levelUp.sectionPaddingRight + 'px';
+      levelUp.header.style.paddingRight = levelUp.headerPaddingRight + 'px';
+      levelUp.navToggle.style.right = levelUp.navToggleRight + 'px';
+
+      levelUp.body.classList.remove('notScrollable');
     },
 
     buildHeader: (headerElements: Header): HTMLElement => {
