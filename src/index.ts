@@ -9,19 +9,23 @@ import {
 
 window.addEventListener('DOMContentLoaded', function () {
   const site: Site = {
-    body: this.document.querySelector('body')!,
+    body: document.querySelector('body')!,
     projectPreview: false,
     sectionPaddingRight: 0,
     headerPaddingRight: 0,
     navToggleRight: 0,
+    lastVerticalScrollY: 0,
+    lastHorizontalScrollY: 0,
+    previewBackgroundDiv: {} as HTMLElement,
     header: {} as HTMLElement,
     section: {} as HTMLElement,
     navToggle: {} as HTMLElement,
-    script: this.document.querySelector('script')!,
+    script: document.querySelector('script')!,
     siteElements: {} as SiteElements,
     navToggled: false,
     buildSite: async function (): Promise<void> {
       await this.fetchElements();
+      // screen.orientation.lock('portrait');
 
       this.body.insertBefore(
         this.buildHeader(this.siteElements.header),
@@ -65,6 +69,32 @@ window.addEventListener('DOMContentLoaded', function () {
       document.addEventListener('keydown', (e) => {
         if (e.code === 'Escape' && this.projectPreview) {
           this.closePreview(this);
+        }
+      });
+
+      window.addEventListener('orientationchange', () => {
+        if (window.orientation === 0) {
+          // Appareil en position portrait
+
+          console.log('passage en portrait');
+          this.lastHorizontalScrollY = window.scrollY;
+          setTimeout(() => {
+            window.scroll(0, this.lastVerticalScrollY);
+            this.previewBackgroundDiv.style.top =
+              this.lastVerticalScrollY + 'px';
+            this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
+          }, 100);
+        } else if (window.orientation === 90 || window.orientation === -90) {
+          // Appareil en position paysage
+
+          console.log('passage en paysage');
+          this.lastVerticalScrollY = window.scrollY;
+          setTimeout(() => {
+            window.scroll(0, this.lastHorizontalScrollY);
+            this.previewBackgroundDiv.style.top =
+              this.lastHorizontalScrollY + 'px';
+            this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
+          }, 100);
         }
       });
     },
@@ -286,7 +316,13 @@ window.addEventListener('DOMContentLoaded', function () {
           previewBackground.id = 'preview';
           previewBackground.classList.add('previewBackground');
           previewBackground.style.top = window.scrollY + 'px';
+          // console.log(window.scrollY);
 
+          previewBackground.style.height = window.innerHeight + 'px';
+          levelUp.previewBackgroundDiv = previewBackground;
+
+          // levelUp.previewBackgroundDiv.style.top = window.scrollY + 'px';
+          console.log(window.scrollY);
           const bodyStyle: CSSStyleDeclaration = window.getComputedStyle(
             levelUp.body
           );
@@ -322,14 +358,22 @@ window.addEventListener('DOMContentLoaded', function () {
           const previewContainer: HTMLDivElement =
             document.createElement('div');
           previewContainer.classList.add('previewContainer');
+          const titleContainer: HTMLDivElement = document.createElement('div');
           const title: HTMLHeadElement = document.createElement('h2');
           title.innerText = project.title;
           const summary: HTMLDivElement = document.createElement('div');
+          // const description: HTMLParagraphElement = document.createElement('p');
+
+          const descriptionContainer: HTMLParagraphElement =
+            document.createElement('div');
           const description: HTMLParagraphElement = document.createElement('p');
           description.innerText = project.description;
+          descriptionContainer.appendChild(description);
           summary.classList.add('previewSummary');
-          summary.appendChild(title);
-          summary.appendChild(description);
+
+          titleContainer.appendChild(title);
+          summary.appendChild(titleContainer);
+          summary.appendChild(descriptionContainer);
           const imageContainer: HTMLDivElement = document.createElement('div');
           imageContainer.classList.add('previewImage');
 

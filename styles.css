@@ -184,17 +184,17 @@ figure > img {
 .previewBackground {
     background-color: rgba(0, 0, 0, 0.8);
     position: absolute;
+    display: flex;
     z-index: 10;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 100%;
 }
 
 .previewContainer {
     display: flex;
     flex-direction: row;
-    margin: auto;
-    margin-top: 5%;
-    width: 70%;
+    width: 80%;
     height: 80%;
     background-color: rgba(49, 44, 44, 1);
 }
@@ -214,20 +214,26 @@ figure > img {
 .previewSummary {
     flex-grow: 0;
     width: 100%;
+    display: flex;
     flex-direction: column;
     padding: 0 1rem;
 }
 
-.previewSummary > h2 {
+.previewSummary  h2 {
     color:white;
-    margin-top: 2.5rem;
     text-align: center
 }
 
-.previewSummary > p {
+.previewSummary p {
     color: white;
-    margin-top: 4rem;
     font-size: 1rem;
+}
+
+.previewSummary div:nth-child(2){
+    flex: 1;
+    display: flex;
+    margin-top: 1rem;
+    align-items: baseline;
 }
 
 .notScrollable {
@@ -402,7 +408,22 @@ form > input[type="submit"]{
         margin-left: 0;
         margin-right: 0;
     }
-}
+    .previewBackground {
+        height:100vh;
+    }
+    .previewImage {
+        display: none
+    }    
+    .previewContainer {
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+    }
+    .previewSummary div:nth-child(2){
+        align-items:first baseline;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
 
 @media screen and (min-width: 481px) and (max-width: 768px){
     html{
@@ -415,6 +436,7 @@ form > input[type="submit"]{
         margin-left: 0;
         margin-right: 0;
     }
+    
 }
 
 @media screen and (min-width: 761px) and (max-width: 1024px){
@@ -436,6 +458,7 @@ form > input[type="submit"]{
         margin-left: 10rem;
         margin-right: 10rem;
     }
+    
 }
 
 @media screen and (min-width: 1201px) and (max-width: 1366px){
@@ -470,4 +493,10 @@ form > input[type="submit"]{
     html{
         font-size: 40px;
     }
-}
+}}
+
+@media (max-width:1080px) and (orientation: landscape)  {
+    .previewSummary div:nth-child(2){
+        align-items:first baseline
+      }
+  }
