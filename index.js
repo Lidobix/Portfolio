@@ -9,21 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 window.addEventListener('DOMContentLoaded', function () {
     const site = {
-        body: this.document.querySelector('body'),
+        body: document.querySelector('body'),
         projectPreview: false,
         sectionPaddingRight: 0,
         headerPaddingRight: 0,
         navToggleRight: 0,
+        lastVerticalScrollY: 0,
+        lastHorizontalScrollY: 0,
+        previewBackgroundDiv: {},
         header: {},
         section: {},
         navToggle: {},
-        script: this.document.querySelector('script'),
+        script: document.querySelector('script'),
         siteElements: {},
         navToggled: false,
         buildSite: function () {
             var _a;
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
+                // screen.orientation.lock('portrait');
                 this.body.insertBefore(this.buildHeader(this.siteElements.header), this.script);
                 this.header = document.querySelector('header');
                 this.body.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
@@ -53,6 +57,30 @@ window.addEventListener('DOMContentLoaded', function () {
                 document.addEventListener('keydown', (e) => {
                     if (e.code === 'Escape' && this.projectPreview) {
                         this.closePreview(this);
+                    }
+                });
+                window.addEventListener('orientationchange', () => {
+                    if (window.orientation === 0) {
+                        // Appareil en position portrait
+                        console.log('passage en portrait');
+                        this.lastHorizontalScrollY = window.scrollY;
+                        setTimeout(() => {
+                            window.scroll(0, this.lastVerticalScrollY);
+                            this.previewBackgroundDiv.style.top =
+                                this.lastVerticalScrollY + 'px';
+                            this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
+                        }, 100);
+                    }
+                    else if (window.orientation === 90 || window.orientation === -90) {
+                        // Appareil en position paysage
+                        console.log('passage en paysage');
+                        this.lastVerticalScrollY = window.scrollY;
+                        setTimeout(() => {
+                            window.scroll(0, this.lastHorizontalScrollY);
+                            this.previewBackgroundDiv.style.top =
+                                this.lastHorizontalScrollY + 'px';
+                            this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
+                        }, 100);
                     }
                 });
             });
@@ -223,6 +251,11 @@ window.addEventListener('DOMContentLoaded', function () {
                     previewBackground.id = 'preview';
                     previewBackground.classList.add('previewBackground');
                     previewBackground.style.top = window.scrollY + 'px';
+                    // console.log(window.scrollY);
+                    previewBackground.style.height = window.innerHeight + 'px';
+                    levelUp.previewBackgroundDiv = previewBackground;
+                    // levelUp.previewBackgroundDiv.style.top = window.scrollY + 'px';
+                    console.log(window.scrollY);
                     const bodyStyle = window.getComputedStyle(levelUp.body);
                     const scrollBarWidth = this.window.innerWidth - parseInt(bodyStyle.width);
                     levelUp.sectionPaddingRight = parseInt(this.window.getComputedStyle(document.querySelector('section'))
@@ -240,14 +273,19 @@ window.addEventListener('DOMContentLoaded', function () {
                     levelUp.body.classList.add('notScrollable');
                     const previewContainer = document.createElement('div');
                     previewContainer.classList.add('previewContainer');
+                    const titleContainer = document.createElement('div');
                     const title = document.createElement('h2');
                     title.innerText = project.title;
                     const summary = document.createElement('div');
+                    // const description: HTMLParagraphElement = document.createElement('p');
+                    const descriptionContainer = document.createElement('div');
                     const description = document.createElement('p');
                     description.innerText = project.description;
+                    descriptionContainer.appendChild(description);
                     summary.classList.add('previewSummary');
-                    summary.appendChild(title);
-                    summary.appendChild(description);
+                    titleContainer.appendChild(title);
+                    summary.appendChild(titleContainer);
+                    summary.appendChild(descriptionContainer);
                     const imageContainer = document.createElement('div');
                     imageContainer.classList.add('previewImage');
                     imageContainer.style.backgroundImage = `url(${project.image})`;

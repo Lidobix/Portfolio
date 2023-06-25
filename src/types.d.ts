@@ -54,6 +54,9 @@ export type Site = {
   sectionPaddingRight: number;
   headerPaddingRight: number;
   navToggleRight: number;
+  lastVerticalScrollY: number;
+  lastHorizontalScrollY: number;
+  previewBackgroundDiv: HTMLElement;
   header: HTMLElement;
   navToggle: HTMLElement;
   section: HTMLElement;
