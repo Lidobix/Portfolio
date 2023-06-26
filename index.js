@@ -27,7 +27,6 @@ window.addEventListener('DOMContentLoaded', function () {
             var _a;
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
-                // screen.orientation.lock('portrait');
                 this.body.insertBefore(this.buildHeader(this.siteElements.header), this.script);
                 this.header = document.querySelector('header');
                 this.body.insertBefore(this.buildSection(this, this.siteElements.section), this.script);
@@ -62,7 +61,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 window.addEventListener('orientationchange', () => {
                     if (window.orientation === 0) {
                         // Appareil en position portrait
-                        console.log('passage en portrait');
                         this.lastHorizontalScrollY = window.scrollY;
                         setTimeout(() => {
                             window.scroll(0, this.lastVerticalScrollY);
@@ -73,7 +71,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     }
                     else if (window.orientation === 90 || window.orientation === -90) {
                         // Appareil en position paysage
-                        console.log('passage en paysage');
                         this.lastVerticalScrollY = window.scrollY;
                         setTimeout(() => {
                             window.scroll(0, this.lastHorizontalScrollY);
@@ -140,7 +137,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     }
                     if (sectionElement.illustrations &&
                         sectionElement.illustrations.length !== 0) {
-                        console.log(sectionElement.illustrations);
                         const imagesContainer = document.createElement('div');
                         imagesContainer.classList.add('imagesContainer');
                         sectionElement.illustrations.forEach((imageUrl) => {
@@ -263,11 +259,8 @@ window.addEventListener('DOMContentLoaded', function () {
                     previewBackground.id = 'preview';
                     previewBackground.classList.add('previewBackground');
                     previewBackground.style.top = window.scrollY + 'px';
-                    // console.log(window.scrollY);
                     previewBackground.style.height = window.innerHeight + 'px';
                     levelUp.previewBackgroundDiv = previewBackground;
-                    // levelUp.previewBackgroundDiv.style.top = window.scrollY + 'px';
-                    console.log(window.scrollY);
                     const bodyStyle = window.getComputedStyle(levelUp.body);
                     const scrollBarWidth = this.window.innerWidth - parseInt(bodyStyle.width);
                     levelUp.sectionPaddingRight = parseInt(this.window.getComputedStyle(document.querySelector('section'))
