@@ -53,9 +53,9 @@ section {
 }
 
 h3 + p {
-font-size: 1.2rem;
-
+    font-size: 1.2rem;
 }
+
 .imagesContainer {
     display: flex;
     flex-wrap: wrap;
