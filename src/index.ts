@@ -25,7 +25,6 @@ window.addEventListener('DOMContentLoaded', function () {
     navToggled: false,
     buildSite: async function (): Promise<void> {
       await this.fetchElements();
-      // screen.orientation.lock('portrait');
 
       this.body.insertBefore(
         this.buildHeader(this.siteElements.header),
@@ -75,8 +74,6 @@ window.addEventListener('DOMContentLoaded', function () {
       window.addEventListener('orientationchange', () => {
         if (window.orientation === 0) {
           // Appareil en position portrait
-
-          console.log('passage en portrait');
           this.lastHorizontalScrollY = window.scrollY;
           setTimeout(() => {
             window.scroll(0, this.lastVerticalScrollY);
@@ -87,7 +84,6 @@ window.addEventListener('DOMContentLoaded', function () {
         } else if (window.orientation === 90 || window.orientation === -90) {
           // Appareil en position paysage
 
-          console.log('passage en paysage');
           this.lastVerticalScrollY = window.scrollY;
           setTimeout(() => {
             window.scroll(0, this.lastHorizontalScrollY);
@@ -172,7 +168,6 @@ window.addEventListener('DOMContentLoaded', function () {
             sectionElement.illustrations &&
             sectionElement.illustrations.length !== 0
           ) {
-            console.log(sectionElement.illustrations);
             const imagesContainer: HTMLDivElement =
               document.createElement('div');
             imagesContainer.classList.add('imagesContainer');
@@ -332,13 +327,10 @@ window.addEventListener('DOMContentLoaded', function () {
           previewBackground.id = 'preview';
           previewBackground.classList.add('previewBackground');
           previewBackground.style.top = window.scrollY + 'px';
-          // console.log(window.scrollY);
 
           previewBackground.style.height = window.innerHeight + 'px';
           levelUp.previewBackgroundDiv = previewBackground;
 
-          // levelUp.previewBackgroundDiv.style.top = window.scrollY + 'px';
-          console.log(window.scrollY);
           const bodyStyle: CSSStyleDeclaration = window.getComputedStyle(
             levelUp.body
           );
@@ -378,7 +370,6 @@ window.addEventListener('DOMContentLoaded', function () {
           const title: HTMLHeadElement = document.createElement('h2');
           title.innerText = project.title;
           const summary: HTMLDivElement = document.createElement('div');
-          // const description: HTMLParagraphElement = document.createElement('p');
 
           const descriptionContainer: HTMLParagraphElement =
             document.createElement('div');
