@@ -168,6 +168,22 @@ window.addEventListener('DOMContentLoaded', function () {
             section.appendChild(content);
           }
 
+          if (
+            sectionElement.illustrations &&
+            sectionElement.illustrations.length !== 0
+          ) {
+            console.log(sectionElement.illustrations);
+            const imagesContainer: HTMLDivElement =
+              document.createElement('div');
+            imagesContainer.classList.add('imagesContainer');
+            sectionElement.illustrations.forEach((imageUrl) => {
+              const image: HTMLImageElement = document.createElement('img');
+              image.src = imageUrl;
+              imagesContainer.appendChild(image);
+            });
+            section.appendChild(imagesContainer);
+          }
+
           if (sectionElement.projectList) {
             section.appendChild(
               levelUp.buildProjects(sectionElement.projectList, levelUp)
