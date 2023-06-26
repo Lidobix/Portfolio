@@ -21,6 +21,7 @@ export type SectionElement = {
   projectList?: Project[];
   display: boolean;
   htmlForm?: string;
+  illustrations: string[];
 };
 
 export type Techno =

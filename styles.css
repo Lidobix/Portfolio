@@ -52,6 +52,22 @@ section {
     padding: 1rem;
 }
 
+.imagesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.imagesContainer > img {
+    aspect-ratio: 3/2;
+    width: 8rem;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+
 .technoList > img{
     aspect-ratio: 3/2; 
     width: 2rem;
