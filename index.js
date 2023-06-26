@@ -190,6 +190,7 @@ window.addEventListener('DOMContentLoaded', function () {
             form.innerHTML = htmlForm;
             form.method = 'POST';
             form.action = 'http://localhost:3000/portfolio/contact';
+            // form.action = 'https://lidobix.alwaysdata.net/portfolio/contact';
             const formContainer = document.createElement('div');
             formContainer.classList.add('formContainer');
             formContainer.appendChild(form);
