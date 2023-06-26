@@ -87,12 +87,8 @@ section {
     background-color:  white;
     flex-grow: 1;
     flex-shrink: 1;
-    flex-basis: 40%;
-    min-width: 16rem;
-    max-width: 20rem;
     color: black;
     display: flex;
-    flex-direction: column;
     box-shadow: none;
     height: 25rem;
     overflow: hidden;
@@ -107,6 +103,13 @@ section {
     -moz-transition: 100ms ease-in-out;
     -ms-transition: 100ms ease-in-out;
     -o-transition: 100ms ease-in-out;
+}
+
+.card {
+    min-width: 16rem;
+    max-width: 20rem;
+    flex-direction: column;
+    flex-basis: 40%;
 }
 
 .cardDescription {
@@ -133,6 +136,7 @@ section {
 .cardDescription p:first-of-type {
     font-size: 1.1rem;
 }
+
 .cardDescription p:last-of-type{
     font-size: 0.9rem;
     overflow: hidden;
@@ -359,10 +363,8 @@ a {
 }
 
 .formContainer{
-    flex: 1;
-    max-width: 100%;
-    margin-left: 20rem;
-    margin-right: 20rem;
+    width: 60%;
+    margin: 1rem auto 2rem auto;
 }
 
 form {
@@ -395,8 +397,7 @@ form > textarea {
 form > input[type="submit"]{
     align-self: center;
     background-color: #086a61;
-    padding-right: 2rem;
-    padding-left: 2rem;
+    padding: 0 2rem;
     border-radius: 0.2rem;
     color:white;
     margin-top: 0.5rem;
@@ -421,8 +422,7 @@ form > input[type="submit"]{
         max-width: 100%;
     }
     .formContainer{
-        margin-left: 0;
-        margin-right: 0;
+        width: 100%;
     }
     .previewBackground {
         height:100vh;
@@ -440,17 +440,13 @@ form > input[type="submit"]{
         padding-top: 1rem;
         padding-bottom: 1rem;
       }
-
+    }
 @media screen and (min-width: 481px) and (max-width: 768px){
     html{
         font-size: 15px;
     }
-    .card {
-        max-width: 100%;
-    }
     .formContainer{
-        margin-left: 0;
-        margin-right: 0;
+        width: 100%
     }
     
 }
@@ -460,8 +456,7 @@ form > input[type="submit"]{
         font-size: 15px;
     }
     .formContainer{
-        margin-left: 10rem;
-        margin-right: 10rem;
+        width: 100%;
     }
     
 }
@@ -470,20 +465,11 @@ form > input[type="submit"]{
     html{
         font-size: 15px;
     }
-    .formContainer{
-        margin-left: 10rem;
-        margin-right: 10rem;
-    }
-    
 }
 
 @media screen and (min-width: 1201px) and (max-width: 1366px){
     html{
         font-size: 16px;
-    }
-    .formContainer{
-        margin-left: 10rem;
-        margin-right: 10rem;
     }
 }
 
@@ -496,7 +482,7 @@ form > input[type="submit"]{
 @media screen and (min-width: 1601px) and (max-width: 1920px){
     html{
         font-size: 20px;
-    }
+    } 
 }
 
 @media screen and (min-width: 1921px) and (max-width: 2560px){
@@ -509,7 +495,7 @@ form > input[type="submit"]{
     html{
         font-size: 40px;
     }
-}}
+}
 
 @media (max-width:1080px) and (orientation: landscape)  {
     .previewSummary div:nth-child(2){
