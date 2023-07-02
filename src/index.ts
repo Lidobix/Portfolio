@@ -7,6 +7,8 @@ import {
   Site,
 } from './types';
 
+import { Button } from './components/Button';
+
 window.addEventListener('DOMContentLoaded', function () {
   const site: Site = {
     body: document.querySelector('body')!,
@@ -26,6 +28,9 @@ window.addEventListener('DOMContentLoaded', function () {
     buildSite: async function (): Promise<void> {
       await this.fetchElements();
       // screen.orientation.lock('portrait');
+      const buttonElement = document.createElement('div');
+      buttonElement.innerHTML = Button('cliquez ici!');
+      this.body.appendChild(buttonElement);
 
       this.body.insertBefore(
         this.buildHeader(this.siteElements.header),
