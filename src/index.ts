@@ -231,9 +231,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
       form.innerHTML = htmlForm;
       form.method = 'POST';
-      form.action = 'http://localhost:3000/portfolio/contact';
+      form.action = 'https://lidobix.alwaysdata.net/portfolio/contact';
       const formContainer: HTMLElement = document.createElement('div');
       formContainer.classList.add('formContainer');
+
+      document.querySelector('form')?.addEventListener('submit', (event) => {
+        fetch(event.target!.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(event.target)),
+        });
+      });
 
       formContainer.appendChild(form);
       return formContainer;
