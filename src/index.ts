@@ -23,6 +23,7 @@ window.addEventListener('DOMContentLoaded', function () {
     script: document.querySelector('script')!,
     siteElements: {} as SiteElements,
     navToggled: false,
+
     buildSite: async function (): Promise<void> {
       await this.fetchElements();
 
@@ -93,6 +94,35 @@ window.addEventListener('DOMContentLoaded', function () {
           }, 100);
         }
       });
+
+      document
+        .querySelector('form')
+        ?.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          const form = event.target as HTMLFormElement;
+          const formData: FormData = new FormData(form as HTMLFormElement);
+          const searchParams = new URLSearchParams(formData as any);
+          await fetch('http://localhost:3000/portfolio/contact', {
+            method: 'POST',
+            body: searchParams.toString(),
+
+            headers: new Headers({
+              'Content-Type': 'application/x-www-form-urlencoded',
+            }),
+          })
+            .then((r) => {
+              console.log('mail envoyé 01');
+              if (r.ok) {
+                alert('message envoyé!');
+              }
+
+              form.reset();
+            })
+
+            .catch((e) => {
+              console.log('mail envoyé 03');
+            });
+        });
     },
     closePreview: (levelUp: Site) => {
       document.getElementById('preview')?.remove();
@@ -228,19 +258,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
     buildForm: (htmlForm: string): HTMLElement => {
       const form: HTMLFormElement = document.createElement('form');
+      form.id = 'formulaire';
 
       form.innerHTML = htmlForm;
       form.method = 'POST';
-      form.action = 'https://lidobix.alwaysdata.net/portfolio/contact';
+      // form.action = 'https://lidobix.alwaysdata.net/portfolio/contact';
       const formContainer: HTMLElement = document.createElement('div');
       formContainer.classList.add('formContainer');
-
-      document.querySelector('form')?.addEventListener('submit', (event) => {
-        fetch(event.target!.action, {
-          method: 'POST',
-          body: new URLSearchParams(new FormData(event.target)),
-        });
-      });
 
       formContainer.appendChild(form);
       return formContainer;
