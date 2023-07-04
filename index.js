@@ -80,9 +80,6 @@ window.addEventListener('DOMContentLoaded', function () {
                         }, 100);
                     }
                 });
-                // const getForm: HTMLElement = document.getElementById('formulaire')!;
-                // const getForm: HTMLElement = document.querySelector('form')!;
-                // console.log('form', getForm);
                 (_b = document
                     .querySelector('form')) === null || _b === void 0 ? void 0 : _b.addEventListener('submit', (event) => __awaiter(this, void 0, void 0, function* () {
                     event.preventDefault();
@@ -97,17 +94,32 @@ window.addEventListener('DOMContentLoaded', function () {
                         }),
                     })
                         .then((r) => {
-                        console.log('mail envoyé 01');
-                        if (r.ok) {
-                            alert('message envoyé!');
-                        }
+                        console.log('message envoyé!');
+                        this.buildFormModal(this, 'MERCI!!', 'Votre mail a bien été envoyé, je vous répondrai dans les plus brefs délais.');
                         form.reset();
                     })
                         .catch((e) => {
-                        console.log('mail envoyé 03');
+                        alert(e + 'Problème technique, veuillez ressayer plus tard');
                     });
                 }));
+                this.buildFormModal(this, 'MERCI!!', 'Votre mail a bien été envoyé, je vous répondrai dans les plus brefs délais.');
             });
+        },
+        buildFormModal: (levelUp, title, message) => {
+            const modalContainer = document.createElement('div');
+            const titleContainer = document.createElement('div');
+            const messageContainer = document.createElement('div');
+            const closeButton = document.createElement('button');
+            titleContainer.innerText = title;
+            messageContainer.innerText = message;
+            closeButton.innerText = 'FERMER';
+            modalContainer.classList.add('modalContainer');
+            titleContainer.classList.add('modalTitleContainer');
+            messageContainer.classList.add('modalMessageContainer');
+            modalContainer.appendChild(titleContainer);
+            modalContainer.appendChild(messageContainer);
+            modalContainer.appendChild(closeButton);
+            levelUp.body.appendChild(modalContainer);
         },
         closePreview: (levelUp) => {
             var _a;

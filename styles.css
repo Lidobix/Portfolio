@@ -417,6 +417,55 @@ form > input[type="submit"]{
     -o-border-radius: 0.1rem;
 }
 
+
+.modalContainer {
+    position:fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 8;
+    top: 50%;
+    left: 50%;
+    width: 20rem;
+    height: 10rem;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+
+.modalTitleContainer{
+    background-color: #086a61;
+    color:white;
+    font-size: 2rem;
+    padding: 0.5rem 0 0.5rem 0.7rem;
+}
+.modalMessageContainer{
+    padding: 0.8rem 0 0.5rem 0.7rem;
+}
+
+
+.modalContainer > button {
+    align-self: center;
+   
+    background-color: #086a61;
+    
+    padding: 0 2rem;
+    border-radius: 0.2rem;
+    color:white;
+    margin-top: 0.5rem;
+    border: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1rem;
+    height: auto;
+    border-radius: 0.1rem;
+    -webkit-border-radius: 0.1rem;
+    -moz-border-radius: 0.1rem;
+    -ms-border-radius: 0.1rem;
+    -o-border-radius: 0.1rem;
+}
+
+
 @media screen and (max-width: 480px){
     html{
         font-size: 15px;

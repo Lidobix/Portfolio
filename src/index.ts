@@ -111,19 +111,48 @@ window.addEventListener('DOMContentLoaded', function () {
             }),
           })
             .then((r) => {
-              console.log('mail envoyé 01');
-              if (r.ok) {
-                alert('message envoyé!');
-              }
-
+              console.log('message envoyé!');
+              this.buildFormModal(
+                this,
+                'MERCI!!',
+                'Votre mail a bien été envoyé, je vous répondrai dans les plus brefs délais.'
+              );
               form.reset();
             })
 
             .catch((e) => {
-              console.log('mail envoyé 03');
+              alert(e + 'Problème technique, veuillez ressayer plus tard');
             });
         });
+
+      this.buildFormModal(
+        this,
+        'MERCI!!',
+        'Votre mail a bien été envoyé, je vous répondrai dans les plus brefs délais.'
+      );
     },
+
+    buildFormModal: (levelUp: Site, title: string, message: string) => {
+      const modalContainer: HTMLDivElement = document.createElement('div');
+      const titleContainer: HTMLDivElement = document.createElement('div');
+      const messageContainer: HTMLElement = document.createElement('div');
+      const closeButton: HTMLElement = document.createElement('button');
+
+      titleContainer.innerText = title;
+      messageContainer.innerText = message;
+      closeButton.innerText = 'FERMER';
+
+      modalContainer.classList.add('modalContainer');
+      titleContainer.classList.add('modalTitleContainer');
+      messageContainer.classList.add('modalMessageContainer');
+
+      modalContainer.appendChild(titleContainer);
+      modalContainer.appendChild(messageContainer);
+      modalContainer.appendChild(closeButton);
+
+      levelUp.body.appendChild(modalContainer);
+    },
+
     closePreview: (levelUp: Site) => {
       document.getElementById('preview')?.remove();
 

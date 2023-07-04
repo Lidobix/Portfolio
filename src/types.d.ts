@@ -58,6 +58,7 @@ export type Site = {
   lastVerticalScrollY: number;
   lastHorizontalScrollY: number;
   previewBackgroundDiv: HTMLElement;
+  buildFormModal: Function;
   header: HTMLElement;
   navToggle: HTMLElement;
   section: HTMLElement;
