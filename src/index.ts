@@ -136,19 +136,21 @@ window.addEventListener('DOMContentLoaded', function () {
       const modalContainer: HTMLDivElement = document.createElement('div');
       const titleContainer: HTMLDivElement = document.createElement('div');
       const messageContainer: HTMLElement = document.createElement('div');
+      const text: HTMLParagraphElement = document.createElement('p');
       const closeButton: HTMLElement = document.createElement('button');
 
       titleContainer.innerText = title;
-      messageContainer.innerText = message;
+      text.innerText = message;
       closeButton.innerText = 'FERMER';
 
       modalContainer.classList.add('modalContainer');
       titleContainer.classList.add('modalTitleContainer');
       messageContainer.classList.add('modalMessageContainer');
 
+      messageContainer.appendChild(text);
+      messageContainer.appendChild(closeButton);
       modalContainer.appendChild(titleContainer);
       modalContainer.appendChild(messageContainer);
-      modalContainer.appendChild(closeButton);
 
       levelUp.body.appendChild(modalContainer);
     },

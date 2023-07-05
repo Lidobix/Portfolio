@@ -109,16 +109,18 @@ window.addEventListener('DOMContentLoaded', function () {
             const modalContainer = document.createElement('div');
             const titleContainer = document.createElement('div');
             const messageContainer = document.createElement('div');
+            const text = document.createElement('p');
             const closeButton = document.createElement('button');
             titleContainer.innerText = title;
-            messageContainer.innerText = message;
+            text.innerText = message;
             closeButton.innerText = 'FERMER';
             modalContainer.classList.add('modalContainer');
             titleContainer.classList.add('modalTitleContainer');
             messageContainer.classList.add('modalMessageContainer');
+            messageContainer.appendChild(text);
+            messageContainer.appendChild(closeButton);
             modalContainer.appendChild(titleContainer);
             modalContainer.appendChild(messageContainer);
-            modalContainer.appendChild(closeButton);
             levelUp.body.appendChild(modalContainer);
         },
         closePreview: (levelUp) => {
