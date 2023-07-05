@@ -5,6 +5,7 @@ import {
   SectionElement,
   Project,
   Site,
+  Modal,
 } from './types';
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -102,7 +103,8 @@ window.addEventListener('DOMContentLoaded', function () {
           const form = event.target as HTMLFormElement;
           const formData: FormData = new FormData(form as HTMLFormElement);
           const searchParams = new URLSearchParams(formData as any);
-          await fetch('http://localhost:3000/portfolio/contact', {
+          // await fetch('http://localhost:3000/portfolio/contact', {
+          await fetch('https://lidobix.alwaysdata.net/portfolio/contact', {
             method: 'POST',
             body: searchParams.toString(),
 
@@ -111,25 +113,21 @@ window.addEventListener('DOMContentLoaded', function () {
             }),
           })
             .then((r) => {
-              console.log('message envoyé!');
               this.buildFormModal(
                 this,
-                'MERCI!!',
-                'Votre mail a bien été envoyé, je vous répondrai dans les plus brefs délais.'
+                this.siteElements.modal.success.title,
+                this.siteElements.modal.success.message
               );
               form.reset();
             })
-
             .catch((e) => {
-              alert(e + 'Problème technique, veuillez ressayer plus tard');
+              this.buildFormModal(
+                this,
+                this.siteElements.modal.error.title,
+                this.siteElements.modal.error.message
+              );
             });
         });
-
-      this.buildFormModal(
-        this,
-        'MERCI!!',
-        'Votre mail a bien été envoyé, je vous répondrai dans les plus brefs délais.'
-      );
     },
 
     buildFormModal: (levelUp: Site, title: string, message: string) => {
@@ -153,6 +151,10 @@ window.addEventListener('DOMContentLoaded', function () {
       modalContainer.appendChild(messageContainer);
 
       levelUp.body.appendChild(modalContainer);
+
+      closeButton.addEventListener('click', () => {
+        modalContainer.remove();
+      });
     },
 
     closePreview: (levelUp: Site) => {
@@ -293,7 +295,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
       form.innerHTML = htmlForm;
       form.method = 'POST';
-      // form.action = 'https://lidobix.alwaysdata.net/portfolio/contact';
       const formContainer: HTMLElement = document.createElement('div');
       formContainer.classList.add('formContainer');
 

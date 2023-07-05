@@ -86,7 +86,8 @@ window.addEventListener('DOMContentLoaded', function () {
                     const form = event.target;
                     const formData = new FormData(form);
                     const searchParams = new URLSearchParams(formData);
-                    yield fetch('http://localhost:3000/portfolio/contact', {
+                    // await fetch('http://localhost:3000/portfolio/contact', {
+                    yield fetch('https://lidobix.alwaysdata.net/portfolio/contact', {
                         method: 'POST',
                         body: searchParams.toString(),
                         headers: new Headers({
@@ -94,15 +95,13 @@ window.addEventListener('DOMContentLoaded', function () {
                         }),
                     })
                         .then((r) => {
-                        console.log('message envoyé!');
-                        this.buildFormModal(this, 'MERCI!!', 'Votre mail a bien été envoyé, je vous répondrai dans les plus brefs délais.');
+                        this.buildFormModal(this, this.siteElements.modal.success.title, this.siteElements.modal.success.message);
                         form.reset();
                     })
                         .catch((e) => {
-                        alert(e + 'Problème technique, veuillez ressayer plus tard');
+                        this.buildFormModal(this, this.siteElements.modal.error.title, this.siteElements.modal.error.message);
                     });
                 }));
-                this.buildFormModal(this, 'MERCI!!', 'Votre mail a bien été envoyé, je vous répondrai dans les plus brefs délais.');
             });
         },
         buildFormModal: (levelUp, title, message) => {
@@ -122,6 +121,9 @@ window.addEventListener('DOMContentLoaded', function () {
             modalContainer.appendChild(titleContainer);
             modalContainer.appendChild(messageContainer);
             levelUp.body.appendChild(modalContainer);
+            closeButton.addEventListener('click', () => {
+                modalContainer.remove();
+            });
         },
         closePreview: (levelUp) => {
             var _a;
@@ -227,7 +229,6 @@ window.addEventListener('DOMContentLoaded', function () {
             form.id = 'formulaire';
             form.innerHTML = htmlForm;
             form.method = 'POST';
-            // form.action = 'https://lidobix.alwaysdata.net/portfolio/contact';
             const formContainer = document.createElement('div');
             formContainer.classList.add('formContainer');
             formContainer.appendChild(form);
