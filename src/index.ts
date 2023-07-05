@@ -5,6 +5,7 @@ import {
   SectionElement,
   Project,
   Site,
+  Modal,
 } from './types';
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -23,6 +24,7 @@ window.addEventListener('DOMContentLoaded', function () {
     script: document.querySelector('script')!,
     siteElements: {} as SiteElements,
     navToggled: false,
+
     buildSite: async function (): Promise<void> {
       await this.fetchElements();
 
@@ -93,7 +95,68 @@ window.addEventListener('DOMContentLoaded', function () {
           }, 100);
         }
       });
+
+      document
+        .querySelector('form')
+        ?.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          const form = event.target as HTMLFormElement;
+          const formData: FormData = new FormData(form as HTMLFormElement);
+          const searchParams = new URLSearchParams(formData as any);
+          // await fetch('http://localhost:3000/portfolio/contact', {
+          await fetch('https://lidobix.alwaysdata.net/portfolio/contact', {
+            method: 'POST',
+            body: searchParams.toString(),
+
+            headers: new Headers({
+              'Content-Type': 'application/x-www-form-urlencoded',
+            }),
+          })
+            .then((r) => {
+              this.buildFormModal(
+                this,
+                this.siteElements.modal.success.title,
+                this.siteElements.modal.success.message
+              );
+              form.reset();
+            })
+            .catch((e) => {
+              this.buildFormModal(
+                this,
+                this.siteElements.modal.error.title,
+                this.siteElements.modal.error.message
+              );
+            });
+        });
     },
+
+    buildFormModal: (levelUp: Site, title: string, message: string) => {
+      const modalContainer: HTMLDivElement = document.createElement('div');
+      const titleContainer: HTMLDivElement = document.createElement('div');
+      const messageContainer: HTMLElement = document.createElement('div');
+      const text: HTMLParagraphElement = document.createElement('p');
+      const closeButton: HTMLElement = document.createElement('button');
+
+      titleContainer.innerText = title;
+      text.innerText = message;
+      closeButton.innerText = 'FERMER';
+
+      modalContainer.classList.add('modalContainer');
+      titleContainer.classList.add('modalTitleContainer');
+      messageContainer.classList.add('modalMessageContainer');
+
+      messageContainer.appendChild(text);
+      messageContainer.appendChild(closeButton);
+      modalContainer.appendChild(titleContainer);
+      modalContainer.appendChild(messageContainer);
+
+      levelUp.body.appendChild(modalContainer);
+
+      closeButton.addEventListener('click', () => {
+        modalContainer.remove();
+      });
+    },
+
     closePreview: (levelUp: Site) => {
       document.getElementById('preview')?.remove();
 
@@ -228,10 +291,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
     buildForm: (htmlForm: string): HTMLElement => {
       const form: HTMLFormElement = document.createElement('form');
+      form.id = 'formulaire';
 
       form.innerHTML = htmlForm;
       form.method = 'POST';
-      form.action = 'http://localhost:3000/portfolio/contact';
       const formContainer: HTMLElement = document.createElement('div');
       formContainer.classList.add('formContainer');
 

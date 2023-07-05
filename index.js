@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', function () {
         siteElements: {},
         navToggled: false,
         buildSite: function () {
-            var _a;
+            var _a, _b;
             return __awaiter(this, void 0, void 0, function* () {
                 yield this.fetchElements();
                 this.body.insertBefore(this.buildHeader(this.siteElements.header), this.script);
@@ -80,6 +80,49 @@ window.addEventListener('DOMContentLoaded', function () {
                         }, 100);
                     }
                 });
+                (_b = document
+                    .querySelector('form')) === null || _b === void 0 ? void 0 : _b.addEventListener('submit', (event) => __awaiter(this, void 0, void 0, function* () {
+                    event.preventDefault();
+                    const form = event.target;
+                    const formData = new FormData(form);
+                    const searchParams = new URLSearchParams(formData);
+                    // await fetch('http://localhost:3000/portfolio/contact', {
+                    yield fetch('https://lidobix.alwaysdata.net/portfolio/contact', {
+                        method: 'POST',
+                        body: searchParams.toString(),
+                        headers: new Headers({
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        }),
+                    })
+                        .then((r) => {
+                        this.buildFormModal(this, this.siteElements.modal.success.title, this.siteElements.modal.success.message);
+                        form.reset();
+                    })
+                        .catch((e) => {
+                        this.buildFormModal(this, this.siteElements.modal.error.title, this.siteElements.modal.error.message);
+                    });
+                }));
+            });
+        },
+        buildFormModal: (levelUp, title, message) => {
+            const modalContainer = document.createElement('div');
+            const titleContainer = document.createElement('div');
+            const messageContainer = document.createElement('div');
+            const text = document.createElement('p');
+            const closeButton = document.createElement('button');
+            titleContainer.innerText = title;
+            text.innerText = message;
+            closeButton.innerText = 'FERMER';
+            modalContainer.classList.add('modalContainer');
+            titleContainer.classList.add('modalTitleContainer');
+            messageContainer.classList.add('modalMessageContainer');
+            messageContainer.appendChild(text);
+            messageContainer.appendChild(closeButton);
+            modalContainer.appendChild(titleContainer);
+            modalContainer.appendChild(messageContainer);
+            levelUp.body.appendChild(modalContainer);
+            closeButton.addEventListener('click', () => {
+                modalContainer.remove();
             });
         },
         closePreview: (levelUp) => {
@@ -183,9 +226,9 @@ window.addEventListener('DOMContentLoaded', function () {
         },
         buildForm: (htmlForm) => {
             const form = document.createElement('form');
+            form.id = 'formulaire';
             form.innerHTML = htmlForm;
             form.method = 'POST';
-            form.action = 'http://localhost:3000/portfolio/contact';
             const formContainer = document.createElement('div');
             formContainer.classList.add('formContainer');
             formContainer.appendChild(form);
@@ -282,7 +325,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     const title = document.createElement('h2');
                     title.innerText = project.title;
                     const summary = document.createElement('div');
-                    // const description: HTMLParagraphElement = document.createElement('p');
                     const descriptionContainer = document.createElement('div');
                     const description = document.createElement('p');
                     description.innerText = project.description;

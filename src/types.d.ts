@@ -12,6 +12,18 @@ export type SiteElements = {
   header: Header;
   section: SectionElement[];
   nav: NavElement[];
+  modal: Modal;
+};
+
+export type Modal = {
+  success: {
+    title: string;
+    message: string;
+  };
+  error: {
+    title: string;
+    message: string;
+  };
 };
 
 export type SectionElement = {
@@ -22,6 +34,7 @@ export type SectionElement = {
   display: boolean;
   htmlForm?: string;
   illustrations: string[];
+  modalWindow: Modal;
 };
 
 export type Techno =
@@ -58,6 +71,7 @@ export type Site = {
   lastVerticalScrollY: number;
   lastHorizontalScrollY: number;
   previewBackgroundDiv: HTMLElement;
+  buildFormModal: Function;
   header: HTMLElement;
   navToggle: HTMLElement;
   section: HTMLElement;
