@@ -5,7 +5,6 @@ import {
   SectionElement,
   Project,
   Site,
-  Modal,
 } from './types';
 
 window.addEventListener('DOMContentLoaded', function () {
