@@ -166,8 +166,7 @@ window.addEventListener('DOMContentLoaded', function () {
       const section = document.querySelector('section');
       sectionElements.forEach((sectionElement) => {
         if (sectionElement.display) {
-          const title = document.createElement('h3');
-          title.innerText = sectionElement.name;
+          const title = DomCreator.h3(sectionElement.name);
 
           const anchorCalc = sectionElement.name
             .toLowerCase()
@@ -182,8 +181,7 @@ window.addEventListener('DOMContentLoaded', function () {
           section.appendChild(title);
 
           if (sectionElement.text) {
-            const content = document.createElement('p');
-            content.innerText = sectionElement.text;
+            const content = DomCreator.p(sectionElement.text);
             section.appendChild(content);
           }
 
@@ -191,11 +189,10 @@ window.addEventListener('DOMContentLoaded', function () {
             sectionElement.illustrations &&
             sectionElement.illustrations.length !== 0
           ) {
-            const imagesContainer = document.createElement('div');
-            imagesContainer.classList.add('imagesContainer');
+            const imagesContainer = DomCreator.div(['imagesContainer']);
+
             sectionElement.illustrations.forEach((imageUrl) => {
-              const image = document.createElement('img');
-              image.src = imageUrl;
+              const image = DomCreator.img(imageUrl);
               imagesContainer.appendChild(image);
             });
             section.appendChild(imagesContainer);
