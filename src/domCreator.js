@@ -1,11 +1,16 @@
 export class domCreator {
   constructor() {}
 
-  a(href, text = null, id = null) {
+  a(href, text = null, id = null, classArray = []) {
     const a = document.createElement('a');
     a.href = href;
     a.innerText = text;
     a.id = id;
+    if (classArray.length) {
+      classArray.forEach((style) => {
+        a.classList.add(style);
+      });
+    }
     return a;
   }
 
@@ -45,6 +50,12 @@ export class domCreator {
     const h3 = document.createElement('h3');
     h3.innerText = text;
     return h3;
+  }
+
+  h4(text) {
+    const h4 = document.createElement('h4');
+    h4.innerText = text;
+    return h4;
   }
 
   img(src) {

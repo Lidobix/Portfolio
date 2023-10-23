@@ -251,59 +251,46 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildProjects: (projects, levelUp) => {
-      const container = document.createElement('div');
-      container.id = 'projectList';
+      const container = DomCreator.div([], null, 'projectList');
+
       projects.forEach((project) => {
         if (project.display) {
-          const card = document.createElement('div');
-          card.classList.add('card');
+          const card = DomCreator.div(['card']);
 
           if (project.image) {
             const figure = document.createElement('figure');
-
-            const view = document.createElement('img');
-
-            view.src = project.image;
+            const view = DomCreator.img(project.image);
             figure.appendChild(view);
-
             card.appendChild(figure);
           }
-          const description = document.createElement('div');
-          description.classList.add('cardDescription');
-
-          const projectTitle = document.createElement('h4');
-          projectTitle.innerText = `${project.title}`;
-
+          const description = DomCreator.div(['cardDescription']);
+          const projectTitle = DomCreator.h4(project.title);
           description.appendChild(projectTitle);
 
-          const type = document.createElement('p');
-          type.innerText = `${project.type}`;
+          const type = DomCreator.p(project.type);
           description.appendChild(type);
 
-          const aHref = document.createElement('a');
-          aHref.innerText = 'Visiter';
-          aHref.id = 'projectLink';
-          description.appendChild(aHref);
+          let aHref;
           if (project.link) {
-            aHref.href = project.link;
-            aHref.classList.add('enabledLink');
+            aHref = DomCreator.a(project.link, 'Visiter', null, [
+              'enabledLink',
+            ]);
           } else {
-            aHref.classList.add('disabledLink');
+            aHref = DomCreator.a(null, 'Visiter', null, ['disabledLink']);
           }
+          description.appendChild(aHref);
 
-          const summary = document.createElement('p');
-          summary.innerText = `${project.description}`;
+          const summary = DomCreator.p(project.description);
           description.appendChild(summary);
 
-          if (project.technos?.length) {
-            const technoListContainer = document.createElement('div');
-            technoListContainer.classList.add('technoListContainer');
-            const technoList = document.createElement('div');
-            technoList.classList.add('technoList');
-            project.technos?.forEach((techno) => {
-              const logo = document.createElement('img');
+          if (project.technos.length) {
+            const technoListContainer = DomCreator.div(['technoListContainer']);
+            const technoList = DomCreator.div(['technoList']);
 
-              logo.src = `assets/images/${techno.toLowerCase()}.png`;
+            project.technos?.forEach((techno) => {
+              const logo = DomCreator.img(
+                `assets/images/${techno.toLowerCase()}.png`
+              );
 
               technoList.appendChild(logo);
             });
