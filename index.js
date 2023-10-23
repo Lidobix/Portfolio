@@ -1,3 +1,6 @@
+import { domCreator } from './src/domCreator.js';
+const DomCreator = new domCreator();
+
 window.addEventListener('DOMContentLoaded', function () {
   const site = {
     body: document.querySelector('body'),
@@ -17,31 +20,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
     buildSite: async function () {
       await this.fetchElements();
-      console.log('coucou');
-
-      this.body.insertBefore(
-        this.buildHeader(this.siteElements.header),
-        this.script
-      );
-
+      this.buildHeader(this.siteElements.header);
+      this.buildSection(this, this.siteElements.section);
+      this.section = document.querySelector('section');
       this.header = document.querySelector('header');
 
-      this.body.insertBefore(
-        this.buildSection(this, this.siteElements.section),
-        this.script
-      );
+      this.buildNav(this.siteElements.nav);
 
-      this.section = document.querySelector('section');
+      document.querySelector('header').appendChild(this.buildNavToggle());
 
-      document
-        .querySelector('header')
-        .appendChild(this.buildNav(this.siteElements.nav));
-
-      if (document.querySelector('header')) {
-        document.querySelector('header')?.appendChild(this.buildNavToggle());
-
-        this.navToggle = document.getElementById('navToggle');
-      }
+      this.navToggle = document.getElementById('navToggle');
 
       document.addEventListener('click', (e) => {
         const nav = document.querySelector('nav');
@@ -122,18 +110,16 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildFormModal: (levelUp, title, message) => {
+      const titleContainer = DomCreator.divText(title, 'modalTitleContainer');
       const modalContainer = document.createElement('div');
-      const titleContainer = document.createElement('div');
       const messageContainer = document.createElement('div');
       const text = document.createElement('p');
       const closeButton = document.createElement('button');
 
-      titleContainer.innerText = title;
       text.innerText = message;
       closeButton.innerText = 'FERMER';
 
       modalContainer.classList.add('modalContainer');
-      titleContainer.classList.add('modalTitleContainer');
       messageContainer.classList.add('modalMessageContainer');
 
       messageContainer.appendChild(text);
@@ -149,7 +135,7 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     closePreview: (levelUp) => {
-      document.getElementById('preview')?.remove();
+      document.getElementById('preview').remove();
 
       levelUp.projectPreview = false;
 
@@ -161,12 +147,10 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildHeader: (headerElements) => {
-      const header = document.createElement('header');
+      const header = document.querySelector('header');
 
-      const pageTitle = document.createElement('h1');
-      pageTitle.innerText = headerElements.title;
-      const subTitle = document.createElement('h2');
-      subTitle.innerText = headerElements.subtitle;
+      const pageTitle = DomCreator.h1(headerElements.title);
+      const subTitle = DomCreator.h2(headerElements.subtitle);
 
       header.appendChild(pageTitle);
       header.appendChild(subTitle);
@@ -186,12 +170,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
         header.appendChild(socialContainer);
       }
-
-      return header;
     },
 
     buildSection: (levelUp, sectionElements) => {
-      const section = document.createElement('section');
+      const section = document.querySelector('section');
       sectionElements.forEach((sectionElement) => {
         if (sectionElement.display) {
           const title = document.createElement('h3');
@@ -246,7 +228,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     buildNav: (navElements) => {
       const ul = document.createElement('ul');
-      const nav = document.createElement('nav');
+      const nav = document.querySelector('nav');
 
       navElements.forEach((element) => {
         const li = document.createElement('li');
@@ -258,7 +240,7 @@ window.addEventListener('DOMContentLoaded', function () {
         nav.appendChild(ul);
       });
 
-      return nav;
+      //   return nav;
     },
 
     buildNavToggle: () => {
@@ -360,6 +342,7 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildCardEvents: (card, project, levelUp) => {
+      console.log('clic card');
       card.addEventListener('click', (e) => {
         const targetEvent = e.target;
         if (!targetEvent.classList.contains('enabledLink')) {
@@ -408,8 +391,7 @@ window.addEventListener('DOMContentLoaded', function () {
           const previewContainer = document.createElement('div');
           previewContainer.classList.add('previewContainer');
           const titleContainer = document.createElement('div');
-          const title = document.createElement('h2');
-          title.innerText = project.title;
+          const title = DomCreator.h2(project.title);
           const summary = document.createElement('div');
 
           const descriptionContainer = document.createElement('div');
