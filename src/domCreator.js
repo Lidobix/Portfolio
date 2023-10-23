@@ -13,9 +13,38 @@ export class domCreator {
     return h2;
   }
 
-  divText(text, style) {
+  div(classArray = [], text = null) {
     const div = document.createElement('div');
+    if (classArray.length) {
+      classArray.forEach((style) => {
+        div.classList.add(style);
+      });
+    }
+
+    // const typeChildren = typeof children;
+    // switch (typeof children) {
+    //   case string:
+    // }
+
     div.innerText = text;
-    div.classList.add(style);
+
+    return div;
+  }
+  p(text) {
+    const p = document.createElement('p');
+    p.innerText = text;
+    return p;
+  }
+  button(text) {
+    const button = document.createElement('button');
+    button.innerText = text;
+    return button;
+  }
+  appendChilds(parent, childs = []) {
+    if (childs.length) {
+      childs.forEach((child) => {
+        parent.appendChild(child);
+      });
+    }
   }
 }

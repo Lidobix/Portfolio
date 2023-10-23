@@ -110,24 +110,18 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildFormModal: (levelUp, title, message) => {
-      const titleContainer = DomCreator.divText(title, 'modalTitleContainer');
-      const modalContainer = document.createElement('div');
-      const messageContainer = document.createElement('div');
-      const text = document.createElement('p');
-      const closeButton = document.createElement('button');
+      const titleContainer = DomCreator.div(['modalTitleContainer'], title);
+      const messageContainer = DomCreator.div(['modalMessageContainer']);
+      const modalContainer = DomCreator.div(['modalContainer']);
+      const text = DomCreator.p(message);
+      const closeButton = DomCreator.button('FERMER');
 
-      text.innerText = message;
-      closeButton.innerText = 'FERMER';
-
-      modalContainer.classList.add('modalContainer');
-      messageContainer.classList.add('modalMessageContainer');
-
-      messageContainer.appendChild(text);
-      messageContainer.appendChild(closeButton);
-      modalContainer.appendChild(titleContainer);
-      modalContainer.appendChild(messageContainer);
-
-      levelUp.body.appendChild(modalContainer);
+      DomCreator.appendChilds(messageContainer, [text, closeButton]);
+      DomCreator.appendChilds(modalContainer, [
+        titleContainer,
+        messageContainer,
+      ]);
+      DomCreator.appendChilds(levelUp.body, [modalContainer]);
 
       closeButton.addEventListener('click', () => {
         modalContainer.remove();
@@ -239,8 +233,6 @@ window.addEventListener('DOMContentLoaded', function () {
         ul.appendChild(li);
         nav.appendChild(ul);
       });
-
-      //   return nav;
     },
 
     buildNavToggle: () => {
