@@ -146,18 +146,14 @@ window.addEventListener('DOMContentLoaded', function () {
       const pageTitle = DomCreator.h1(headerElements.title);
       const subTitle = DomCreator.h2(headerElements.subtitle);
 
-      header.appendChild(pageTitle);
-      header.appendChild(subTitle);
+      DomCreator.appendChilds(header, [pageTitle, subTitle]);
 
       if (headerElements.socials.length) {
-        const socialContainer = document.createElement('div');
+        const socialContainer = DomCreator.div(['socialContainer']);
 
-        socialContainer.classList.add('socialContainer');
         headerElements.socials.forEach((element) => {
-          const a = document.createElement('a');
-          a.href = element.url;
-          const picto = document.createElement('img');
-          picto.src = element.picto;
+          const a = DomCreator.a(element.url);
+          const picto = DomCreator.img(element.picto);
           a.appendChild(picto);
           socialContainer.appendChild(a);
         });

@@ -1,6 +1,23 @@
 export class domCreator {
   constructor() {}
+  a(href) {
+    const a = document.createElement('a');
+    a.href = href;
+    return a;
+  }
 
+  div(classArray = [], text = null) {
+    const div = document.createElement('div');
+    if (classArray.length) {
+      classArray.forEach((style) => {
+        div.classList.add(style);
+      });
+    }
+
+    div.innerText = text;
+
+    return div;
+  }
   h1(text) {
     const h1 = document.createElement('h1');
     h1.innerText = text;
@@ -13,23 +30,12 @@ export class domCreator {
     return h2;
   }
 
-  div(classArray = [], text = null) {
-    const div = document.createElement('div');
-    if (classArray.length) {
-      classArray.forEach((style) => {
-        div.classList.add(style);
-      });
-    }
-
-    // const typeChildren = typeof children;
-    // switch (typeof children) {
-    //   case string:
-    // }
-
-    div.innerText = text;
-
-    return div;
+  img(src) {
+    const img = document.createElement('img');
+    img.src = src;
+    return img;
   }
+
   p(text) {
     const p = document.createElement('p');
     p.innerText = text;
