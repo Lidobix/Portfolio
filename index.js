@@ -219,9 +219,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
       navElements.forEach((element) => {
         const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = element.anchor;
-        a.innerText = element.name;
+        const a = DomCreator.a(element.anchor, element.name);
+
         li.appendChild(a);
         ul.appendChild(li);
         nav.appendChild(ul);
@@ -229,14 +228,14 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildNavToggle: () => {
-      const navToggle = document.createElement('div');
-
-      navToggle.id = 'navToggle';
-      navToggle.classList.add('mobile', 'navTrigger');
+      const navToggle = DomCreator.div(
+        ['mobile', 'navTrigger'],
+        null,
+        'navToggle'
+      );
 
       for (let i = 0; i < 3; i++) {
-        const bullet = document.createElement('div');
-        bullet.classList.add('navTrigger');
+        const bullet = DomCreator.div(['navTrigger']);
         navToggle.appendChild(bullet);
       }
 
