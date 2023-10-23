@@ -243,13 +243,8 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildForm: (htmlForm) => {
-      const form = document.createElement('form');
-      form.id = 'formulaire';
-
-      form.innerHTML = htmlForm;
-      form.method = 'POST';
-      const formContainer = document.createElement('div');
-      formContainer.classList.add('formContainer');
+      const form = DomCreator.form('formulaire', htmlForm, 'POST');
+      const formContainer = DomCreator.div(['formContainer']);
 
       formContainer.appendChild(form);
       return formContainer;

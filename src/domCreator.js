@@ -1,10 +1,11 @@
 export class domCreator {
   constructor() {}
 
-  a(href, text = null) {
+  a(href, text = null, id = null) {
     const a = document.createElement('a');
     a.href = href;
-    a.innerText = text ?? text;
+    a.innerText = text;
+    a.id = id;
     return a;
   }
 
@@ -18,6 +19,14 @@ export class domCreator {
     div.innerText = text ?? text;
     div.id = id ?? id;
     return div;
+  }
+
+  form(id, html, method) {
+    const form = document.createElement('form');
+    form.id = id;
+    form.innerHTML = html;
+    form.method = method;
+    return form;
   }
 
   h1(text) {
