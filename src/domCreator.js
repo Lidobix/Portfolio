@@ -1,7 +1,7 @@
 export class domCreator {
   constructor() {}
 
-  createNode(type, classArray, attributes = {}) {
+  createNode(type, classArray = [], attributes = {}) {
     const node = document.createElement(type);
 
     if (classArray.length) {
@@ -11,16 +11,9 @@ export class domCreator {
     }
 
     const attributesArray = Object.entries(attributes);
-
     attributesArray.forEach((attribute) => {
-      console.log(attribute[0]);
-      console.log('attribute', attribute);
       node[attribute[0]] = attribute[1];
     });
-
-    // node[attributesArray[0][0]] = attributesArray[0][1];
-
-    console.log(node);
 
     return node;
   }

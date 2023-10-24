@@ -313,17 +313,19 @@ window.addEventListener('DOMContentLoaded', function () {
     },
 
     buildCardEvents: (card, project, levelUp) => {
-      console.log('clic card');
       card.addEventListener('click', (e) => {
         const targetEvent = e.target;
         if (!targetEvent.classList.contains('enabledLink')) {
           this.setTimeout(() => {
             levelUp.projectPreview = true;
           }, 300);
-          const previewBackground = document.createElement('div');
 
-          previewBackground.id = 'preview';
-          previewBackground.classList.add('previewBackground');
+          const previewBackground = DomCreator.createNode(
+            'div',
+            ['previewBackground'],
+            { id: 'preview' }
+          );
+
           previewBackground.style.top = window.scrollY + 'px';
 
           previewBackground.style.height = window.innerHeight + 'px';
@@ -359,27 +361,32 @@ window.addEventListener('DOMContentLoaded', function () {
 
           levelUp.body.classList.add('notScrollable');
 
-          const previewContainer = document.createElement('div');
-          previewContainer.classList.add('previewContainer');
-          const titleContainer = document.createElement('div');
+          const previewContainer = DomCreator.createNode('div', [
+            'previewContainer',
+          ]);
+
+          const titleContainer = DomCreator.createNode('div');
           const title = DomCreator.hX(2, project.title);
-          const summary = document.createElement('div');
+          const summary = DomCreator.createNode('div', ['previewSummary']);
 
           const descriptionContainer = document.createElement('div');
-          const description = document.createElement('p');
-          description.innerText = project.description;
+          const description = DomCreator.createNode('p', [], {
+            innerText: project.description,
+          });
           descriptionContainer.appendChild(description);
-          summary.classList.add('previewSummary');
 
           titleContainer.appendChild(title);
-          summary.appendChild(titleContainer);
-          summary.appendChild(descriptionContainer);
-          const imageContainer = document.createElement('div');
-          imageContainer.classList.add('previewImage');
+
+          DomCreator.appendChilds(summary, [
+            titleContainer,
+            descriptionContainer,
+          ]);
+
+          const imageContainer = DomCreator.createNode('div', ['previewImage']);
 
           imageContainer.style.backgroundImage = `url(${project.image})`;
-          previewContainer.appendChild(imageContainer);
-          previewContainer.appendChild(summary);
+
+          DomCreator.appendChilds(previewContainer, [imageContainer, summary]);
 
           previewBackground.appendChild(previewContainer);
 
