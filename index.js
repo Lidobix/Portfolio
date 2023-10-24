@@ -369,7 +369,8 @@ window.addEventListener('DOMContentLoaded', function () {
           const title = DomCreator.hX(2, project.title);
           const summary = DomCreator.createNode('div', ['previewSummary']);
 
-          const descriptionContainer = document.createElement('div');
+          const descriptionContainer = DomCreator.createNode('div');
+
           const description = DomCreator.createNode('p', [], {
             innerText: project.description,
           });
