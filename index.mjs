@@ -1,5 +1,9 @@
-import { domCreator } from './src/domCreator.js';
+import { domCreator } from './src/domCreator.mjs';
 const DomCreator = new domCreator();
+
+import datasManager from './src/datasManager.mjs';
+import { SiteBuilder } from './src/site.mjs';
+const Site = new SiteBuilder();
 
 window.addEventListener('DOMContentLoaded', function () {
   const site = {
@@ -19,8 +23,8 @@ window.addEventListener('DOMContentLoaded', function () {
     navToggled: false,
 
     buildSite: async function () {
-      await this.fetchElements();
-      this.buildHeader(this.siteElements.header);
+      await datasManager.fetchElements();
+      Site.buildHeader();
       this.buildSection(this, this.siteElements.section);
       this.section = document.querySelector('section');
       this.header = document.querySelector('header');
@@ -138,33 +142,6 @@ window.addEventListener('DOMContentLoaded', function () {
       levelUp.navToggle.style.right = levelUp.navToggleRight + 'px';
 
       levelUp.body.classList.remove('notScrollable');
-    },
-
-    buildHeader: (headerElements) => {
-      const header = document.querySelector('header');
-      const pageTitle = DomCreator.createNode('h1', [], {
-        innerText: headerElements.title,
-      });
-
-      const subTitle = DomCreator.createNode('h2', [], {
-        innerText: headerElements.subtitle,
-      });
-
-      DomCreator.appendChilds(header, [pageTitle, subTitle]);
-
-      if (headerElements.socials.length) {
-        const socialContainer = DomCreator.createNode('div', [
-          'socialContainer',
-        ]);
-        headerElements.socials.forEach((element) => {
-          const a = DomCreator.a(element.url);
-          const picto = DomCreator.img(element.picto);
-          a.appendChild(picto);
-          socialContainer.appendChild(a);
-        });
-
-        header.appendChild(socialContainer);
-      }
     },
 
     buildSection: (levelUp, sectionElements) => {
@@ -394,22 +371,6 @@ window.addEventListener('DOMContentLoaded', function () {
           levelUp.body.appendChild(previewBackground);
         }
       });
-    },
-
-    fetchElements: () => {
-      return fetch('https://lidobix.alwaysdata.net/portfolio/home', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((result) => {
-          return result.json();
-        })
-        .then((datas) => {
-          site.siteElements = datas[0];
-          return datas[0];
-        });
     },
   };
 
