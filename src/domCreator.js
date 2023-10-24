@@ -1,6 +1,30 @@
 export class domCreator {
   constructor() {}
 
+  createNode(type, classArray, attributes = {}) {
+    const node = document.createElement(type);
+
+    if (classArray.length) {
+      classArray.forEach((style) => {
+        node.classList.add(style);
+      });
+    }
+
+    const attributesArray = Object.entries(attributes);
+
+    attributesArray.forEach((attribute) => {
+      console.log(attribute[0]);
+      console.log('attribute', attribute);
+      node[attribute[0]] = attribute[1];
+    });
+
+    // node[attributesArray[0][0]] = attributesArray[0][1];
+
+    console.log(node);
+
+    return node;
+  }
+
   a(href, text = null, id = null, classArray = []) {
     const a = document.createElement('a');
     a.href = href;
@@ -34,28 +58,10 @@ export class domCreator {
     return form;
   }
 
-  h1(text) {
-    const h1 = document.createElement('h1');
-    h1.innerText = text;
-    return h1;
-  }
-
-  h2(text) {
-    const h2 = document.createElement('h2');
-    h2.innerText = text;
-    return h2;
-  }
-
-  h3(text) {
-    const h3 = document.createElement('h3');
-    h3.innerText = text;
-    return h3;
-  }
-
-  h4(text) {
-    const h4 = document.createElement('h4');
-    h4.innerText = text;
-    return h4;
+  hX(hType, text) {
+    const hX = document.createElement('h' + hType);
+    hX.innerText = text;
+    return hX;
   }
 
   img(src) {

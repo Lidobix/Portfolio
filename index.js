@@ -142,15 +142,20 @@ window.addEventListener('DOMContentLoaded', function () {
 
     buildHeader: (headerElements) => {
       const header = document.querySelector('header');
+      const pageTitle = DomCreator.createNode('h1', [], {
+        innerText: headerElements.title,
+      });
 
-      const pageTitle = DomCreator.h1(headerElements.title);
-      const subTitle = DomCreator.h2(headerElements.subtitle);
+      const subTitle = DomCreator.createNode('h2', [], {
+        innerText: headerElements.subtitle,
+      });
 
       DomCreator.appendChilds(header, [pageTitle, subTitle]);
 
       if (headerElements.socials.length) {
-        const socialContainer = DomCreator.div(['socialContainer']);
-
+        const socialContainer = DomCreator.createNode('div', [
+          'socialContainer',
+        ]);
         headerElements.socials.forEach((element) => {
           const a = DomCreator.a(element.url);
           const picto = DomCreator.img(element.picto);
@@ -166,7 +171,7 @@ window.addEventListener('DOMContentLoaded', function () {
       const section = document.querySelector('section');
       sectionElements.forEach((sectionElement) => {
         if (sectionElement.display) {
-          const title = DomCreator.h3(sectionElement.name);
+          const title = DomCreator.hX(3, sectionElement.name);
 
           const anchorCalc = sectionElement.name
             .toLowerCase()
@@ -264,7 +269,7 @@ window.addEventListener('DOMContentLoaded', function () {
             card.appendChild(figure);
           }
           const description = DomCreator.div(['cardDescription']);
-          const projectTitle = DomCreator.h4(project.title);
+          const projectTitle = DomCreator.hX(4, project.title);
           description.appendChild(projectTitle);
 
           const type = DomCreator.p(project.type);
@@ -357,7 +362,7 @@ window.addEventListener('DOMContentLoaded', function () {
           const previewContainer = document.createElement('div');
           previewContainer.classList.add('previewContainer');
           const titleContainer = document.createElement('div');
-          const title = DomCreator.h2(project.title);
+          const title = DomCreator.hX(2, project.title);
           const summary = document.createElement('div');
 
           const descriptionContainer = document.createElement('div');
