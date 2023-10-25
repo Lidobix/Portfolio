@@ -1,7 +1,7 @@
 export class domCreator {
   constructor() {}
 
-  createNode(type, classArray = [], attributes = {}) {
+  createNode(type, classArray = [], attributes = {}, appendTo) {
     const node = document.createElement(type);
 
     if (classArray.length) {

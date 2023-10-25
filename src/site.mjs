@@ -3,7 +3,13 @@ import { domCreator } from './domCreator.mjs';
 const DomCreator = new domCreator();
 
 export class SiteBuilder {
-  constructor() {}
+  constructor() {
+    this.header = document.querySelector('header');
+    this.section = document.querySelector('section');
+    this.headerDatas = {};
+    this.sectionDatas = {};
+    this.navItems = [];
+  }
 
   buildHeader() {
     if (datasManager.header !== null) {
@@ -12,7 +18,7 @@ export class SiteBuilder {
       return;
     }
 
-    const header = document.querySelector('header');
+    // const header = document.querySelector('header');
     const pageTitle = DomCreator.createNode('h1', [], {
       innerText: this.headerDatas.title,
     });
@@ -21,7 +27,7 @@ export class SiteBuilder {
       innerText: this.headerDatas.subtitle,
     });
 
-    DomCreator.appendChilds(header, [pageTitle, subTitle]);
+    DomCreator.appendChilds(this.header, [pageTitle, subTitle]);
 
     if (this.headerDatas.socials.length) {
       const socialContainer = DomCreator.createNode('div', ['socialContainer']);
@@ -32,7 +38,7 @@ export class SiteBuilder {
         socialContainer.appendChild(a);
       });
 
-      header.appendChild(socialContainer);
+      this.header.appendChild(socialContainer);
     }
   }
 
@@ -42,52 +48,52 @@ export class SiteBuilder {
     } else {
       return;
     }
-    const section = document.querySelector('section');
-    console.log(this.sectionDatas);
     this.sectionDatas.forEach((sectionElement) => {
       if (sectionElement.display) {
-        const title = DomCreator.hX(3, sectionElement.name);
-
-        const anchorCalc = sectionElement.name
-          .toLowerCase()
-          .split(' ')
-          .sort((a, b) => b.length - a.length)[0];
-        title.id = anchorCalc;
-
-        this.siteElements.nav.push({
-          name: sectionElement.name,
-          anchor: `#${anchorCalc}`,
-        });
-        section.appendChild(title);
-
-        if (sectionElement.text) {
-          const content = DomCreator.p(sectionElement.text);
-          section.appendChild(content);
-        }
-
-        if (
-          sectionElement.illustrations &&
-          sectionElement.illustrations.length !== 0
-        ) {
-          const imagesContainer = DomCreator.div(['imagesContainer']);
-
-          sectionElement.illustrations.forEach((imageUrl) => {
-            const image = DomCreator.img(imageUrl);
-            imagesContainer.appendChild(image);
-          });
-          section.appendChild(imagesContainer);
-        }
-
-        // if (this.sectionDatas.projectList) {
-        //   section.appendChild(
-        //     this.buildProjects(this.sectionDatas.projectList, this)
-        //   );
-        // }
-
-        // if (this.sectionDatas.htmlForm) {
-        //   section.appendChild(this.buildForm(this.sectionDatas.htmlForm));
-        // }
+        this.buildSectionItem(sectionElement);
       }
     });
+  }
+
+  buildSectionItem(paragraph) {
+    const title = DomCreator.hX(3, paragraph.name);
+
+    const anchorCalc = paragraph.name
+      .toLowerCase()
+      .split(' ')
+      .sort((a, b) => b.length - a.length)[0];
+    title.id = anchorCalc;
+
+    this.navItems.push({
+      name: paragraph.name,
+      anchor: `#${anchorCalc}`,
+    });
+
+    this.section.appendChild(title);
+
+    if (paragraph.text) {
+      const content = DomCreator.p(paragraph.text);
+      this.section.appendChild(content);
+    }
+
+    if (paragraph.illustrations && paragraph.illustrations.length !== 0) {
+      const imagesContainer = DomCreator.div(['imagesContainer']);
+
+      paragraph.illustrations.forEach((imageUrl) => {
+        const image = DomCreator.img(imageUrl);
+        imagesContainer.appendChild(image);
+      });
+      this.section.appendChild(imagesContainer);
+    }
+
+    // if (this.sectionDatas.projectList) {
+    //   section.appendChild(
+    //     this.buildProjects(this.sectionDatas.projectList, this)
+    //   );
+    // }
+
+    // if (this.sectionDatas.htmlForm) {
+    //   section.appendChild(this.buildForm(this.sectionDatas.htmlForm));
+    // }}
   }
 }

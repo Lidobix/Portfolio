@@ -144,57 +144,6 @@ window.addEventListener('DOMContentLoaded', function () {
       levelUp.body.classList.remove('notScrollable');
     },
 
-    // buildSection: (levelUp, sectionElements) => {
-    //   const section = document.querySelector('section');
-    //   sectionElements.forEach((sectionElement) => {
-    //     if (sectionElement.display) {
-    //       const title = DomCreator.hX(3, sectionElement.name);
-
-    //       const anchorCalc = sectionElement.name
-    //         .toLowerCase()
-    //         .split(' ')
-    //         .sort((a, b) => b.length - a.length)[0];
-    //       title.id = anchorCalc;
-
-    //       levelUp.siteElements.nav.push({
-    //         name: sectionElement.name,
-    //         anchor: `#${anchorCalc}`,
-    //       });
-    //       section.appendChild(title);
-
-    //       if (sectionElement.text) {
-    //         const content = DomCreator.p(sectionElement.text);
-    //         section.appendChild(content);
-    //       }
-
-    //       if (
-    //         sectionElement.illustrations &&
-    //         sectionElement.illustrations.length !== 0
-    //       ) {
-    //         const imagesContainer = DomCreator.div(['imagesContainer']);
-
-    //         sectionElement.illustrations.forEach((imageUrl) => {
-    //           const image = DomCreator.img(imageUrl);
-    //           imagesContainer.appendChild(image);
-    //         });
-    //         section.appendChild(imagesContainer);
-    //       }
-
-    //       if (sectionElement.projectList) {
-    //         section.appendChild(
-    //           levelUp.buildProjects(sectionElement.projectList, levelUp)
-    //         );
-    //       }
-
-    //       if (sectionElement.htmlForm) {
-    //         section.appendChild(levelUp.buildForm(sectionElement.htmlForm));
-    //       }
-    //     }
-    //   });
-
-    //   return section;
-    // },
-
     buildNav: (navElements) => {
       const ul = document.createElement('ul');
       const nav = document.querySelector('nav');
