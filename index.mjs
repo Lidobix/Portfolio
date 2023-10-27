@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', function () {
       this.section = document.querySelector('section');
       this.header = document.querySelector('header');
 
-      this.buildNav(this.siteElements.nav);
+      // this.buildNav(this.siteElements.nav);
 
       document.querySelector('header').appendChild(this.buildNavToggle());
 
@@ -144,19 +144,19 @@ window.addEventListener('DOMContentLoaded', function () {
       levelUp.body.classList.remove('notScrollable');
     },
 
-    buildNav: (navElements) => {
-      const ul = document.createElement('ul');
-      const nav = document.querySelector('nav');
+    // buildNav: (navElements) => {
+    //   const ul = document.createElement('ul');
+    //   const nav = document.querySelector('nav');
 
-      navElements.forEach((element) => {
-        const li = document.createElement('li');
-        const a = DomCreator.a(element.anchor, element.name);
+    //   navElements.forEach((element) => {
+    //     const li = document.createElement('li');
+    //     const a = DomCreator.a(element.anchor, element.name);
 
-        li.appendChild(a);
-        ul.appendChild(li);
-        nav.appendChild(ul);
-      });
-    },
+    //     li.appendChild(a);
+    //     ul.appendChild(li);
+    //     nav.appendChild(ul);
+    //   });
+    // },
 
     buildNavToggle: () => {
       const navToggle = DomCreator.div(
@@ -179,63 +179,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
       formContainer.appendChild(form);
       return formContainer;
-    },
-
-    buildProjects: (projects, levelUp) => {
-      const container = DomCreator.div([], null, 'projectList');
-
-      projects.forEach((project) => {
-        if (project.display) {
-          const card = DomCreator.div(['card']);
-
-          if (project.image) {
-            const figure = document.createElement('figure');
-            const view = DomCreator.img(project.image);
-            figure.appendChild(view);
-            card.appendChild(figure);
-          }
-          const description = DomCreator.div(['cardDescription']);
-          const projectTitle = DomCreator.hX(4, project.title);
-          description.appendChild(projectTitle);
-
-          const type = DomCreator.p(project.type);
-          description.appendChild(type);
-
-          let aHref;
-          if (project.link) {
-            aHref = DomCreator.a(project.link, 'Visiter', null, [
-              'enabledLink',
-            ]);
-          } else {
-            aHref = DomCreator.a(null, 'Visiter', null, ['disabledLink']);
-          }
-          description.appendChild(aHref);
-
-          const summary = DomCreator.p(project.description);
-          description.appendChild(summary);
-
-          if (project.technos.length) {
-            const technoListContainer = DomCreator.div(['technoListContainer']);
-            const technoList = DomCreator.div(['technoList']);
-
-            project.technos?.forEach((techno) => {
-              const logo = DomCreator.img(
-                `assets/images/${techno.toLowerCase()}.png`
-              );
-
-              technoList.appendChild(logo);
-            });
-            technoListContainer.appendChild(technoList);
-            description.appendChild(technoListContainer);
-            card.appendChild(description);
-          }
-
-          levelUp.buildCardEvents(card, project, levelUp);
-
-          container.appendChild(card);
-        }
-      });
-      return container;
     },
 
     buildCardEvents: (card, project, levelUp) => {

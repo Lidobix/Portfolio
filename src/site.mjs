@@ -17,24 +17,21 @@ export class SiteBuilder {
     } else {
       return;
     }
-
-    // const header = document.querySelector('header');
-    const pageTitle = DomCreator.createNode('h1', [], {
-      innerText: this.headerDatas.title,
-    });
-
-    const subTitle = DomCreator.createNode('h2', [], {
-      innerText: this.headerDatas.subtitle,
-    });
-
-    DomCreator.appendChilds(this.header, [pageTitle, subTitle]);
+    DomCreator.appendChilds(this.header, [
+      DomCreator.createNode('h1', [], {
+        innerText: this.headerDatas.title,
+      }),
+      DomCreator.createNode('h2', [], {
+        innerText: this.headerDatas.subtitle,
+      }),
+    ]);
 
     if (this.headerDatas.socials.length) {
       const socialContainer = DomCreator.createNode('div', ['socialContainer']);
+
       this.headerDatas.socials.forEach((element) => {
         const a = DomCreator.a(element.url);
-        const picto = DomCreator.img(element.picto);
-        a.appendChild(picto);
+        DomCreator.createNodeAppended('img', [], { src: element.picto }, a);
         socialContainer.appendChild(a);
       });
 
@@ -48,21 +45,23 @@ export class SiteBuilder {
     } else {
       return;
     }
-    this.sectionDatas.forEach((sectionElement) => {
-      if (sectionElement.display) {
-        this.buildSectionItem(sectionElement);
+    this.sectionDatas.forEach((paragraph) => {
+      if (paragraph.display) {
+        this.buildSectionParagraph(paragraph);
       }
     });
   }
 
-  buildSectionItem(paragraph) {
-    const title = DomCreator.hX(3, paragraph.name);
-
+  buildSectionParagraph(paragraph) {
     const anchorCalc = paragraph.name
       .toLowerCase()
       .split(' ')
       .sort((a, b) => b.length - a.length)[0];
-    title.id = anchorCalc;
+
+    const title = DomCreator.createNode('h3', [], {
+      innerText: paragraph.name,
+      id: anchorCalc,
+    });
 
     this.navItems.push({
       name: paragraph.name,
@@ -72,28 +71,92 @@ export class SiteBuilder {
     this.section.appendChild(title);
 
     if (paragraph.text) {
-      const content = DomCreator.p(paragraph.text);
-      this.section.appendChild(content);
+      DomCreator.createNodeAppended(
+        'p',
+        [],
+        { innerText: paragraph.text },
+        this.section
+      );
     }
 
     if (paragraph.illustrations && paragraph.illustrations.length !== 0) {
       const imagesContainer = DomCreator.div(['imagesContainer']);
 
       paragraph.illustrations.forEach((imageUrl) => {
-        const image = DomCreator.img(imageUrl);
-        imagesContainer.appendChild(image);
+        DomCreator.createNodeAppended(
+          'img',
+          [],
+          { src: imageUrl },
+          imagesContainer
+        );
       });
       this.section.appendChild(imagesContainer);
     }
-
-    // if (this.sectionDatas.projectList) {
-    //   section.appendChild(
-    //     this.buildProjects(this.sectionDatas.projectList, this)
-    //   );
-    // }
+    console.log(this.sectionDatas);
+    if (this.sectionDatas.projectList) {
+      section.appendChild(
+        this.buildProjects(this.sectionDatas.projectList)
+        // this.buildProjects(this.sectionDatas.projectList, this)
+      );
+    }
 
     // if (this.sectionDatas.htmlForm) {
     //   section.appendChild(this.buildForm(this.sectionDatas.htmlForm));
     // }}
+  }
+
+  buildProjects(projects) {
+    const container = DomCreator.div([], null, 'projectList');
+
+    projects.forEach((project) => {
+      if (project.display) {
+        const card = DomCreator.div(['card']);
+
+        if (project.image) {
+          const figure = document.createElement('figure');
+          const view = DomCreator.img(project.image);
+          figure.appendChild(view);
+          card.appendChild(figure);
+        }
+        const description = DomCreator.div(['cardDescription']);
+        const projectTitle = DomCreator.hX(4, project.title);
+        description.appendChild(projectTitle);
+
+        const type = DomCreator.p(project.type);
+        description.appendChild(type);
+
+        let aHref;
+        if (project.link) {
+          aHref = DomCreator.a(project.link, 'Visiter', null, ['enabledLink']);
+        } else {
+          aHref = DomCreator.a(null, 'Visiter', null, ['disabledLink']);
+        }
+        description.appendChild(aHref);
+
+        const summary = DomCreator.p(project.description);
+        description.appendChild(summary);
+
+        if (project.technos.length) {
+          const technoListContainer = DomCreator.div(['technoListContainer']);
+          const technoList = DomCreator.div(['technoList']);
+
+          project.technos?.forEach((techno) => {
+            const logo = DomCreator.img(
+              `assets/images/${techno.toLowerCase()}.png`
+            );
+
+            technoList.appendChild(logo);
+          });
+          technoListContainer.appendChild(technoList);
+          description.appendChild(technoListContainer);
+          card.appendChild(description);
+        }
+
+        this.buildCardEvents(card, project, this);
+
+        container.appendChild(card);
+      }
+    });
+    return container;
   }
 }

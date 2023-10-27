@@ -12,7 +12,6 @@ class DatasManager {
         return result.json();
       })
       .then((datas) => {
-        console.log(datas[0]);
         this.header = datas[0].header;
         this.section = datas[0].section;
         this.modal = datas[0].modal;
