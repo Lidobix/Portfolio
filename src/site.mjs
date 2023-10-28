@@ -10,32 +10,28 @@ class SiteBuilder {
     this.header = document.querySelector('header');
     this.nav = document.querySelector('nav');
     this.section = document.querySelector('section');
-    this.headerDatas = {};
-    this.sectionDatas = {};
     this.navItems = [];
   }
 
   buildHeader() {
-    if (datasManager.header !== null) {
-      this.headerDatas = datasManager.header;
-    } else {
-      return;
+    const { header, socials } = datasManager;
+    if (header !== null) {
+      DomCreator.appendChilds(this.header, [
+        DomCreator.createNode('h1', [], {
+          innerText: header.title,
+        }),
+        DomCreator.createNode('h2', [], {
+          innerText: header.subtitle,
+        }),
+      ]);
     }
-    DomCreator.appendChilds(this.header, [
-      DomCreator.createNode('h1', [], {
-        innerText: this.headerDatas.title,
-      }),
-      DomCreator.createNode('h2', [], {
-        innerText: this.headerDatas.subtitle,
-      }),
-    ]);
 
-    if (this.headerDatas.socials.length) {
+    if (socials.length) {
       const socialContainer = DomCreator.createNode('div', ['socialContainer']);
 
-      this.headerDatas.socials.forEach((element) => {
-        const a = DomCreator.a(element.url);
-        DomCreator.createNodeAppended('img', [], { src: element.picto }, a);
+      socials.forEach((social) => {
+        const a = DomCreator.a(social.url);
+        DomCreator.createNodeAppended('img', [], { src: social.picto }, a);
         socialContainer.appendChild(a);
       });
 
@@ -44,16 +40,22 @@ class SiteBuilder {
   }
 
   buildSection() {
-    if (datasManager.section !== null) {
-      this.sectionDatas = datasManager.section;
-    } else {
-      return;
-    }
-    this.sectionDatas.forEach((paragraph) => {
-      if (paragraph.display) {
-        this.buildSectionParagraph(paragraph);
+    const { section, stack, projects } = datasManager;
+    if (section !== null) {
+      section.forEach((paragraph) => {
+        if (paragraph.display) {
+          this.buildSectionParagraph(paragraph);
+        }
+      });
+
+      if (stack !== null) {
+        this.buildIllustrations(stack, document.getElementById('pFormation'));
       }
-    });
+
+      if (projects !== null) {
+        this.buildProjects(projects);
+      }
+    }
   }
 
   buildSectionParagraph(paragraph) {
@@ -67,38 +69,19 @@ class SiteBuilder {
       id: anchorCalc,
     });
 
-    this.navItems.push({
-      name: paragraph.name,
-      anchor: `#${anchorCalc}`,
-    });
-
     this.section.appendChild(title);
 
     if (paragraph.text) {
       DomCreator.createNodeAppended(
         'p',
         [],
-        { innerText: paragraph.text },
+        { id: `p${paragraph.name}`, innerText: paragraph.text },
         this.section
       );
     }
 
     if (paragraph.illustrations && paragraph.illustrations.length !== 0) {
-      const imagesContainer = DomCreator.div(['imagesContainer']);
-
-      paragraph.illustrations.forEach((imageUrl) => {
-        DomCreator.createNodeAppended(
-          'img',
-          [],
-          { src: imageUrl },
-          imagesContainer
-        );
-      });
-      this.section.appendChild(imagesContainer);
-    }
-    // console.log('section datas', paragraph);
-    if (paragraph.projectList) {
-      this.buildProjects(paragraph.projectList);
+      this.buildIllustrations(paragraph.illustration, this.section);
     }
 
     if (paragraph.htmlForm) {
@@ -106,14 +89,38 @@ class SiteBuilder {
     }
   }
 
-  // buildNav() {
-  //   this.buildNavMenu();
-  //   this.buildNavToggle();
-  // }
+  buildNav() {
+    const { nav } = datasManager;
 
-  buildNavMenu() {
+    if (nav !== null) {
+      this.buildNavMenu(nav);
+    }
+    this.buildNavToggle();
+  }
+
+  buildIllustrations(illustrations, parent) {
+    const imagesContainer = DomCreator.div(['imagesContainer']);
+
+    illustrations.forEach((imageUrl) => {
+      DomCreator.createNodeAppended(
+        'img',
+        [],
+        { src: imageUrl },
+        imagesContainer
+      );
+    });
+    parent.after(imagesContainer);
+  }
+
+  buildNavMenu(nav) {
+    nav.forEach((navElement) => {
+      this.navItems.push({
+        name: navElement,
+        anchor: `#${navElement.toLowerCase()}`,
+      });
+    });
+
     const ul = document.createElement('ul');
-    const nav = document.querySelector('nav');
 
     this.navItems.forEach((item) => {
       const li = document.createElement('li');
@@ -121,7 +128,7 @@ class SiteBuilder {
 
       li.appendChild(a);
       ul.appendChild(li);
-      nav.appendChild(ul);
+      this.nav.appendChild(ul);
     });
   }
 
@@ -194,8 +201,6 @@ class SiteBuilder {
     });
 
     document.getElementById('projets').after(container);
-
-    // return container;
   }
   buildForm(htmlForm) {
     const form = DomCreator.form('formulaire', htmlForm, 'POST');

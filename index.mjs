@@ -7,10 +7,10 @@ const eventsManager = new EventsManager();
 window.addEventListener('DOMContentLoaded', function () {
   datasManager.fetchElements().then(() => {
     siteBuilder.buildHeader();
-    // siteBuilder.buildNav();
-    siteBuilder.buildNavToggle();
+    siteBuilder.buildNav();
+    // siteBuilder.buildNavToggle();
     siteBuilder.buildSection();
-    siteBuilder.buildNavMenu();
+    // siteBuilder.buildNavMenu();
     eventsManager.addPageEvents();
   });
 });
