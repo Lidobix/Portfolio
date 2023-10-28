@@ -130,12 +130,6 @@ class SiteBuilder {
       id: 'navToggle',
     });
 
-    // DomCreator.div(
-
-    //   null,
-    //   'navToggle'
-    // );
-
     for (let i = 0; i < 3; i++) {
       const bullet = DomCreator.div(['navTrigger']);
       navToggle.appendChild(bullet);
@@ -191,7 +185,7 @@ class SiteBuilder {
           card.appendChild(description);
         }
 
-        eventManager.clicCard(card, project, this);
+        eventManager.clicCard(card, project);
 
         // this.buildCardEvents(card, project, this);
 

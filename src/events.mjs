@@ -1,3 +1,4 @@
+import datasManager from './datasManager.mjs';
 import { domCreator } from './domCreator.mjs';
 
 // TODO: remplacer le header par une référence à this
@@ -21,12 +22,47 @@ export class EventsManager {
 
   addPageEvents() {
     this.clicPage();
+    this.escapeKey();
+    this.rotatePhone();
+    this.submitForm();
+  }
+
+  escapeKey() {
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Escape' && this.projectPreview) {
+        this.closePreview(this);
+      }
+    });
+  }
+
+  rotatePhone() {
+    window.addEventListener('orientationchange', () => {
+      if (window.orientation === 0) {
+        // Appareil en position portrait
+        this.lastHorizontalScrollY = window.scrollY;
+        setTimeout(() => {
+          window.scroll(0, this.lastVerticalScrollY);
+          this.previewBackgroundDiv.style.top = this.lastVerticalScrollY + 'px';
+          this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
+        }, 100);
+      } else if (window.orientation === 90 || window.orientation === -90) {
+        // Appareil en position paysage
+
+        this.lastVerticalScrollY = window.scrollY;
+        setTimeout(() => {
+          window.scroll(0, this.lastHorizontalScrollY);
+          this.previewBackgroundDiv.style.top =
+            this.lastHorizontalScrollY + 'px';
+          this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
+        }, 100);
+      }
+    });
   }
 
   clicPage() {
     document.addEventListener('click', (e) => {
-      console.log('clic page');
-      //   console.log('projectPreview', this);
+      //   console.log('clic page');
+      //   console.log('projectPreview', this.projectPreview);
       const targetEvent = e.target;
       if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
         this.nav.style.transform = 'translate(-15rem)';
@@ -36,7 +72,7 @@ export class EventsManager {
         this.navToggled = false;
       }
       if (this.projectPreview) {
-        console.log('fermeture preview');
+        console.log('target', targetEvent.id);
         this.closePreview();
       }
     });
@@ -44,7 +80,7 @@ export class EventsManager {
 
   clicCard(card, project) {
     this.navToggle = document.getElementById('navToggle');
-    console.log(this.navToggle);
+    // console.log(this.navToggle);
 
     card.addEventListener('click', (e) => {
       const targetEvent = e.target;
@@ -52,10 +88,10 @@ export class EventsManager {
         setTimeout(() => {
           console.log('settimeout');
           this.projectPreview = true;
-          console.log('settimeout projectPreview', this.projectPreview);
+          //   console.log('settimeout projectPreview', this.projectPreview);
         }, 300);
 
-        console.log('clic projectPreview', this.projectPreview);
+        // console.log('clic projectPreview', this.projectPreview);
 
         const previewBackground = DomCreator.createNode(
           'div',
@@ -131,8 +167,8 @@ export class EventsManager {
 
   closePreview() {
     document.getElementById('preview').remove();
-    console.log('close prev');
-    console.log(this);
+    // console.log('close prev');
+    // console.log(this);
 
     this.projectPreview = false;
 
@@ -141,5 +177,53 @@ export class EventsManager {
     this.navToggle.style.right = this.navToggleRight + 'px';
 
     this.body.classList.remove('notScrollable');
+  }
+
+  submitForm() {
+    document.querySelector('form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const searchParams = new URLSearchParams(formData);
+      // await fetch('http://localhost:3000/portfolio/contact', {
+      await fetch('https://lidobix.alwaysdata.net/portfolio/contact', {
+        method: 'POST',
+        body: searchParams.toString(),
+
+        headers: new Headers({
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }),
+      })
+        .then((r) => {
+          this.buildFormModal(
+            datasManager.modal.success.title,
+            datasManager.modal.success.message
+          );
+          form.reset();
+        })
+        .catch((e) => {
+          // le catch peut être généré par unne erreur dans la construction de buildFormModal
+          this.buildFormModal(
+            datasManager.modal.error.title,
+            datasManager.modal.error.message
+          );
+        });
+    });
+  }
+
+  buildFormModal(title, message) {
+    const titleContainer = DomCreator.div(['modalTitleContainer'], title);
+    const messageContainer = DomCreator.div(['modalMessageContainer']);
+    const modalContainer = DomCreator.div(['modalContainer']);
+    const text = DomCreator.p(message);
+    const closeButton = DomCreator.button('FERMER');
+
+    DomCreator.appendChilds(messageContainer, [text, closeButton]);
+    DomCreator.appendChilds(modalContainer, [titleContainer, messageContainer]);
+    DomCreator.appendChilds(this.body, [modalContainer]);
+
+    closeButton.addEventListener('click', () => {
+      modalContainer.remove();
+    });
   }
 }
