@@ -1,10 +1,14 @@
 import datasManager from './datasManager.mjs';
 import { domCreator } from './domCreator.mjs';
+import { EventsManager } from './events.mjs';
+const eventManager = new EventsManager();
 const DomCreator = new domCreator();
 
-export class SiteBuilder {
+class SiteBuilder {
   constructor() {
+    this.body = document.querySelector('body');
     this.header = document.querySelector('header');
+    this.nav = document.querySelector('nav');
     this.section = document.querySelector('section');
     this.headerDatas = {};
     this.sectionDatas = {};
@@ -92,17 +96,52 @@ export class SiteBuilder {
       });
       this.section.appendChild(imagesContainer);
     }
-    console.log(this.sectionDatas);
-    if (this.sectionDatas.projectList) {
-      section.appendChild(
-        this.buildProjects(this.sectionDatas.projectList)
-        // this.buildProjects(this.sectionDatas.projectList, this)
-      );
+    // console.log('section datas', paragraph);
+    if (paragraph.projectList) {
+      this.buildProjects(paragraph.projectList);
     }
 
-    // if (this.sectionDatas.htmlForm) {
-    //   section.appendChild(this.buildForm(this.sectionDatas.htmlForm));
-    // }}
+    if (paragraph.htmlForm) {
+      this.buildForm(paragraph.htmlForm);
+    }
+  }
+
+  // buildNav() {
+  //   this.buildNavMenu();
+  //   this.buildNavToggle();
+  // }
+
+  buildNavMenu() {
+    const ul = document.createElement('ul');
+    const nav = document.querySelector('nav');
+
+    this.navItems.forEach((item) => {
+      const li = document.createElement('li');
+      const a = DomCreator.a(item.anchor, item.name);
+
+      li.appendChild(a);
+      ul.appendChild(li);
+      nav.appendChild(ul);
+    });
+  }
+
+  buildNavToggle() {
+    const navToggle = DomCreator.createNode('div', ['mobile', 'navTrigger'], {
+      id: 'navToggle',
+    });
+
+    // DomCreator.div(
+
+    //   null,
+    //   'navToggle'
+    // );
+
+    for (let i = 0; i < 3; i++) {
+      const bullet = DomCreator.div(['navTrigger']);
+      navToggle.appendChild(bullet);
+    }
+
+    this.header.appendChild(navToggle);
   }
 
   buildProjects(projects) {
@@ -152,11 +191,26 @@ export class SiteBuilder {
           card.appendChild(description);
         }
 
-        this.buildCardEvents(card, project, this);
+        eventManager.clicCard(card, project, this);
+
+        // this.buildCardEvents(card, project, this);
 
         container.appendChild(card);
       }
     });
-    return container;
+
+    document.getElementById('projets').after(container);
+
+    // return container;
+  }
+  buildForm(htmlForm) {
+    const form = DomCreator.form('formulaire', htmlForm, 'POST');
+    const formContainer = DomCreator.div(['formContainer']);
+
+    formContainer.appendChild(form);
+
+    document.getElementById('contact').after(formContainer);
   }
 }
+const siteBuilder = new SiteBuilder();
+export default siteBuilder;
