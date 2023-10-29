@@ -1,7 +1,5 @@
 import datasManager from './datasManager.mjs';
 import { domCreator } from './domCreator.mjs';
-import { EventsManager } from './events.mjs';
-const eventManager = new EventsManager();
 const DomCreator = new domCreator();
 
 class SiteBuilder {
@@ -151,7 +149,9 @@ class SiteBuilder {
 
     projects.forEach((project) => {
       if (project.display) {
-        const card = DomCreator.div(['card']);
+        const card = DomCreator.createNode('div', ['card'], {
+          id: `project${project.name}`,
+        });
 
         if (project.image) {
           const figure = document.createElement('figure');
@@ -160,7 +160,7 @@ class SiteBuilder {
           card.appendChild(figure);
         }
         const description = DomCreator.div(['cardDescription']);
-        const projectTitle = DomCreator.hX(4, project.title);
+        const projectTitle = DomCreator.hX(4, project.name);
         description.appendChild(projectTitle);
 
         const type = DomCreator.p(project.type);
@@ -193,7 +193,7 @@ class SiteBuilder {
           card.appendChild(description);
         }
 
-        eventManager.clicCard(card, project);
+        // eventManager.clicCard(card, project);
 
         // this.buildCardEvents(card, project, this);
 
@@ -214,3 +214,5 @@ class SiteBuilder {
 }
 const siteBuilder = new SiteBuilder();
 export default siteBuilder;
+
+// Finir les exports

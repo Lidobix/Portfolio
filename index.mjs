@@ -1,7 +1,6 @@
 import { EventsManager } from './src/events.mjs';
 import datasManager from './src/datasManager.mjs';
 import siteBuilder from './src/site.mjs';
-
 const eventsManager = new EventsManager();
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -9,6 +8,6 @@ window.addEventListener('DOMContentLoaded', function () {
     siteBuilder.buildHeader();
     siteBuilder.buildNav();
     siteBuilder.buildSection();
-    eventsManager.addPageEvents();
+    eventsManager.addEvents();
   });
 });

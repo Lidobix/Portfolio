@@ -1,16 +1,15 @@
 import datasManager from './datasManager.mjs';
 import { domCreator } from './domCreator.mjs';
-
-// TODO: remplacer le header par une référence à this
+import siteBuilder from './site.mjs';
 
 const DomCreator = new domCreator();
 
 export class EventsManager {
   constructor() {
-    this.body = document.querySelector('body');
-    this.header = document.querySelector('header');
-    this.nav = document.querySelector('nav');
-    this.section = document.querySelector('section');
+    this.body = siteBuilder.body;
+    this.header = siteBuilder.header;
+    this.nav = siteBuilder.nav;
+    this.section = siteBuilder.section;
     this.projectPreview = false;
     this.previewBackgroundDiv = '';
     this.sectionPaddingRight = '';
@@ -19,11 +18,101 @@ export class EventsManager {
     this.navToggleRight = '';
   }
 
-  addPageEvents() {
-    this.clicPage();
+  addEvents() {
+    this.clicProject();
+    this.clicOnPage();
+    this.clicOnPage();
     this.escapeKey();
     this.rotatePhone();
     this.submitForm();
+  }
+
+  clicProject() {
+    const { projects } = datasManager;
+
+    this.navToggle = document.getElementById('navToggle');
+
+    projects.forEach((project) => {
+      const card = document.getElementById(`project${project.name}`);
+
+      card.addEventListener('click', (e) => {
+        const targetEvent = e.target;
+        if (!targetEvent.classList.contains('enabledLink')) {
+          setTimeout(() => {
+            this.projectPreview = true;
+          }, 300);
+
+          const previewBackground = DomCreator.createNode(
+            'div',
+            ['previewBackground'],
+            { id: 'preview' }
+          );
+
+          previewBackground.style.top = window.scrollY + 'px';
+
+          previewBackground.style.height = window.innerHeight + 'px';
+          this.previewBackgroundDiv = previewBackground;
+
+          const bodyStyle = window.getComputedStyle(this.body);
+
+          const scrollBarWidth = window.innerWidth - parseInt(bodyStyle.width);
+
+          this.sectionPaddingRight = parseInt(
+            window.getComputedStyle(this.section).paddingRight
+          );
+
+          this.headerPaddingRight = parseInt(
+            window.getComputedStyle(this.header).paddingRight
+          );
+
+          this.navToggleRight = parseInt(
+            window.getComputedStyle(this.navToggle).right
+          );
+          this.section.style.paddingRight =
+            this.sectionPaddingRight + scrollBarWidth + 'px';
+
+          this.header.style.paddingRight =
+            this.headerPaddingRight + scrollBarWidth + 'px';
+
+          this.navToggle.style.right =
+            this.navToggleRight + scrollBarWidth + 'px';
+
+          this.body.classList.add('notScrollable');
+
+          const previewContainer = DomCreator.createNode('div', [
+            'previewContainer',
+          ]);
+
+          const titleContainer = DomCreator.createNode('div');
+          const title = DomCreator.hX(2, project.title);
+          const summary = DomCreator.createNode('div', ['previewSummary']);
+
+          const descriptionContainer = DomCreator.createNode('div');
+
+          const description = DomCreator.createNode('p', [], {
+            innerText: project.description,
+          });
+          descriptionContainer.appendChild(description);
+
+          titleContainer.appendChild(title);
+
+          DomCreator.appendChilds(summary, [
+            titleContainer,
+            descriptionContainer,
+          ]);
+
+          const imageContainer = DomCreator.createNode('div', ['previewImage']);
+
+          imageContainer.style.backgroundImage = `url(${project.image})`;
+
+          DomCreator.appendChilds(previewContainer, [imageContainer, summary]);
+
+          previewBackground.appendChild(previewContainer);
+
+          this.body.appendChild(previewBackground);
+        }
+      });
+    });
   }
 
   escapeKey() {
@@ -58,7 +147,7 @@ export class EventsManager {
     });
   }
 
-  clicPage() {
+  clicOnPage() {
     document.addEventListener('click', (e) => {
       const targetEvent = e.target;
       if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
@@ -70,88 +159,6 @@ export class EventsManager {
       }
       if (this.projectPreview) {
         this.closePreview();
-      }
-    });
-  }
-
-  clicCard(card, project) {
-    this.navToggle = document.getElementById('navToggle');
-
-    card.addEventListener('click', (e) => {
-      const targetEvent = e.target;
-      if (!targetEvent.classList.contains('enabledLink')) {
-        setTimeout(() => {
-          this.projectPreview = true;
-        }, 300);
-
-        const previewBackground = DomCreator.createNode(
-          'div',
-          ['previewBackground'],
-          { id: 'preview' }
-        );
-
-        previewBackground.style.top = window.scrollY + 'px';
-
-        previewBackground.style.height = window.innerHeight + 'px';
-        this.previewBackgroundDiv = previewBackground;
-
-        const bodyStyle = window.getComputedStyle(this.body);
-
-        const scrollBarWidth = window.innerWidth - parseInt(bodyStyle.width);
-
-        this.sectionPaddingRight = parseInt(
-          window.getComputedStyle(this.section).paddingRight
-        );
-
-        this.headerPaddingRight = parseInt(
-          window.getComputedStyle(this.header).paddingRight
-        );
-
-        this.navToggleRight = parseInt(
-          window.getComputedStyle(this.navToggle).right
-        );
-        this.section.style.paddingRight =
-          this.sectionPaddingRight + scrollBarWidth + 'px';
-
-        this.header.style.paddingRight =
-          this.headerPaddingRight + scrollBarWidth + 'px';
-
-        this.navToggle.style.right =
-          this.navToggleRight + scrollBarWidth + 'px';
-
-        this.body.classList.add('notScrollable');
-
-        const previewContainer = DomCreator.createNode('div', [
-          'previewContainer',
-        ]);
-
-        const titleContainer = DomCreator.createNode('div');
-        const title = DomCreator.hX(2, project.title);
-        const summary = DomCreator.createNode('div', ['previewSummary']);
-
-        const descriptionContainer = DomCreator.createNode('div');
-
-        const description = DomCreator.createNode('p', [], {
-          innerText: project.description,
-        });
-        descriptionContainer.appendChild(description);
-
-        titleContainer.appendChild(title);
-
-        DomCreator.appendChilds(summary, [
-          titleContainer,
-          descriptionContainer,
-        ]);
-
-        const imageContainer = DomCreator.createNode('div', ['previewImage']);
-
-        imageContainer.style.backgroundImage = `url(${project.image})`;
-
-        DomCreator.appendChilds(previewContainer, [imageContainer, summary]);
-
-        previewBackground.appendChild(previewContainer);
-
-        this.body.appendChild(previewBackground);
       }
     });
   }
