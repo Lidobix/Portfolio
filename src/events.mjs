@@ -16,7 +16,6 @@ export class EventsManager {
     this.sectionPaddingRight = '';
     this.headerPaddingRight = '';
     this.navToggle = '';
-
     this.navToggleRight = '';
   }
 
@@ -61,8 +60,6 @@ export class EventsManager {
 
   clicPage() {
     document.addEventListener('click', (e) => {
-      //   console.log('clic page');
-      //   console.log('projectPreview', this.projectPreview);
       const targetEvent = e.target;
       if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
         this.nav.style.transform = 'translate(-15rem)';
@@ -72,7 +69,6 @@ export class EventsManager {
         this.navToggled = false;
       }
       if (this.projectPreview) {
-        console.log('target', targetEvent.id);
         this.closePreview();
       }
     });
@@ -80,18 +76,13 @@ export class EventsManager {
 
   clicCard(card, project) {
     this.navToggle = document.getElementById('navToggle');
-    // console.log(this.navToggle);
 
     card.addEventListener('click', (e) => {
       const targetEvent = e.target;
       if (!targetEvent.classList.contains('enabledLink')) {
         setTimeout(() => {
-          console.log('settimeout');
           this.projectPreview = true;
-          //   console.log('settimeout projectPreview', this.projectPreview);
         }, 300);
-
-        // console.log('clic projectPreview', this.projectPreview);
 
         const previewBackground = DomCreator.createNode(
           'div',
@@ -115,7 +106,7 @@ export class EventsManager {
         this.headerPaddingRight = parseInt(
           window.getComputedStyle(this.header).paddingRight
         );
-        console.log(this.navToggle);
+
         this.navToggleRight = parseInt(
           window.getComputedStyle(this.navToggle).right
         );
@@ -167,8 +158,6 @@ export class EventsManager {
 
   closePreview() {
     document.getElementById('preview').remove();
-    // console.log('close prev');
-    // console.log(this);
 
     this.projectPreview = false;
 
