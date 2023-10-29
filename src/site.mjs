@@ -151,7 +151,9 @@ class SiteBuilder {
 
     projects.forEach((project) => {
       if (project.display) {
-        const card = DomCreator.div(['card']);
+        const card = DomCreator.createNode('div', ['card'], {
+          id: `project${project.name}`,
+        });
 
         if (project.image) {
           const figure = document.createElement('figure');
@@ -193,7 +195,7 @@ class SiteBuilder {
           card.appendChild(description);
         }
 
-        eventManager.clicCard(card, project);
+        // eventManager.clicCard(card, project);
 
         // this.buildCardEvents(card, project, this);
 

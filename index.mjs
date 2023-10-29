@@ -9,6 +9,6 @@ window.addEventListener('DOMContentLoaded', function () {
     siteBuilder.buildHeader();
     siteBuilder.buildNav();
     siteBuilder.buildSection();
-    eventsManager.addPageEvents();
+    eventsManager.addEvents();
   });
 });
