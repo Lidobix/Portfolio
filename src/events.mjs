@@ -1,14 +1,15 @@
 import datasManager from './datasManager.mjs';
 import { domCreator } from './domCreator.mjs';
+import siteBuilder from './site.mjs';
 
 const DomCreator = new domCreator();
 
 export class EventsManager {
   constructor() {
-    this.body = document.querySelector('body');
-    this.header = document.querySelector('header');
-    this.nav = document.querySelector('nav');
-    this.section = document.querySelector('section');
+    this.body = siteBuilder.body;
+    this.header = siteBuilder.header;
+    this.nav = siteBuilder.nav;
+    this.section = siteBuilder.section;
     this.projectPreview = false;
     this.previewBackgroundDiv = '';
     this.sectionPaddingRight = '';
@@ -19,6 +20,7 @@ export class EventsManager {
 
   addEvents() {
     this.clicProject();
+    this.clicOnPage();
     this.clicOnPage();
     this.escapeKey();
     this.rotatePhone();

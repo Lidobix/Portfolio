@@ -1,7 +1,5 @@
 import datasManager from './datasManager.mjs';
 import { domCreator } from './domCreator.mjs';
-import { EventsManager } from './events.mjs';
-const eventManager = new EventsManager();
 const DomCreator = new domCreator();
 
 class SiteBuilder {
@@ -162,7 +160,7 @@ class SiteBuilder {
           card.appendChild(figure);
         }
         const description = DomCreator.div(['cardDescription']);
-        const projectTitle = DomCreator.hX(4, project.title);
+        const projectTitle = DomCreator.hX(4, project.name);
         description.appendChild(projectTitle);
 
         const type = DomCreator.p(project.type);
@@ -216,3 +214,5 @@ class SiteBuilder {
 }
 const siteBuilder = new SiteBuilder();
 export default siteBuilder;
+
+// Finir les exports
