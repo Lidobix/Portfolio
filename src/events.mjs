@@ -11,6 +11,7 @@ export class EventsManager {
     this.nav = siteBuilder.nav;
     this.section = siteBuilder.section;
     this.projectPreview = false;
+    this.navToggled = false;
     this.previewBackgroundDiv = '';
     this.sectionPaddingRight = '';
     this.headerPaddingRight = '';
@@ -20,7 +21,6 @@ export class EventsManager {
 
   addEvents() {
     this.clicProject();
-    this.clicOnPage();
     this.clicOnPage();
     this.escapeKey();
     this.rotatePhone();
@@ -84,7 +84,7 @@ export class EventsManager {
           ]);
 
           const titleContainer = DomCreator.createNode('div');
-          const title = DomCreator.hX(2, project.title);
+          const title = DomCreator.hX(2, project.name);
           const summary = DomCreator.createNode('div', ['previewSummary']);
 
           const descriptionContainer = DomCreator.createNode('div');
