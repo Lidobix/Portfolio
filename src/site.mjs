@@ -10,7 +10,6 @@ class SiteBuilder {
     this.header = document.querySelector('header');
     this.nav = document.querySelector('nav');
     this.section = document.querySelector('section');
-    this.navItems = [];
   }
 
   buildHeader() {
@@ -113,8 +112,10 @@ class SiteBuilder {
   }
 
   buildNavMenu(nav) {
+    const navItems = [];
+
     nav.forEach((navElement) => {
-      this.navItems.push({
+      navItems.push({
         name: navElement,
         anchor: `#${navElement.toLowerCase()}`,
       });
@@ -122,7 +123,7 @@ class SiteBuilder {
 
     const ul = document.createElement('ul');
 
-    this.navItems.forEach((item) => {
+    navItems.forEach((item) => {
       const li = document.createElement('li');
       const a = DomCreator.a(item.anchor, item.name);
 
