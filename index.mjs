@@ -8,9 +8,7 @@ window.addEventListener('DOMContentLoaded', function () {
   datasManager.fetchElements().then(() => {
     siteBuilder.buildHeader();
     siteBuilder.buildNav();
-    // siteBuilder.buildNavToggle();
     siteBuilder.buildSection();
-    // siteBuilder.buildNavMenu();
     eventsManager.addPageEvents();
   });
 });
