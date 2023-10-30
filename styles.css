@@ -358,12 +358,13 @@ li {
     background-color: #086a61;
     border: 0.01rem solid rgb(27, 23, 37);
     text-align: center;
-    padding: 0.8rem 0.4rem;
 }
 
 a {
+    display: block;
     text-decoration: none;
-    color:rgb(173,186,199);
+    padding: 0.8rem 0.0rem;
+    color:white;
 }
 
 .formContainer{
