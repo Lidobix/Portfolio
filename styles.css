@@ -10,7 +10,6 @@ html {
 }
 
 body{
-    
     background-color: var(--white);
     margin: 0;
     font-family: 'Roboto Condensed', sans-serif;
@@ -36,8 +35,8 @@ h3 {
     color: var(--black_strong);
     text-transform: uppercase;
     font-size: 1.6rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 h3::after{
