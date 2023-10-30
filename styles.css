@@ -1,5 +1,17 @@
+html {
+    --black_strong:#000000;
+    --black_light:#191717; 
+    --grey_strong:#312c2c;
+    --white: #FFFFFF;
+    --white_cream: #E3F5E3;
+    --yellow: #FDD746;
+    --green: #006A61;
+    --grey_light: #9D9D9D;
+}
+
 body{
-    background-color: white;
+    
+    background-color: var(--white);
     margin: 0;
     font-family: 'Roboto Condensed', sans-serif;
     overflow-x: hidden;
@@ -10,31 +22,30 @@ h1 {
     margin-left: 0;
     margin-bottom: 0;
     font-size: 5rem;
-    color: white;  
+    color: var(--white);  
 }
 
 h2 {
-    color: rgb(227, 245, 227);
+    color: var(--white_cream);
     font-size: 2.2rem;
     margin-left: 0;
     margin-bottom: 0;
 }
 
 h3 {    
-    color: black;
+    color: var(--black_strong);
     text-transform: uppercase;
     font-size: 1.6rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
-
 h3::after{
     content : "";
     position : absolute;
     width : 50%;
     height : 0.15rem;
-    background-color: rgba(253, 215, 70,1);
+    background-color: var(--yellow);
     left: 0;
     margin-top: 2.2rem;
     z-index: 1;
@@ -43,7 +54,7 @@ h3::after{
 h4 {
     margin: 0;
     font-size: 1.4rem;
-    color:black;
+    color: var(--black_strong);
     text-transform: uppercase;
     font-weight: bolder;
 }
@@ -88,10 +99,10 @@ h3 + p {
 }
 
 .card, .formContainer{
-    background-color:  white;
+    background-color: var(--white);
     flex-grow: 1;
     flex-shrink: 1;
-    color: black;
+    color: var(--black_strong);
     display: flex;
     box-shadow: none;
     height: 25rem;
@@ -124,7 +135,7 @@ h3 + p {
 }
 
  .cardDescription > a {
-    color: white;
+    color: var(--white);
     font-size: 1.1rem;
     padding: 0.1rem 0.9rem;
     width: -webkit-min-content;
@@ -161,11 +172,12 @@ h3 + p {
 }
 
 .enabledLink {
-    background-color: rgb(0,106,97);
+    background-color: var(--green);
 }
 
 .disabledLink {
-    background-color: rgba(0,106,97,0.5);
+    background-color: var(--green);
+    opacity: 0.5
 }
 
 figure {
@@ -196,8 +208,8 @@ figure > img {
     display: flex;
     padding: 0.3rem;
     flex-wrap: wrap;
-    border: 0.05rem solid rgba(0, 0, 0, 0.384);
-    background-color: #ffffff;
+    border: 0.05rem solid var(--grey_light);
+    background-color: var(--white);
     border-radius: 0.2rem;
     -webkit-border-radius: 0.2rem;
     -moz-border-radius: 0.2rem;
@@ -220,7 +232,7 @@ figure > img {
     flex-direction: row;
     width: 80%;
     height: 80%;
-    background-color: rgba(49, 44, 44, 1);
+    background-color: var(--grey_strong);
 }
 
 .previewImage {
@@ -232,7 +244,7 @@ figure > img {
     background-repeat: no-repeat;
     background-position: center;
     background-origin: content-box;
-    background-color: rgb(25, 23, 23);
+    background-color: var(--black_light);
 }
 
 .previewSummary {
@@ -244,12 +256,12 @@ figure > img {
 }
 
 .previewSummary  h2 {
-    color:white;
+    color: var(--white);
     text-align: center
 }
 
 .previewSummary p {
-    color: white;
+    color:  var(--white);
     font-size: 1rem;
 }
 
@@ -271,7 +283,7 @@ header {
     padding-right: 1rem;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(119deg, #086a61,81%, rgba(253, 215, 70,0.85));
+    background: linear-gradient(119deg, var(--green),81%, rgba(253, 215, 70,0.85));
     box-shadow: rgba(0, 0, 0, 0.60) 0px 5px 15px;
 }
 
@@ -339,8 +351,7 @@ nav {
 #navToggle > div {
     width: 2rem;
     height: 0.32rem;
-    background-color:rgb(164,179,179);
-    background-color:rgb(27, 23, 37);
+    background-color:var(--black_strong);
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
     -moz-border-radius: 1rem;
@@ -355,8 +366,8 @@ ul {
 
 li {
     list-style-type: none;
-    background-color: #086a61;
-    border: 0.01rem solid rgb(27, 23, 37);
+    background-color: var(--green);
+    border: 0.01rem solid var(--black_strong);
     text-align: center;
 }
 
@@ -364,7 +375,7 @@ a {
     display: block;
     text-decoration: none;
     padding: 0.8rem 0.0rem;
-    color:white;
+    color: var(--white);
 }
 
 .formContainer{
@@ -382,7 +393,7 @@ form {
 }
 
 form > label {
-    color:rgb(27, 23, 37);
+    color:var(--black_strong);
 }
 
 form :nth-child(even){
@@ -401,10 +412,10 @@ form > textarea {
 
 form > input[type="submit"]{
     align-self: center;
-    background-color: #086a61;
+    background-color: var(--green);
     padding: 0 2rem;
     border-radius: 0.2rem;
-    color:white;
+    color: var(--white);
     margin-top: 0.5rem;
     border: none;
     padding-top: 0.5rem;
@@ -418,7 +429,6 @@ form > input[type="submit"]{
     -o-border-radius: 0.1rem;
 }
 
-
 .modalContainer {
     position:fixed;
     display: flex;
@@ -428,7 +438,7 @@ form > input[type="submit"]{
     left: 50%;
     width: 20rem;
     height: auto;
-    background-color: white;
+    background-color: var(--white);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
@@ -439,27 +449,27 @@ form > input[type="submit"]{
     max-width: 100%;
 }
 
-
 .modalTitleContainer{
-    background-color: #086a61;
-    color: white;
+    background-color: var(--green);
+    color:  var(--white);
     font-size: 2rem;
     padding: 0.5rem 0.7rem;
-    border: 1px solid white;
+    border: 1px solid  var(--white);
     border-bottom-width: 0;
 }
+
 .modalMessageContainer{
     padding: 0.5rem 0.7rem 0.9rem 0.7rem;
     display: flex;
     flex-direction: column;
-    border: 1px solid #086a61;
+    border: 1px solid var(--green);
     border-top-width: 0;
 }
 
 .modalContainer  button {
     align-self: center;
-    background-color: #086a61;
-    color:white;
+    background-color: var(--green);
+    color: var(--white);
     border: none;
     padding: 0.5rem 2rem ;
     margin-top: 0.4rem;
@@ -469,16 +479,14 @@ form > input[type="submit"]{
     -moz-border-radius: 0.1rem;
     -ms-border-radius: 0.1rem;
     -o-border-radius: 0.1rem;
-    
 }
-
 
 @media screen and (max-width: 480px){
     html{
         font-size: 15px;
     }
     .card{
-        background-color:  white;
+        background-color: var(--white);
         max-width: 100%;
     }
     .formContainer{
@@ -501,6 +509,7 @@ form > input[type="submit"]{
         padding-bottom: 1rem;
       }
     }
+
 @media screen and (min-width: 481px) and (max-width: 768px){
     html{
         font-size: 15px;
@@ -508,7 +517,7 @@ form > input[type="submit"]{
     .formContainer{
         width: 100%
     }
-    
+   
 }
 
 @media screen and (min-width: 761px) and (max-width: 1024px){
@@ -518,7 +527,6 @@ form > input[type="submit"]{
     .formContainer{
         width: 100%;
     }
-    
 }
 
 @media screen and (min-width: 1025px) and  (max-width: 1200px){
