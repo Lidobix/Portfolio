@@ -220,6 +220,7 @@ figure > img {
     background-color: rgba(0, 0, 0, 0.8);
     position: absolute;
     display: flex;
+    top:0;
     z-index: 10;
     justify-content: center;
     align-items: center;

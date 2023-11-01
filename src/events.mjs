@@ -33,9 +33,10 @@ export class EventsManager {
   }
 
   updatePreviewBackgroundCss() {
-    this.bodyStyle = window.getComputedStyle(this.body);
-    this.previewBackground.style.top = '0px';
-    this.previewBackground.style.height = this.bodyStyle.height;
+    if (this.previewBackground) {
+      this.bodyStyle = window.getComputedStyle(this.body);
+      this.previewBackground.style.height = this.bodyStyle.height;
+    }
   }
 
   clicProject() {
@@ -113,8 +114,6 @@ export class EventsManager {
         this.lastHorizontalScrollY = window.scrollY;
         setTimeout(() => {
           window.scroll(0, this.lastVerticalScrollY);
-          //   this.previewBackgroundDiv.style.top = this.lastVerticalScrollY + 'px';
-          //   this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
         }, 100);
       } else if (window.orientation === 90 || window.orientation === -90) {
         // Appareil en position paysage
@@ -122,9 +121,6 @@ export class EventsManager {
         this.lastVerticalScrollY = window.scrollY;
         setTimeout(() => {
           window.scroll(0, this.lastHorizontalScrollY);
-          //   this.previewBackgroundDiv.style.top =
-          //     this.lastHorizontalScrollY + 'px';
-          //   this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
         }, 100);
       }
     });
@@ -148,14 +144,7 @@ export class EventsManager {
 
   closePreview() {
     document.getElementById('preview').remove();
-
     this.projectPreview = false;
-
-    // this.section.style.paddingRight = this.sectionPaddingRight + 'px';
-    // this.header.style.paddingRight = this.headerPaddingRight + 'px';
-    // this.navToggle.style.right = this.navToggleRight + 'px';
-
-    // this.body.classList.remove('notScrollable');
   }
 
   submitForm() {
