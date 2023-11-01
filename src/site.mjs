@@ -34,6 +34,16 @@ class SiteBuilder {
 
       this.header.appendChild(socialContainer);
     }
+
+    DomCreator.createNodeAppended(
+      'img',
+      ['invisible'],
+      {
+        id: 'navArrowTop',
+        src: './assets/images/arrow_top.png',
+      },
+      this.body
+    );
   }
 
   buildSection() {

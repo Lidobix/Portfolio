@@ -10,20 +10,44 @@ export class EventsManager {
     this.header = siteBuilder.header;
     this.nav = siteBuilder.nav;
     this.section = siteBuilder.section;
-    this.projectPreview = false;
-    this.navToggled = false;
-    this.previewBackgroundDiv = '';
+    this.isPreviewDisplayed = false;
+    this.isNavDisplayed = false;
     this.navToggle = '';
-    this.navToggleRight = '';
+    this.arrow = '';
   }
 
   addEvents() {
+    this.init();
     this.resizeWindow();
+    this.clicOnArrow();
     this.clicProject();
     this.clicOnPage();
+    this.scrollPage();
     this.escapeKey();
     this.rotatePhone();
     this.submitForm();
+  }
+
+  init() {
+    this.arrow = document.getElementById('navArrowTop');
+  }
+
+  scrollPage() {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        this.arrow.classList.remove('invisible');
+        this.arrow.classList.add('visible');
+      } else {
+        this.arrow.classList.remove('visible');
+        this.arrow.classList.add('invisible');
+      }
+    });
+  }
+
+  clicOnArrow() {
+    this.arrow.addEventListener('click', () => {
+      window.scrollTo(0, 0);
+    });
   }
 
   resizeWindow() {
@@ -51,7 +75,7 @@ export class EventsManager {
         const targetEvent = e.target;
         if (!targetEvent.classList.contains('enabledLink')) {
           setTimeout(() => {
-            this.projectPreview = true;
+            this.isPreviewDisplayed = true;
           }, 300);
 
           this.previewBackground = DomCreator.createNode(
@@ -101,7 +125,7 @@ export class EventsManager {
 
   escapeKey() {
     document.addEventListener('keydown', (e) => {
-      if (e.code === 'Escape' && this.projectPreview) {
+      if (e.code === 'Escape' && this.isPreviewDisplayed) {
         this.closePreview(this);
       }
     });
@@ -129,14 +153,17 @@ export class EventsManager {
   clicOnPage() {
     document.addEventListener('click', (e) => {
       const targetEvent = e.target;
-      if (targetEvent.classList.contains('navTrigger') && !this.navToggled) {
+      if (
+        targetEvent.classList.contains('navTrigger') &&
+        !this.isNavDisplayed
+      ) {
         this.nav.style.transform = 'translate(-15rem)';
-        this.navToggled = true;
+        this.isNavDisplayed = true;
       } else {
         this.nav.style.transform = 'translate(15rem)';
-        this.navToggled = false;
+        this.isNavDisplayed = false;
       }
-      if (this.projectPreview) {
+      if (this.isPreviewDisplayed) {
         this.closePreview();
       }
     });
@@ -144,7 +171,7 @@ export class EventsManager {
 
   closePreview() {
     document.getElementById('preview').remove();
-    this.projectPreview = false;
+    this.isPreviewDisplayed = false;
   }
 
   submitForm() {
