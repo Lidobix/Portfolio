@@ -68,6 +68,7 @@ export class EventsManager {
           }, 300);
 
           siteBuilder.buildProjectPreview(project);
+          // lancer une fonction qui attribue des événements aux flèches de défilement des images
         }
       });
     });

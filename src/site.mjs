@@ -246,6 +246,10 @@ class SiteBuilder {
     DomCreator.appendChilds(summary, [titleContainer, descriptionContainer]);
 
     const imageContainer = DomCreator.createNode('div', ['previewImage']);
+    //Repositionner l'image dans une autre div, en flex row avec les flèches
+    // au défilement on fait diparaitre les flèches inutiles.
+    // on garde la taille de l'image intacte.
+    // créer un indicateur d'images façon insta
 
     imageContainer.style.backgroundImage = `url(${project.images[0]})`;
 
@@ -283,5 +287,3 @@ class SiteBuilder {
 
 const siteBuilder = new SiteBuilder();
 export default siteBuilder;
-
-// Finir les exports
