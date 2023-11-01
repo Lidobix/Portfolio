@@ -20,11 +20,23 @@ export class EventsManager {
   }
 
   addEvents() {
+    this.resizeWindow();
     this.clicProject();
     this.clicOnPage();
     this.escapeKey();
     this.rotatePhone();
     this.submitForm();
+  }
+
+  resizeWindow() {
+    window.addEventListener('resize', (event) => {
+      this.updatePreviewBackgroundSize();
+    });
+  }
+
+  updatePreviewBackgroundSize() {
+    this.bodyStyle = window.getComputedStyle(this.body);
+    this.previewBackground.style.height = this.bodyStyle.height;
   }
 
   clicProject() {
@@ -42,20 +54,19 @@ export class EventsManager {
             this.projectPreview = true;
           }, 300);
 
-          const previewBackground = DomCreator.createNode(
+          this.previewBackground = DomCreator.createNode(
             'div',
             ['previewBackground'],
             { id: 'preview' }
           );
 
-          previewBackground.style.top = window.scrollY + 'px';
+          //   console.log(this.bodyStyle.height);
+          this.previewBackground.style.top = '0px';
+          //   this.previewBackground.style.height = this.bodyStyle.height;
+          this.updatePreviewBackgroundSize();
 
-          previewBackground.style.height = window.innerHeight + 'px';
-          this.previewBackgroundDiv = previewBackground;
-
-          const bodyStyle = window.getComputedStyle(this.body);
-
-          const scrollBarWidth = window.innerWidth - parseInt(bodyStyle.width);
+          const scrollBarWidth =
+            window.innerWidth - parseInt(this.bodyStyle.width);
 
           this.sectionPaddingRight = parseInt(
             window.getComputedStyle(this.section).paddingRight
@@ -77,7 +88,7 @@ export class EventsManager {
           this.navToggle.style.right =
             this.navToggleRight + scrollBarWidth + 'px';
 
-          this.body.classList.add('notScrollable');
+          //   this.body.classList.add('notScrollable');
 
           const previewContainer = DomCreator.createNode('div', [
             'previewContainer',
@@ -107,9 +118,9 @@ export class EventsManager {
 
           DomCreator.appendChilds(previewContainer, [imageContainer, summary]);
 
-          previewBackground.appendChild(previewContainer);
+          this.previewBackground.appendChild(previewContainer);
 
-          this.body.appendChild(previewBackground);
+          this.body.appendChild(this.previewBackground);
         }
       });
     });
