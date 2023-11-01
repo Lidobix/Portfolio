@@ -66,6 +66,30 @@ h3 + p {
     font-size: 1.1rem;
 }
 
+#navArrowTop{
+    position: fixed;
+    bottom:10px;
+    right:5px;
+    z-index: 10;
+    height:30px;
+}
+
+#navArrowTop:hover{
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+}
+
+.visible{
+    visibility: visible;
+}
+
+.invisible{
+    visibility: hidden;
+}
+
 .imagesContainer {
     display: flex;
     flex-wrap: wrap;
