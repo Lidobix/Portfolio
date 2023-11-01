@@ -13,8 +13,6 @@ export class EventsManager {
     this.projectPreview = false;
     this.navToggled = false;
     this.previewBackgroundDiv = '';
-    this.sectionPaddingRight = '';
-    this.headerPaddingRight = '';
     this.navToggle = '';
     this.navToggleRight = '';
   }
@@ -30,12 +28,13 @@ export class EventsManager {
 
   resizeWindow() {
     window.addEventListener('resize', (event) => {
-      this.updatePreviewBackgroundSize();
+      this.updatePreviewBackgroundCss();
     });
   }
 
-  updatePreviewBackgroundSize() {
+  updatePreviewBackgroundCss() {
     this.bodyStyle = window.getComputedStyle(this.body);
+    this.previewBackground.style.top = '0px';
     this.previewBackground.style.height = this.bodyStyle.height;
   }
 
@@ -60,42 +59,16 @@ export class EventsManager {
             { id: 'preview' }
           );
 
-          //   console.log(this.bodyStyle.height);
-          this.previewBackground.style.top = '0px';
-          //   this.previewBackground.style.height = this.bodyStyle.height;
-          this.updatePreviewBackgroundSize();
-
-          const scrollBarWidth =
-            window.innerWidth - parseInt(this.bodyStyle.width);
-
-          this.sectionPaddingRight = parseInt(
-            window.getComputedStyle(this.section).paddingRight
-          );
-
-          this.headerPaddingRight = parseInt(
-            window.getComputedStyle(this.header).paddingRight
-          );
-
-          this.navToggleRight = parseInt(
-            window.getComputedStyle(this.navToggle).right
-          );
-          this.section.style.paddingRight =
-            this.sectionPaddingRight + scrollBarWidth + 'px';
-
-          this.header.style.paddingRight =
-            this.headerPaddingRight + scrollBarWidth + 'px';
-
-          this.navToggle.style.right =
-            this.navToggleRight + scrollBarWidth + 'px';
-
-          //   this.body.classList.add('notScrollable');
+          this.updatePreviewBackgroundCss();
 
           const previewContainer = DomCreator.createNode('div', [
             'previewContainer',
           ]);
 
           const titleContainer = DomCreator.createNode('div');
-          const title = DomCreator.hX(2, project.name);
+          const title = DomCreator.createNode('h2', [], {
+            innerText: project.name,
+          });
           const summary = DomCreator.createNode('div', ['previewSummary']);
 
           const descriptionContainer = DomCreator.createNode('div');
@@ -119,7 +92,6 @@ export class EventsManager {
           DomCreator.appendChilds(previewContainer, [imageContainer, summary]);
 
           this.previewBackground.appendChild(previewContainer);
-
           this.body.appendChild(this.previewBackground);
         }
       });
@@ -141,8 +113,8 @@ export class EventsManager {
         this.lastHorizontalScrollY = window.scrollY;
         setTimeout(() => {
           window.scroll(0, this.lastVerticalScrollY);
-          this.previewBackgroundDiv.style.top = this.lastVerticalScrollY + 'px';
-          this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
+          //   this.previewBackgroundDiv.style.top = this.lastVerticalScrollY + 'px';
+          //   this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
         }, 100);
       } else if (window.orientation === 90 || window.orientation === -90) {
         // Appareil en position paysage
@@ -150,9 +122,9 @@ export class EventsManager {
         this.lastVerticalScrollY = window.scrollY;
         setTimeout(() => {
           window.scroll(0, this.lastHorizontalScrollY);
-          this.previewBackgroundDiv.style.top =
-            this.lastHorizontalScrollY + 'px';
-          this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
+          //   this.previewBackgroundDiv.style.top =
+          //     this.lastHorizontalScrollY + 'px';
+          //   this.previewBackgroundDiv.style.height = window.innerHeight + 'px';
         }, 100);
       }
     });
@@ -179,11 +151,11 @@ export class EventsManager {
 
     this.projectPreview = false;
 
-    this.section.style.paddingRight = this.sectionPaddingRight + 'px';
-    this.header.style.paddingRight = this.headerPaddingRight + 'px';
-    this.navToggle.style.right = this.navToggleRight + 'px';
+    // this.section.style.paddingRight = this.sectionPaddingRight + 'px';
+    // this.header.style.paddingRight = this.headerPaddingRight + 'px';
+    // this.navToggle.style.right = this.navToggleRight + 'px';
 
-    this.body.classList.remove('notScrollable');
+    // this.body.classList.remove('notScrollable');
   }
 
   submitForm() {
