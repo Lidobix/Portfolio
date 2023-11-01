@@ -8,6 +8,7 @@ class SiteBuilder {
     this.header = document.querySelector('header');
     this.nav = document.querySelector('nav');
     this.section = document.querySelector('section');
+    this.previewBackground = '';
   }
 
   buildHeader() {
@@ -163,9 +164,9 @@ class SiteBuilder {
           id: `project${project.name}`,
         });
 
-        if (project.image) {
+        if (project.images) {
           const figure = document.createElement('figure');
-          const view = DomCreator.img(project.image);
+          const view = DomCreator.img(project.images[0]);
           figure.appendChild(view);
           card.appendChild(figure);
         }
@@ -202,17 +203,58 @@ class SiteBuilder {
           description.appendChild(technoListContainer);
           card.appendChild(description);
         }
-
-        // eventManager.clicCard(card, project);
-
-        // this.buildCardEvents(card, project, this);
-
         container.appendChild(card);
       }
     });
 
     document.getElementById('projets').after(container);
   }
+
+  updatePreviewBackgroundCss() {
+    if (this.previewBackground) {
+      this.bodyStyle = window.getComputedStyle(this.body);
+      this.previewBackground.style.height = this.bodyStyle.height;
+    }
+  }
+
+  buildProjectPreview(project) {
+    this.previewBackground = DomCreator.createNode(
+      'div',
+      ['previewBackground'],
+      { id: 'preview' }
+    );
+
+    this.updatePreviewBackgroundCss();
+
+    const previewContainer = DomCreator.createNode('div', ['previewContainer']);
+
+    const titleContainer = DomCreator.createNode('div');
+    const title = DomCreator.createNode('h2', [], {
+      innerText: project.name,
+    });
+    const summary = DomCreator.createNode('div', ['previewSummary']);
+
+    const descriptionContainer = DomCreator.createNode('div');
+
+    const description = DomCreator.createNode('p', [], {
+      innerText: project.description,
+    });
+    descriptionContainer.appendChild(description);
+
+    titleContainer.appendChild(title);
+
+    DomCreator.appendChilds(summary, [titleContainer, descriptionContainer]);
+
+    const imageContainer = DomCreator.createNode('div', ['previewImage']);
+
+    imageContainer.style.backgroundImage = `url(${project.images[0]})`;
+
+    DomCreator.appendChilds(previewContainer, [imageContainer, summary]);
+
+    this.previewBackground.appendChild(previewContainer);
+    this.body.appendChild(this.previewBackground);
+  }
+
   buildForm(htmlForm) {
     const form = DomCreator.form('formulaire', htmlForm, 'POST');
     const formContainer = DomCreator.div(['formContainer']);
@@ -221,7 +263,24 @@ class SiteBuilder {
 
     document.getElementById('contact').after(formContainer);
   }
+
+  buildFormModal(title, message) {
+    const titleContainer = DomCreator.div(['modalTitleContainer'], title);
+    const messageContainer = DomCreator.div(['modalMessageContainer']);
+    const modalContainer = DomCreator.div(['modalContainer']);
+    const text = DomCreator.p(message);
+    const closeButton = DomCreator.button('FERMER');
+
+    DomCreator.appendChilds(messageContainer, [text, closeButton]);
+    DomCreator.appendChilds(modalContainer, [titleContainer, messageContainer]);
+    DomCreator.appendChilds(this.body, [modalContainer]);
+
+    closeButton.addEventListener('click', () => {
+      modalContainer.remove();
+    });
+  }
 }
+
 const siteBuilder = new SiteBuilder();
 export default siteBuilder;
 

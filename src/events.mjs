@@ -1,8 +1,5 @@
 import datasManager from './datasManager.mjs';
-import { domCreator } from './domCreator.mjs';
 import siteBuilder from './site.mjs';
-
-const DomCreator = new domCreator();
 
 export class EventsManager {
   constructor() {
@@ -51,16 +48,9 @@ export class EventsManager {
   }
 
   resizeWindow() {
-    window.addEventListener('resize', (event) => {
-      this.updatePreviewBackgroundCss();
+    window.addEventListener('resize', () => {
+      siteBuilder.updatePreviewBackgroundCss();
     });
-  }
-
-  updatePreviewBackgroundCss() {
-    if (this.previewBackground) {
-      this.bodyStyle = window.getComputedStyle(this.body);
-      this.previewBackground.style.height = this.bodyStyle.height;
-    }
   }
 
   clicProject() {
@@ -72,52 +62,12 @@ export class EventsManager {
       const card = document.getElementById(`project${project.name}`);
 
       card.addEventListener('click', (e) => {
-        const targetEvent = e.target;
-        if (!targetEvent.classList.contains('enabledLink')) {
+        if (!e.target.classList.contains('enabledLink')) {
           setTimeout(() => {
             this.isPreviewDisplayed = true;
           }, 300);
 
-          this.previewBackground = DomCreator.createNode(
-            'div',
-            ['previewBackground'],
-            { id: 'preview' }
-          );
-
-          this.updatePreviewBackgroundCss();
-
-          const previewContainer = DomCreator.createNode('div', [
-            'previewContainer',
-          ]);
-
-          const titleContainer = DomCreator.createNode('div');
-          const title = DomCreator.createNode('h2', [], {
-            innerText: project.name,
-          });
-          const summary = DomCreator.createNode('div', ['previewSummary']);
-
-          const descriptionContainer = DomCreator.createNode('div');
-
-          const description = DomCreator.createNode('p', [], {
-            innerText: project.description,
-          });
-          descriptionContainer.appendChild(description);
-
-          titleContainer.appendChild(title);
-
-          DomCreator.appendChilds(summary, [
-            titleContainer,
-            descriptionContainer,
-          ]);
-
-          const imageContainer = DomCreator.createNode('div', ['previewImage']);
-
-          imageContainer.style.backgroundImage = `url(${project.image})`;
-
-          DomCreator.appendChilds(previewContainer, [imageContainer, summary]);
-
-          this.previewBackground.appendChild(previewContainer);
-          this.body.appendChild(this.previewBackground);
+          siteBuilder.buildProjectPreview(project);
         }
       });
     });
@@ -190,7 +140,7 @@ export class EventsManager {
         }),
       })
         .then((r) => {
-          this.buildFormModal(
+          siteBuilder.buildFormModal(
             datasManager.modal.success.title,
             datasManager.modal.success.message
           );
@@ -198,27 +148,11 @@ export class EventsManager {
         })
         .catch((e) => {
           // le catch peut être généré par unne erreur dans la construction de buildFormModal
-          this.buildFormModal(
+          siteBuilder.buildFormModal(
             datasManager.modal.error.title,
             datasManager.modal.error.message
           );
         });
-    });
-  }
-
-  buildFormModal(title, message) {
-    const titleContainer = DomCreator.div(['modalTitleContainer'], title);
-    const messageContainer = DomCreator.div(['modalMessageContainer']);
-    const modalContainer = DomCreator.div(['modalContainer']);
-    const text = DomCreator.p(message);
-    const closeButton = DomCreator.button('FERMER');
-
-    DomCreator.appendChilds(messageContainer, [text, closeButton]);
-    DomCreator.appendChilds(modalContainer, [titleContainer, messageContainer]);
-    DomCreator.appendChilds(this.body, [modalContainer]);
-
-    closeButton.addEventListener('click', () => {
-      modalContainer.remove();
     });
   }
 }
