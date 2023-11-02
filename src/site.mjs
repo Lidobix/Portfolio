@@ -9,6 +9,7 @@ class SiteBuilder {
     this.nav = document.querySelector('nav');
     this.section = document.querySelector('section');
     this.previewBackground = '';
+    this.previewImageIndex = 0;
   }
 
   buildHeader() {
@@ -226,7 +227,7 @@ class SiteBuilder {
 
     this.updatePreviewBackgroundCss();
 
-    const previewContainer = DomCreator.createNode('div', ['previewContainer']);
+    const previewWindow = DomCreator.createNode('div', ['previewWindow']);
 
     const titleContainer = DomCreator.createNode('div');
     const title = DomCreator.createNode('h2', [], {
@@ -244,18 +245,51 @@ class SiteBuilder {
     titleContainer.appendChild(title);
 
     DomCreator.appendChilds(summary, [titleContainer, descriptionContainer]);
+    const previewContainer = DomCreator.createNode('div', [], {
+      id: 'previewContainer',
+    });
 
-    const imageContainer = DomCreator.createNode('div', ['previewImage']);
-    //Repositionner l'image dans une autre div, en flex row avec les flèches
-    // au défilement on fait diparaitre les flèches inutiles.
-    // on garde la taille de l'image intacte.
-    // créer un indicateur d'images façon insta
+    const previewLeftArrow = DomCreator.createNode('div', ['switchPreview'], {
+      id: 'previewLeftArrow',
+    });
 
-    imageContainer.style.backgroundImage = `url(${project.images[0]})`;
+    const previewRightArrow = DomCreator.createNode('div', ['switchPreview'], {
+      id: 'previewRightArrow',
+    });
 
-    DomCreator.appendChilds(previewContainer, [imageContainer, summary]);
+    if (project.images.length > 1) {
+      if (this.previewImageIndex === 0) {
+        previewLeftArrow.style.backgroundImage = ``;
+        previewRightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
+      }
+      if (
+        this.previewImageIndex > 0 &&
+        this.previewImageIndex < project.images.length
+      ) {
+        previewLeftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
+        previewRightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
+      }
+      if (this.previewImageIndex === project.images.length - 1) {
+        previewLeftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
+        previewRightArrow.style.backgroundImage = ``;
+      }
+    }
 
-    this.previewBackground.appendChild(previewContainer);
+    const previewImage = DomCreator.createNode('div', ['previewImage']);
+
+    DomCreator.appendChilds(previewContainer, [
+      previewLeftArrow,
+      previewImage,
+      previewRightArrow,
+    ]);
+
+    previewImage.style.backgroundImage = `url(${
+      project.images[this.previewImageIndex]
+    })`;
+
+    DomCreator.appendChilds(previewWindow, [previewContainer, summary]);
+
+    this.previewBackground.appendChild(previewWindow);
     this.body.appendChild(this.previewBackground);
   }
 
