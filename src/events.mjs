@@ -1,5 +1,7 @@
 import datasManager from './datasManager.mjs';
 import siteBuilder from './site.mjs';
+import { PreviewProject } from './previewProject.mjs';
+const Preview = new PreviewProject();
 
 export class EventsManager {
   constructor() {
@@ -27,6 +29,7 @@ export class EventsManager {
 
   init() {
     this.arrow = document.getElementById('navArrowTop');
+    this.navToggle = document.getElementById('navToggle');
   }
 
   scrollPage() {
@@ -49,25 +52,27 @@ export class EventsManager {
 
   resizeWindow() {
     window.addEventListener('resize', () => {
-      siteBuilder.updatePreviewBackgroundCss();
+      if (this.isPreviewDisplayed) {
+        setTimeout(() => {
+          Preview.updateBackgroundCss();
+        }, 150);
+      }
     });
   }
 
   clicProject() {
     const { projects } = datasManager;
 
-    this.navToggle = document.getElementById('navToggle');
-
     projects.forEach((project) => {
       const card = document.getElementById(`project${project.name}`);
 
       card.addEventListener('click', (e) => {
         if (!e.target.classList.contains('enabledLink')) {
+          Preview.open(project);
           setTimeout(() => {
             this.isPreviewDisplayed = true;
           }, 300);
 
-          siteBuilder.buildProjectPreview(project);
           // lancer une fonction qui attribue des événements aux flèches de défilement des images
         }
       });
@@ -77,7 +82,8 @@ export class EventsManager {
   escapeKey() {
     document.addEventListener('keydown', (e) => {
       if (e.code === 'Escape' && this.isPreviewDisplayed) {
-        this.closePreview(this);
+        Preview.close();
+        this.isPreviewDisplayed = false;
       }
     });
   }
@@ -103,11 +109,7 @@ export class EventsManager {
 
   clicOnPage() {
     document.addEventListener('click', (e) => {
-      const targetEvent = e.target;
-      if (
-        targetEvent.classList.contains('navTrigger') &&
-        !this.isNavDisplayed
-      ) {
+      if (e.target.classList.contains('navTrigger') && !this.isNavDisplayed) {
         this.nav.style.transform = 'translate(-15rem)';
         this.isNavDisplayed = true;
       } else {
@@ -115,14 +117,10 @@ export class EventsManager {
         this.isNavDisplayed = false;
       }
       if (this.isPreviewDisplayed) {
-        this.closePreview();
+        this.isPreviewDisplayed = false;
+        Preview.close();
       }
     });
-  }
-
-  closePreview() {
-    document.getElementById('preview').remove();
-    this.isPreviewDisplayed = false;
   }
 
   submitForm() {

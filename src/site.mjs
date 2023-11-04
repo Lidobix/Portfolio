@@ -8,8 +8,6 @@ class SiteBuilder {
     this.header = document.querySelector('header');
     this.nav = document.querySelector('nav');
     this.section = document.querySelector('section');
-    this.previewBackground = '';
-    this.previewImageIndex = 0;
   }
 
   buildHeader() {
@@ -209,88 +207,6 @@ class SiteBuilder {
     });
 
     document.getElementById('projets').after(container);
-  }
-
-  updatePreviewBackgroundCss() {
-    if (this.previewBackground) {
-      this.bodyStyle = window.getComputedStyle(this.body);
-      this.previewBackground.style.height = this.bodyStyle.height;
-    }
-  }
-
-  buildProjectPreview(project) {
-    this.previewBackground = DomCreator.createNode(
-      'div',
-      ['previewBackground'],
-      { id: 'preview' }
-    );
-
-    this.updatePreviewBackgroundCss();
-
-    const previewWindow = DomCreator.createNode('div', ['previewWindow']);
-
-    const titleContainer = DomCreator.createNode('div');
-    const title = DomCreator.createNode('h2', [], {
-      innerText: project.name,
-    });
-    const summary = DomCreator.createNode('div', ['previewSummary']);
-
-    const descriptionContainer = DomCreator.createNode('div');
-
-    const description = DomCreator.createNode('p', [], {
-      innerText: project.description,
-    });
-    descriptionContainer.appendChild(description);
-
-    titleContainer.appendChild(title);
-
-    DomCreator.appendChilds(summary, [titleContainer, descriptionContainer]);
-    const previewContainer = DomCreator.createNode('div', [], {
-      id: 'previewContainer',
-    });
-
-    const previewLeftArrow = DomCreator.createNode('div', ['switchPreview'], {
-      id: 'previewLeftArrow',
-    });
-
-    const previewRightArrow = DomCreator.createNode('div', ['switchPreview'], {
-      id: 'previewRightArrow',
-    });
-
-    if (project.images.length > 1) {
-      if (this.previewImageIndex === 0) {
-        previewLeftArrow.style.backgroundImage = ``;
-        previewRightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
-      }
-      if (
-        this.previewImageIndex > 0 &&
-        this.previewImageIndex < project.images.length
-      ) {
-        previewLeftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
-        previewRightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
-      }
-      if (this.previewImageIndex === project.images.length - 1) {
-        previewLeftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
-        previewRightArrow.style.backgroundImage = ``;
-      }
-    }
-
-    const previewImage = DomCreator.createNode('div', ['previewImage']);
-
-    DomCreator.appendChilds(previewContainer, [
-      previewLeftArrow,
-      previewImage,
-      previewRightArrow,
-    ]);
-
-    previewImage.style.backgroundImage = `url(${
-      project.images[this.previewImageIndex]
-    })`;
-
-    DomCreator.appendChilds(previewWindow, [previewContainer, summary]);
-
-    this.previewBackground.appendChild(previewWindow);
-    this.body.appendChild(this.previewBackground);
   }
 
   buildForm(htmlForm) {
