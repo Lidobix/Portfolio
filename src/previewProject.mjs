@@ -78,13 +78,24 @@ export class PreviewProject {
   updateImage(offset = 0) {
     this.imageIndex = this.imageIndex + offset;
 
+    this.checkImageIndex();
+    this.updateArrows();
+
+    this.image.style.backgroundImage = `url(${
+      this.project.images[this.imageIndex]
+    })`;
+  }
+
+  checkImageIndex() {
     if (this.imageIndex < 0) {
       this.imageIndex = 0;
     }
     if (this.imageIndex === this.project.images.length) {
       this.imageIndex = this.project.images.length - 1;
     }
+  }
 
+  updateArrows() {
     if (this.project.images.length > 1) {
       if (this.imageIndex === 0) {
         this.leftArrow.style.backgroundImage = ``;
@@ -99,9 +110,6 @@ export class PreviewProject {
         this.rightArrow.style.backgroundImage = ``;
       }
     }
-    this.image.style.backgroundImage = `url(${
-      this.project.images[this.imageIndex]
-    })`;
   }
 
   close() {
