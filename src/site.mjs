@@ -163,9 +163,9 @@ class SiteBuilder {
           id: `project${project.name}`,
         });
 
-        if (project.image) {
+        if (project.images) {
           const figure = document.createElement('figure');
-          const view = DomCreator.img(project.image);
+          const view = DomCreator.img(project.images[0]);
           figure.appendChild(view);
           card.appendChild(figure);
         }
@@ -202,17 +202,13 @@ class SiteBuilder {
           description.appendChild(technoListContainer);
           card.appendChild(description);
         }
-
-        // eventManager.clicCard(card, project);
-
-        // this.buildCardEvents(card, project, this);
-
         container.appendChild(card);
       }
     });
 
     document.getElementById('projets').after(container);
   }
+
   buildForm(htmlForm) {
     const form = DomCreator.form('formulaire', htmlForm, 'POST');
     const formContainer = DomCreator.div(['formContainer']);
@@ -221,8 +217,23 @@ class SiteBuilder {
 
     document.getElementById('contact').after(formContainer);
   }
+
+  buildFormModal(title, message) {
+    const titleContainer = DomCreator.div(['modalTitleContainer'], title);
+    const messageContainer = DomCreator.div(['modalMessageContainer']);
+    const modalContainer = DomCreator.div(['modalContainer']);
+    const text = DomCreator.p(message);
+    const closeButton = DomCreator.button('FERMER');
+
+    DomCreator.appendChilds(messageContainer, [text, closeButton]);
+    DomCreator.appendChilds(modalContainer, [titleContainer, messageContainer]);
+    DomCreator.appendChilds(this.body, [modalContainer]);
+
+    closeButton.addEventListener('click', () => {
+      modalContainer.remove();
+    });
+  }
 }
+
 const siteBuilder = new SiteBuilder();
 export default siteBuilder;
-
-// Finir les exports
