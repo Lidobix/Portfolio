@@ -1,22 +1,25 @@
-import datasManager from './datasManager.mjs';
 import siteBuilder from './site.mjs';
 import { domCreator } from './domCreator.mjs';
 const DomCreator = new domCreator();
 
 export class PreviewProject {
   constructor() {
+    this.project;
     this.body = siteBuilder.body;
-    this.previewBackground = '';
-    this.previewImageIndex = 0;
+    this.previewBackground;
+    this.imageIndex;
     this.previewLeftArrow;
     this.previewRightArrow;
     this.previewImage;
   }
 
-  //Mise à jour des images de la preview
-  //update des flèches
-
   open(project) {
+    this.project = project;
+    this.imageIndex = 0;
+    this.build();
+  }
+
+  build() {
     this.previewBackground = DomCreator.createNode(
       'div',
       ['previewBackground'],
@@ -29,14 +32,14 @@ export class PreviewProject {
 
     const titleContainer = DomCreator.createNode('div');
     const title = DomCreator.createNode('h2', [], {
-      innerText: project.name,
+      innerText: this.project.name,
     });
     const summary = DomCreator.createNode('div', ['previewSummary']);
 
     const descriptionContainer = DomCreator.createNode('div');
 
     const description = DomCreator.createNode('p', [], {
-      innerText: project.description,
+      innerText: this.project.description,
     });
     descriptionContainer.appendChild(description);
 
@@ -65,7 +68,7 @@ export class PreviewProject {
     DomCreator.appendChilds(previewWindow, [previewContainer, summary]);
 
     this.previewBackground.appendChild(previewWindow);
-    this.updateImage(project);
+    this.updateImage();
 
     this.body.appendChild(this.previewBackground);
   }
@@ -76,26 +79,32 @@ export class PreviewProject {
     ).height;
   }
 
-  updateImage(project) {
-    if (project.images.length > 1) {
-      if (this.previewImageIndex === 0) {
+  updateImage(offset = 0) {
+    this.imageIndex = this.imageIndex + offset;
+
+    if (this.imageIndex < 0) {
+      this.imageIndex = 0;
+    }
+    if (this.imageIndex === this.project.images.length) {
+      this.imageIndex = this.project.images.length - 1;
+    }
+
+    if (this.project.images.length > 1) {
+      if (this.imageIndex === 0) {
         this.previewLeftArrow.style.backgroundImage = ``;
         this.previewRightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
       }
-      if (
-        this.previewImageIndex > 0 &&
-        this.previewImageIndex < project.images.length
-      ) {
+      if (this.imageIndex > 0 && this.imageIndex < this.project.images.length) {
         this.previewLeftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
         this.previewRightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
       }
-      if (this.previewImageIndex === project.images.length - 1) {
+      if (this.imageIndex === this.project.images.length - 1) {
         this.previewLeftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
         this.previewRightArrow.style.backgroundImage = ``;
       }
     }
     this.previewImage.style.backgroundImage = `url(${
-      project.images[this.previewImageIndex]
+      this.project.images[this.imageIndex]
     })`;
   }
 

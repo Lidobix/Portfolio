@@ -18,7 +18,7 @@ export class EventsManager {
   addEvents() {
     this.init();
     this.resizeWindow();
-    this.clicOnArrow();
+    this.clicOnArrowTop();
     this.clicProject();
     this.clicOnPage();
     this.scrollPage();
@@ -44,7 +44,7 @@ export class EventsManager {
     });
   }
 
-  clicOnArrow() {
+  clicOnArrowTop() {
     this.arrow.addEventListener('click', () => {
       window.scrollTo(0, 0);
     });
@@ -69,6 +69,8 @@ export class EventsManager {
       card.addEventListener('click', (e) => {
         if (!e.target.classList.contains('enabledLink')) {
           Preview.open(project);
+          this.clicArrowPreview();
+
           setTimeout(() => {
             this.isPreviewDisplayed = true;
           }, 300);
@@ -79,6 +81,14 @@ export class EventsManager {
     });
   }
 
+  clicArrowPreview() {
+    Preview.previewLeftArrow.addEventListener('click', () => {
+      Preview.updateImage(-1);
+    });
+    Preview.previewRightArrow.addEventListener('click', () => {
+      Preview.updateImage(1);
+    });
+  }
   escapeKey() {
     document.addEventListener('keydown', (e) => {
       if (e.code === 'Escape' && this.isPreviewDisplayed) {
@@ -116,7 +126,10 @@ export class EventsManager {
         this.nav.style.transform = 'translate(15rem)';
         this.isNavDisplayed = false;
       }
-      if (this.isPreviewDisplayed) {
+      if (
+        this.isPreviewDisplayed &&
+        !e.target.classList.contains('switchPreview')
+      ) {
         this.isPreviewDisplayed = false;
         Preview.close();
       }
