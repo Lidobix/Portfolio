@@ -11,15 +11,15 @@ export class EventsManager {
     this.section = siteBuilder.section;
     this.isPreviewDisplayed = false;
     this.isNavDisplayed = false;
-    this.navToggle = '';
-    this.arrow = '';
+    this.navToggle;
+    this.arrow;
   }
 
   addEvents() {
     this.init();
     this.resizeWindow();
-    this.clicOnArrowTop();
-    this.clicProject();
+    this.goToTop();
+    this.openPreviewProject();
     this.clicOnPage();
     this.scrollPage();
     this.escapeKey();
@@ -44,7 +44,7 @@ export class EventsManager {
     });
   }
 
-  clicOnArrowTop() {
+  goToTop() {
     this.arrow.addEventListener('click', () => {
       window.scrollTo(0, 0);
     });
@@ -60,7 +60,7 @@ export class EventsManager {
     });
   }
 
-  clicProject() {
+  openPreviewProject() {
     const { projects } = datasManager;
 
     projects.forEach((project) => {
