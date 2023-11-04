@@ -82,10 +82,10 @@ export class EventsManager {
   }
 
   clicArrowPreview() {
-    Preview.previewLeftArrow.addEventListener('click', () => {
+    Preview.leftArrow.addEventListener('click', () => {
       Preview.updateImage(-1);
     });
-    Preview.previewRightArrow.addEventListener('click', () => {
+    Preview.rightArrow.addEventListener('click', () => {
       Preview.updateImage(1);
     });
   }

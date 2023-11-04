@@ -6,11 +6,11 @@ export class PreviewProject {
   constructor() {
     this.project;
     this.body = siteBuilder.body;
-    this.previewBackground;
+    this.background;
     this.imageIndex;
-    this.previewLeftArrow;
-    this.previewRightArrow;
-    this.previewImage;
+    this.leftArrow;
+    this.rightArrow;
+    this.image;
   }
 
   open(project) {
@@ -20,11 +20,9 @@ export class PreviewProject {
   }
 
   build() {
-    this.previewBackground = DomCreator.createNode(
-      'div',
-      ['previewBackground'],
-      { id: 'preview' }
-    );
+    this.background = DomCreator.createNode('div', ['previewBackground'], {
+      id: 'preview',
+    });
 
     this.updateBackgroundCss();
 
@@ -51,32 +49,30 @@ export class PreviewProject {
       id: 'previewContainer',
     });
 
-    this.previewRightArrow = DomCreator.createNode('div', ['switchPreview'], {
+    this.rightArrow = DomCreator.createNode('div', ['switchPreview'], {
       id: 'previewRightArrow',
     });
-    this.previewLeftArrow = DomCreator.createNode('div', ['switchPreview'], {
+    this.leftArrow = DomCreator.createNode('div', ['switchPreview'], {
       id: 'previewLefttArrow',
     });
-    this.previewImage = DomCreator.createNode('div', ['previewImage']);
+    this.image = DomCreator.createNode('div', ['previewImage']);
 
     DomCreator.appendChilds(previewContainer, [
-      this.previewLeftArrow,
-      this.previewImage,
-      this.previewRightArrow,
+      this.leftArrow,
+      this.image,
+      this.rightArrow,
     ]);
 
     DomCreator.appendChilds(previewWindow, [previewContainer, summary]);
 
-    this.previewBackground.appendChild(previewWindow);
+    this.background.appendChild(previewWindow);
     this.updateImage();
 
-    this.body.appendChild(this.previewBackground);
+    this.body.appendChild(this.background);
   }
 
   updateBackgroundCss() {
-    this.previewBackground.style.height = window.getComputedStyle(
-      this.body
-    ).height;
+    this.background.style.height = window.getComputedStyle(this.body).height;
   }
 
   updateImage(offset = 0) {
@@ -91,19 +87,19 @@ export class PreviewProject {
 
     if (this.project.images.length > 1) {
       if (this.imageIndex === 0) {
-        this.previewLeftArrow.style.backgroundImage = ``;
-        this.previewRightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
+        this.leftArrow.style.backgroundImage = ``;
+        this.rightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
       }
       if (this.imageIndex > 0 && this.imageIndex < this.project.images.length) {
-        this.previewLeftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
-        this.previewRightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
+        this.leftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
+        this.rightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
       }
       if (this.imageIndex === this.project.images.length - 1) {
-        this.previewLeftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
-        this.previewRightArrow.style.backgroundImage = ``;
+        this.leftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
+        this.rightArrow.style.backgroundImage = ``;
       }
     }
-    this.previewImage.style.backgroundImage = `url(${
+    this.image.style.backgroundImage = `url(${
       this.project.images[this.imageIndex]
     })`;
   }
