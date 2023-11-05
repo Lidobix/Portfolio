@@ -40,7 +40,7 @@ class SiteBuilder {
       ['invisible'],
       {
         id: 'navArrowTop',
-        src: './assets/images/arrow_top.png',
+        src: './assets/images/top_arrow.png',
       },
       this.body
     );
