@@ -20,15 +20,23 @@ export class PreviewProject {
   }
 
   build() {
-    this.background = DomCreator.createNode('div', ['previewBackground'], {
-      id: 'preview',
-    });
+    this.background = DomCreator.createNode(
+      'div',
+      ['previewBackground', 'transition100'],
+      {
+        id: 'preview',
+      }
+    );
 
     this.updateBackgroundCss();
 
     const previewWindow = DomCreator.createNode('div', ['previewWindow']);
 
-    const closingCross = DomCreator.createNode('div', ['closingCross'], {});
+    const closingCross = DomCreator.createNode(
+      'div',
+      ['closingCross', 'bg_image'],
+      {}
+    );
     closingCross.style.backgroundImage = `url(assets/images/cross.png)`;
 
     const titleContainer = DomCreator.createNode('div');
@@ -52,13 +60,21 @@ export class PreviewProject {
       id: 'previewContainer',
     });
 
-    this.rightArrow = DomCreator.createNode('div', ['switchPreview'], {
-      id: 'previewRightArrow',
-    });
-    this.leftArrow = DomCreator.createNode('div', ['switchPreview'], {
-      id: 'previewLefttArrow',
-    });
-    this.image = DomCreator.createNode('div', ['previewImage']);
+    this.rightArrow = DomCreator.createNode(
+      'div',
+      ['switchPreview', 'bg_image'],
+      {
+        id: 'previewRightArrow',
+      }
+    );
+    this.leftArrow = DomCreator.createNode(
+      'div',
+      ['switchPreview', 'bg_image'],
+      {
+        id: 'previewLefttArrow',
+      }
+    );
+    this.image = DomCreator.createNode('div', ['previewImage', 'bg_image']);
 
     DomCreator.appendChilds(previewContainer, [
       this.leftArrow,
@@ -74,8 +90,11 @@ export class PreviewProject {
 
     this.background.appendChild(previewWindow);
     this.updateImage();
-
     this.body.appendChild(this.background);
+
+    setTimeout(() => {
+      this.background.style.opacity = 1;
+    }, 0);
   }
 
   updateBackgroundCss() {

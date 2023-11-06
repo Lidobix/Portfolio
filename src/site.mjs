@@ -121,6 +121,7 @@ class SiteBuilder {
 
   buildNavMenu(nav) {
     const navItems = [];
+    this.nav.classList.add('transition300');
 
     nav.forEach((navElement) => {
       navItems.push({
@@ -142,9 +143,13 @@ class SiteBuilder {
   }
 
   buildNavToggle() {
-    const navToggle = DomCreator.createNode('div', ['mobile', 'navTrigger'], {
-      id: 'navToggle',
-    });
+    const navToggle = DomCreator.createNode(
+      'div',
+      ['mobile', 'navTrigger', 'transition100'],
+      {
+        id: 'navToggle',
+      }
+    );
 
     for (let i = 0; i < 3; i++) {
       const bullet = DomCreator.div(['navTrigger']);
@@ -159,9 +164,13 @@ class SiteBuilder {
 
     projects.forEach((project) => {
       if (project.display) {
-        const card = DomCreator.createNode('div', ['card'], {
-          id: `project${project.name}`,
-        });
+        const card = DomCreator.createNode(
+          'div',
+          ['card', 'transition100', 'borderRad_02'],
+          {
+            id: `project${project.name}`,
+          }
+        );
 
         if (project.images) {
           const figure = document.createElement('figure');
@@ -178,9 +187,15 @@ class SiteBuilder {
 
         let aHref;
         if (project.link) {
-          aHref = DomCreator.a(project.link, 'Visiter', null, ['enabledLink']);
+          aHref = DomCreator.a(project.link, 'Visiter', null, [
+            'enabledLink',
+            'borderRad_01',
+          ]);
         } else {
-          aHref = DomCreator.a(null, 'Visiter', null, ['disabledLink']);
+          aHref = DomCreator.a(null, 'Visiter', null, [
+            'disabledLink',
+            'borderRad_01',
+          ]);
         }
         description.appendChild(aHref);
 
@@ -189,7 +204,7 @@ class SiteBuilder {
 
         if (project.technos.length) {
           const technoListContainer = DomCreator.div(['technoListContainer']);
-          const technoList = DomCreator.div(['technoList']);
+          const technoList = DomCreator.div(['technoList', 'borderRad_02']);
 
           project.technos?.forEach((techno) => {
             const logo = DomCreator.img(
@@ -211,11 +226,12 @@ class SiteBuilder {
 
   buildForm(htmlForm) {
     const form = DomCreator.form('formulaire', htmlForm, 'POST');
-    const formContainer = DomCreator.div(['formContainer']);
+    const formContainer = DomCreator.div(['formContainer', 'borderRad_02']);
 
     formContainer.appendChild(form);
 
     document.getElementById('contact').after(formContainer);
+    document.getElementById('submitButton').classList.add('borderRad_01');
   }
 
   buildFormModal(title, message) {
@@ -223,7 +239,8 @@ class SiteBuilder {
     const messageContainer = DomCreator.div(['modalMessageContainer']);
     const modalContainer = DomCreator.div(['modalContainer']);
     const text = DomCreator.p(message);
-    const closeButton = DomCreator.button('FERMER');
+    // const closeButton = DomCreator.button('FERMER');
+    const closeButton = DomCreator.createNode('button', ['border_01']);
 
     DomCreator.appendChilds(messageContainer, [text, closeButton]);
     DomCreator.appendChilds(modalContainer, [titleContainer, messageContainer]);
