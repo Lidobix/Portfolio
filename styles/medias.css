@@ -1,0 +1,90 @@
+
+@media screen and (max-width: 480px){
+    html{
+        font-size: 15px;
+    }
+    .card{
+        background-color: var(--white);
+        max-width: 100%;
+    }
+    .formContainer{
+        width: 100%;
+    }
+    .previewBackground {
+        height:100vh;
+    }
+    .previewImage {
+        display: none
+    }    
+    .previewWindow {
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+    }
+    .previewSummary div:nth-child(2){
+        align-items:first baseline;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+    }
+
+@media screen and (min-width: 481px) and (max-width: 768px){
+    html{
+        font-size: 15px;
+    }
+    .formContainer{
+        width: 100%
+    }
+   
+}
+
+@media screen and (min-width: 761px) and (max-width: 1024px){
+    html{
+        font-size: 15px;
+    }
+    .formContainer{
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1025px) and  (max-width: 1200px){
+    html{
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1366px){
+    html{
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1367px) and (max-width: 1600px){
+    html{
+        font-size: 17px;
+    }
+}
+
+@media screen and (min-width: 1601px) and (max-width: 1920px){
+    html{
+        font-size: 20px;
+    } 
+}
+
+@media screen and (min-width: 1921px) and (max-width: 2560px){
+    html{
+        font-size: 30px;
+    }
+}
+
+@media screen and (min-width: 2561px) {
+    html{
+        font-size: 40px;
+    }
+}
+
+@media (max-width:1080px) and (orientation: landscape)  {
+    .previewSummary div:nth-child(2){
+        align-items:first baseline
+      }
+  }

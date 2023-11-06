@@ -27,7 +27,7 @@ class SiteBuilder {
       const socialContainer = DomCreator.createNode('div', ['socialContainer']);
 
       socials.forEach((social) => {
-        const a = DomCreator.a(social.url);
+        const a = DomCreator.createNode('a', [], { href: social.url });
         DomCreator.createNodeAppended('img', [], { src: social.picto }, a);
         socialContainer.appendChild(a);
       });
@@ -106,7 +106,7 @@ class SiteBuilder {
   }
 
   buildIllustrations(illustrations, parent) {
-    const imagesContainer = DomCreator.div(['imagesContainer']);
+    const imagesContainer = DomCreator.createNode('div', ['imagesContainer']);
 
     illustrations.forEach((imageUrl) => {
       DomCreator.createNodeAppended(
@@ -121,6 +121,7 @@ class SiteBuilder {
 
   buildNavMenu(nav) {
     const navItems = [];
+    this.nav.classList.add('transition300');
 
     nav.forEach((navElement) => {
       navItems.push({
@@ -133,7 +134,10 @@ class SiteBuilder {
 
     navItems.forEach((item) => {
       const li = document.createElement('li');
-      const a = DomCreator.a(item.anchor, item.name);
+      const a = DomCreator.createNode('a', [], {
+        href: item.anchor,
+        innerText: item.name,
+      });
 
       li.appendChild(a);
       ul.appendChild(li);
@@ -142,12 +146,16 @@ class SiteBuilder {
   }
 
   buildNavToggle() {
-    const navToggle = DomCreator.createNode('div', ['mobile', 'navTrigger'], {
-      id: 'navToggle',
-    });
+    const navToggle = DomCreator.createNode(
+      'div',
+      ['mobile', 'navTrigger', 'transition100'],
+      {
+        id: 'navToggle',
+      }
+    );
 
     for (let i = 0; i < 3; i++) {
-      const bullet = DomCreator.div(['navTrigger']);
+      const bullet = DomCreator.createNode('div', ['navTrigger']);
       navToggle.appendChild(bullet);
     }
 
@@ -155,46 +163,71 @@ class SiteBuilder {
   }
 
   buildProjects(projects) {
-    const container = DomCreator.div([], null, 'projectList');
+    const container = DomCreator.createNode('div', [], { id: 'projectList' });
 
     projects.forEach((project) => {
       if (project.display) {
-        const card = DomCreator.createNode('div', ['card'], {
-          id: `project${project.name}`,
-        });
+        const card = DomCreator.createNode(
+          'div',
+          ['card', 'transition100', 'borderRad_02'],
+          {
+            id: `project${project.name}`,
+          }
+        );
 
         if (project.images) {
           const figure = document.createElement('figure');
-          const view = DomCreator.img(project.images[0]);
+          const view = DomCreator.createNode('img', [], {
+            src: project.images[0],
+          });
           figure.appendChild(view);
           card.appendChild(figure);
         }
-        const description = DomCreator.div(['cardDescription']);
-        const projectTitle = DomCreator.hX(4, project.name);
+        const description = DomCreator.createNode(
+          'div',
+          ['cardDescription'],
+          {}
+        );
+        const projectTitle = DomCreator.createNode('h4', [], {
+          innerText: project.name,
+        });
         description.appendChild(projectTitle);
 
-        const type = DomCreator.p(project.type);
+        const type = DomCreator.createNode('p', [], {
+          innerText: project.type,
+        });
         description.appendChild(type);
 
-        let aHref;
-        if (project.link) {
-          aHref = DomCreator.a(project.link, 'Visiter', null, ['enabledLink']);
-        } else {
-          aHref = DomCreator.a(null, 'Visiter', null, ['disabledLink']);
-        }
+        const aHref = DomCreator.createNode(
+          'a',
+          [project.link ? 'enabledLink' : 'disabledLink', 'borderRad_01'],
+
+          {
+            innerText: 'Visiter',
+          }
+        );
+
+        project.link ? (aHref.href = project.link) : null;
         description.appendChild(aHref);
 
-        const summary = DomCreator.p(project.description);
+        const summary = DomCreator.createNode('p', [], {
+          innerText: project.description,
+        });
         description.appendChild(summary);
 
         if (project.technos.length) {
-          const technoListContainer = DomCreator.div(['technoListContainer']);
-          const technoList = DomCreator.div(['technoList']);
+          const technoListContainer = DomCreator.createNode('div', [
+            'technoListContainer',
+          ]);
+          const technoList = DomCreator.createNode('div', [
+            'technoList',
+            'borderRad_02',
+          ]);
 
           project.technos?.forEach((techno) => {
-            const logo = DomCreator.img(
-              `assets/images/${techno.toLowerCase()}.png`
-            );
+            const logo = DomCreator.createNode('img', [], {
+              src: `assets/images/${techno.toLowerCase()}.png`,
+            });
 
             technoList.appendChild(logo);
           });
@@ -210,20 +243,36 @@ class SiteBuilder {
   }
 
   buildForm(htmlForm) {
-    const form = DomCreator.form('formulaire', htmlForm, 'POST');
-    const formContainer = DomCreator.div(['formContainer']);
+    const form = DomCreator.createNode('form', [], {
+      id: 'formulaire',
+      innerHTML: htmlForm,
+      method: 'POST',
+    });
+    const formContainer = DomCreator.createNode('div', [
+      'formContainer',
+      'borderRad_02',
+    ]);
 
     formContainer.appendChild(form);
 
     document.getElementById('contact').after(formContainer);
+    document.getElementById('submitButton').classList.add('borderRad_01');
   }
 
   buildFormModal(title, message) {
-    const titleContainer = DomCreator.div(['modalTitleContainer'], title);
-    const messageContainer = DomCreator.div(['modalMessageContainer']);
-    const modalContainer = DomCreator.div(['modalContainer']);
+    const titleContainer = DomCreator.createNode(
+      'div',
+      ['modalTitleContainer'],
+      { innerText: title }
+    );
+    const messageContainer = DomCreator.createNode('div', [
+      'modalMessageContainer',
+    ]);
+    const modalContainer = DomCreator.createNode('div', ['modalContainer']);
     const text = DomCreator.p(message);
-    const closeButton = DomCreator.button('FERMER');
+    const closeButton = DomCreator.createNode('button', ['border_01'], {
+      innerText: 'FERMER',
+    });
 
     DomCreator.appendChilds(messageContainer, [text, closeButton]);
     DomCreator.appendChilds(modalContainer, [titleContainer, messageContainer]);
