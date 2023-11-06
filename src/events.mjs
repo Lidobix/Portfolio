@@ -127,8 +127,9 @@ export class EventsManager {
         this.isNavDisplayed = false;
       }
       if (
-        this.isPreviewDisplayed &&
-        !e.target.classList.contains('switchPreview')
+        (this.isPreviewDisplayed &&
+          e.target.classList.contains('previewBackground')) ||
+        e.target.classList.contains('closingCross')
       ) {
         this.isPreviewDisplayed = false;
         Preview.close();
