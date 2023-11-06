@@ -28,6 +28,9 @@ export class PreviewProject {
 
     const previewWindow = DomCreator.createNode('div', ['previewWindow']);
 
+    const closingCross = DomCreator.createNode('div', ['closingCross'], {});
+    closingCross.style.backgroundImage = `url(assets/images/cross.png)`;
+
     const titleContainer = DomCreator.createNode('div');
     const title = DomCreator.createNode('h2', [], {
       innerText: this.project.name,
@@ -63,7 +66,11 @@ export class PreviewProject {
       this.rightArrow,
     ]);
 
-    DomCreator.appendChilds(previewWindow, [previewContainer, summary]);
+    DomCreator.appendChilds(previewWindow, [
+      previewContainer,
+      summary,
+      closingCross,
+    ]);
 
     this.background.appendChild(previewWindow);
     this.updateImage();

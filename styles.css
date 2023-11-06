@@ -5,7 +5,7 @@ html {
     --white: #FFFFFF;
     --white_cream: #e6f5e6;
     --yellow: #FDD746;
-    --green: #006b62;
+    --green: rgb(0, 107, 98);
     --grey_light: #9D9D9D;
 }
 
@@ -259,6 +259,28 @@ figure > img {
     width: 80vw;
     flex-direction: row;
     background-color: var(--grey_strong);
+}
+
+.closingCross{
+    position: absolute;
+    right: -10px;
+    top:-10px;    
+    height:30px;
+    width:30px;
+    opacity: 0.8;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-origin: content-box;
+}
+
+.closingCross:hover{
+    opacity: 1;
+    transition: 100ms ease-in-out;
+    -webkit-transition: 100ms ease-in-out;
+    -moz-transition: 100ms ease-in-out;
+    -ms-transition: 100ms ease-in-out;
+    -o-transition: 100ms ease-in-out;
 }
 
 #previewContainer{
