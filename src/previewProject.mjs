@@ -39,46 +39,100 @@ export class PreviewProject {
     );
     closingCross.style.backgroundImage = `url(assets/images/cross.png)`;
 
-    const titleContainer = DomCreator.createNode('div');
+    // const titleContainer = DomCreator.createNode('div');
+
     const title = DomCreator.createNode('h2', [], {
       innerText: this.project.name,
     });
     const summary = DomCreator.createNode('div', ['previewSummary']);
 
-    const descriptionContainer = DomCreator.createNode('div');
+    // const descriptionContainer = DomCreator.createNode('div');
 
     const description = DomCreator.createNode('p', [], {
       innerText: this.project.description,
     });
-    descriptionContainer.appendChild(description);
+    // descriptionContainer.appendChild(description);
 
-    titleContainer.appendChild(title);
+    // titleContainer.appendChild(title);
 
-    DomCreator.appendChilds(summary, [titleContainer, descriptionContainer]);
+    // DomCreator.appendChilds(summary, [titleContainer, descriptionContainer]);
+    DomCreator.appendChilds(summary, [title, description]);
 
     const previewContainer = DomCreator.createNode('div', [], {
       id: 'previewContainer',
     });
 
     this.rightArrow = DomCreator.createNode(
-      'div',
-      ['switchPreview', 'bg_image'],
+      'img',
+      [
+        'switchPreview',
+        // 'bg_image'
+      ],
       {
         id: 'previewRightArrow',
       }
     );
     this.leftArrow = DomCreator.createNode(
-      'div',
-      ['switchPreview', 'bg_image'],
+      'img',
+      [
+        'switchPreview',
+        //  'bg_image'
+      ],
       {
         id: 'previewLefttArrow',
       }
     );
-    this.image = DomCreator.createNode('div', ['previewImage', 'bg_image']);
+
+    // this.rightArrow = DomCreator.createNode(
+    //   'div',
+    //   ['switchPreview', 'bg_image'],
+    //   {
+    //     id: 'previewRightArrow',
+    //   }
+    // );
+    // this.leftArrow = DomCreator.createNode(
+    //   'div',
+    //   ['switchPreview', 'bg_image'],
+    //   {
+    //     id: 'previewLefttArrow',
+    //   }
+    // );
+
+    // this.image = DomCreator.createNode('div', ['previewImage', 'bg_image']);
+    // const imageContainer = DomCreator.createNode('div', [
+    //   'previewImage',
+    //   'bg_image',
+    // ]);
+    // this.image = DomCreator.createNode('img', [], {});
+    this.image = new Image();
+    // this.image.style.width = 'inherit';
+    // this.image.style.maxHeight = '300px';
+
+    this.image.style.objectFit = 'contain';
+    this.image.style.objectPosition = 'center';
+    this.image.style.display = 'flex';
+    this.image.style.flex = '1';
+    this.image.style.width = '80%';
+    // this.image.style.maxHeight = '-webkit-fill-available';
+    // this.image.style.maxHeight = '30vh';
+    console.log(this.image);
+    // imageContainer.appendChild(this.image);
+    // imageContainer.style.width = '100%';
+
+    // width: 100%;
+    // object-fit: contain;
+    /* object-position: center center; */
+    // max-height: -webkit-fill-available;
+
+    // width: 100%;
+
+    // object-fit: cover;
+    // object-position: center;
 
     DomCreator.appendChilds(previewContainer, [
       this.leftArrow,
       this.image,
+      // imageContainer,
       this.rightArrow,
     ]);
 
@@ -106,10 +160,19 @@ export class PreviewProject {
 
     this.checkImageIndex();
     this.updateArrows();
-
-    this.image.style.backgroundImage = `url(${
-      this.project.images[this.imageIndex]
-    })`;
+    const _this = this;
+    // this.image.src = this.project.images[this.imageIndex];
+    // this.image.style.backgroundImage = `url(${
+    //   this.project.images[this.imageIndex]
+    // })`;
+    this.image.src = this.project.images[this.imageIndex];
+    this.image.onload = function () {
+      if (this.width > this.height) {
+        _this.image.classList.add('landscape');
+      } else {
+        _this.image.classList.add('portrait');
+      }
+    };
   }
 
   checkImageIndex() {
@@ -124,18 +187,33 @@ export class PreviewProject {
   updateArrows() {
     if (this.project.images.length > 1) {
       if (this.imageIndex === 0) {
-        this.leftArrow.style.backgroundImage = ``;
-        this.rightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
+        this.leftArrow.src = ``;
+        this.rightArrow.src = `assets/images/right_arrow.png`;
       }
       if (this.imageIndex > 0 && this.imageIndex < this.project.images.length) {
-        this.leftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
-        this.rightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
+        this.leftArrow.src = `assets/images/left_arrow.png`;
+        this.rightArrow.src = `assets/images/right_arrow.png`;
       }
       if (this.imageIndex === this.project.images.length - 1) {
-        this.leftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
-        this.rightArrow.style.backgroundImage = ``;
+        this.leftArrow.src = `assets/images/left_arrow.png`;
+        this.rightArrow.src = ``;
       }
     }
+
+    // if (this.project.images.length > 1) {
+    //   if (this.imageIndex === 0) {
+    //     this.leftArrow.style.backgroundImage = ``;
+    //     this.rightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
+    //   }
+    //   if (this.imageIndex > 0 && this.imageIndex < this.project.images.length) {
+    //     this.leftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
+    //     this.rightArrow.style.backgroundImage = `url(assets/images/right_arrow.png)`;
+    //   }
+    //   if (this.imageIndex === this.project.images.length - 1) {
+    //     this.leftArrow.style.backgroundImage = `url(assets/images/left_arrow.png)`;
+    //     this.rightArrow.style.backgroundImage = ``;
+    //   }
+    // }
   }
 
   close() {

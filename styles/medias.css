@@ -1,5 +1,5 @@
 
-@media screen and (max-width: 480px){
+/* @media screen and (max-width: 480px){
     html{
         font-size: 15px;
     }
@@ -11,24 +11,71 @@
         width: 100%;
     }
     .previewBackground {
-        height:100vh;
+        
+        align-items: start;
     }
     .previewImage {
         display: none
     }    
     .previewWindow {
-        height: -webkit-fit-content;
-        height: -moz-fit-content;
-        height: fit-content;
+        flex-direction: column-reverse;
+        justify-content: start;
+        height: initial;
+        
+        flex: 1;
+        
     }
     .previewSummary div:nth-child(2){
         align-items:first baseline;
-        padding-top: 1rem;
+        
         padding-bottom: 1rem;
       }
-    }
+    } */
 
-@media screen and (min-width: 481px) and (max-width: 768px){
+
+    @media screen and (max-width: 750px){
+        html{
+            font-size: 15px;
+        }
+        .card{
+            background-color: var(--white);
+            max-width: 100%;
+        }
+        .formContainer{
+            width: 100%;
+        }
+        .previewBackground {
+            /* height:100vh; */
+            /* flex-direction: column; */
+            align-items: start;
+        }
+        .previewImage {
+            display: none
+        }    
+        .previewWindow {
+            flex-direction: column-reverse;
+            justify-content: start;
+            height: initial;
+            
+            flex: 1;
+            /* height: -webkit-fit-content;
+            height: -moz-fit-content;
+            height: fit-content; */
+        }
+        .landscape {
+            max-height: 30vh;}
+        .portrait {
+            max-height: 30vh;
+        }
+        .previewSummary div:nth-child(2){
+            align-items:first baseline;
+            /* padding-top: 1rem; */
+            padding-bottom: 1rem;
+          }
+        }
+
+
+/* @media screen and (min-width: 481px) and (max-width: 768px){
     html{
         font-size: 15px;
     }
@@ -45,7 +92,29 @@
     .formContainer{
         width: 100%;
     }
+} */
+@media screen and (min-width: 750px) {
+    html{
+        font-size: 15px;
+    }
+    .formContainer{
+        width: 100%;
+    }
+
+    .previewWindow{
+        height: 80vh;
+    }
+
+    .landscape {
+        max-height: -webkit-fill-available;}
+    .portrait {
+        max-height: -webkit-fill-available;
+    }
+    
 }
+
+
+
 
 @media screen and (min-width: 1025px) and  (max-width: 1200px){
     html{

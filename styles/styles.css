@@ -97,6 +97,7 @@ h3 + p {
     justify-content: space-evenly;
 }
 
+
 .imagesContainer > img {
     aspect-ratio: 3/2;
     width: 8rem;
@@ -235,9 +236,10 @@ figure > img {
     position: fixed;
     display: flex;
     top:10vh;
-    height: 80vh;
+    /* bottom:10vh; */
+    /* height: 80vh; */
     width: 80vw;
-    flex-direction: row;
+    /* flex-direction: row; */
     background-color: var(--grey_strong);
 }
 
@@ -261,18 +263,27 @@ figure > img {
 
 #previewContainer{
     display: flex;
-    flex-basis: 60%;
+    /* flex-basis: 70%; */
     flex-direction: row;
     background-color: var(--black_light);
     /* flex-grow: 2; */
     align-items: center;
     flex-shrink: 0;
+    flex: 1.5
 }
 
+
 .switchPreview{
-    flex:1;
-    height: 7.5%;
+    /* flex:1;
+    height: 7.5%; */
+    width: 6%;
+    margin: 0 1%;
     opacity: 0.8;
+    -o-object-fit: contain;
+       object-fit: contain;
+    -o-object-position: center;
+       object-position: center;
+    max-height: -webkit-fill-available;
 }
 
 .switchPreview:hover{
@@ -293,7 +304,8 @@ figure > img {
 
 .previewSummary {
     flex-grow: 0;
-    width: 100%;
+    /* width: 100%; */
+    flex:1;
     display: flex;
     flex-direction: column;
     padding: 0 1rem;
@@ -307,6 +319,7 @@ figure > img {
 .previewSummary p {
     color: var(--white);
     font-size: 1rem;
+    margin-top: 1rem
 }
 
 .previewSummary div:nth-child(2){
