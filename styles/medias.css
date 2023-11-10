@@ -33,7 +33,14 @@
     } */
 
 
-    @media screen and (max-width: 750px){
+    @media screen and (orientation: portrait) {
+        /* #toolbar {
+          width: 100%;
+        } */
+      }
+
+
+    @media screen and (max-width: 750px) and (orientation:portrait){
         html{
             font-size: 15px;
         }
