@@ -1,13 +1,12 @@
-import { EventsManager } from './src/events.mjs';
+// import { EventsManager } from './src/events.mjs';
 import datasManager from './src/datasManager.mjs';
-import siteBuilder from './src/site.mjs';
-const eventsManager = new EventsManager();
+import { buildSite } from './src/site.mjs';
+// const eventsManager = new EventsManager();
+import { addEvents } from './src/events.mjs';
 
 window.addEventListener('DOMContentLoaded', function () {
   datasManager.fetchElements().then(() => {
-    siteBuilder.buildHeader();
-    siteBuilder.buildNav();
-    siteBuilder.buildSection();
-    eventsManager.addEvents();
+    buildSite();
+    addEvents();
   });
 });

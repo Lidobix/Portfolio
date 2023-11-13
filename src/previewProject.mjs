@@ -1,11 +1,11 @@
-import siteBuilder from './site.mjs';
+// import siteBuilder from './site.mjs';
 import { domCreator } from './domCreator.mjs';
 const DomCreator = new domCreator();
 
 export class PreviewProject {
   constructor() {
     this.project;
-    this.body = siteBuilder.body;
+    this.body = document.querySelector('body');
     this.background;
     this.imageIndex;
     this.leftArrow;

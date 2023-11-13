@@ -237,7 +237,7 @@ figure > img {
     display: flex;
     top:10vh;
     /* bottom:10vh; */
-    /* height: 80vh; */
+    max-height: 80vh;
     width: 80vw;
     /* flex-direction: row; */
     background-color: var(--grey_strong);
@@ -269,9 +269,14 @@ figure > img {
     /* flex-grow: 2; */
     align-items: center;
     flex-shrink: 0;
-    flex: 1.5
+    flex: 1.5;
+    /* max-height: 30vh; */
+    
 }
 
+.portrait{
+    aspect-ratio: 2/3;
+}
 
 .switchPreview{
     /* flex:1;

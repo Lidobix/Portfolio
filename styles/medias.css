@@ -45,24 +45,18 @@
             font-size: 15px;
         }
         .card{
-            background-color: var(--white);
+            background-color: var(--red);
             max-width: 100%;
         }
         .formContainer{
             width: 100%;
         }
-        .previewBackground {
-            /* height:100vh; */
-            /* flex-direction: column; */
-            align-items: start;
-        }
-        .previewImage {
-            display: none
-        }    
+    
+
         .previewWindow {
             flex-direction: column-reverse;
             justify-content: start;
-            height: initial;
+            /* height: initial; */
             
             flex: 1;
             /* height: -webkit-fit-content;
@@ -70,9 +64,10 @@
             height: fit-content; */
         }
         .landscape {
-            max-height: 30vh;}
+            /* height: 80vh; */
+        }
         .portrait {
-            max-height: 30vh;
+            /* height: 80vh; */
         }
         .previewSummary div:nth-child(2){
             align-items:first baseline;
