@@ -6,5 +6,4 @@ window.addEventListener('DOMContentLoaded', function () {
   datasManager.fetchElements().then(() => {
     buildSite();
     addEvents();
-  });
 });

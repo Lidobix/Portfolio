@@ -66,6 +66,16 @@ h3 + p {
     font-size: 1.1rem;
 }
 
+#loader{
+    position :absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    background-color: var(--green);
+    z-index: 20;
+    
+}
+
 #navArrowTop{
     position: fixed;
     bottom: 10px;
