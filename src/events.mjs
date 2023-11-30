@@ -15,18 +15,6 @@ class EventsManager {
     this.arrow;
   }
 
-  // addEvents() {
-  //   this.init();
-  //   this.resizeWindow();
-  //   this.goToTop();
-  //   this.openPreviewProject();
-  //   this.clicOnPage();
-  //   this.scrollPage();
-  //   this.escapeKey();
-  //   this.rotatePhone();
-  //   this.submitForm();
-  // }
-
   init() {
     this.arrow = document.getElementById('navArrowTop');
     this.navToggle = document.getElementById('navToggle');
@@ -74,8 +62,6 @@ class EventsManager {
           setTimeout(() => {
             this.isPreviewDisplayed = true;
           }, 300);
-
-          // lancer une fonction qui attribue des événements aux flèches de défilement des images
         }
       });
     });

@@ -105,14 +105,6 @@ export class PreviewProject {
     this.image.style.backgroundImage = `url(${
       this.project.images[this.imageIndex]
     })`;
-
-    this.image.onload = function () {
-      if (this.width > this.height) {
-        _this.image.classList.add('landscape');
-      } else {
-        _this.image.classList.add('portrait');
-      }
-    };
   }
 
   checkImageIndex() {

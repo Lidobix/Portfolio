@@ -284,9 +284,6 @@ class SiteBuilder {
   }
 }
 
-// const siteBuilder = new SiteBuilder();
-// export default siteBuilder;
-
 export const buildSite = () => {
   const siteBuilder = new SiteBuilder();
 
