@@ -1,11 +1,10 @@
-import siteBuilder from './site.mjs';
 import { domCreator } from './domCreator.mjs';
 const DomCreator = new domCreator();
 
 export class PreviewProject {
   constructor() {
     this.project;
-    this.body = siteBuilder.body;
+    this.body = document.querySelector('body');
     this.background;
     this.imageIndex;
     this.leftArrow;
@@ -39,22 +38,16 @@ export class PreviewProject {
     );
     closingCross.style.backgroundImage = `url(assets/images/cross.png)`;
 
-    const titleContainer = DomCreator.createNode('div');
     const title = DomCreator.createNode('h2', [], {
       innerText: this.project.name,
     });
     const summary = DomCreator.createNode('div', ['previewSummary']);
 
-    const descriptionContainer = DomCreator.createNode('div');
-
     const description = DomCreator.createNode('p', [], {
       innerText: this.project.description,
     });
-    descriptionContainer.appendChild(description);
 
-    titleContainer.appendChild(title);
-
-    DomCreator.appendChilds(summary, [titleContainer, descriptionContainer]);
+    DomCreator.appendChilds(summary, [title, description]);
 
     const previewContainer = DomCreator.createNode('div', [], {
       id: 'previewContainer',
@@ -74,6 +67,7 @@ export class PreviewProject {
         id: 'previewLefttArrow',
       }
     );
+
     this.image = DomCreator.createNode('div', ['previewImage', 'bg_image']);
 
     DomCreator.appendChilds(previewContainer, [
@@ -106,6 +100,7 @@ export class PreviewProject {
 
     this.checkImageIndex();
     this.updateArrows();
+    const _this = this;
 
     this.image.style.backgroundImage = `url(${
       this.project.images[this.imageIndex]

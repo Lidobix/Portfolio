@@ -1,30 +1,18 @@
 import datasManager from './datasManager.mjs';
-import siteBuilder from './site.mjs';
+import { buildSite } from './site.mjs';
 import { PreviewProject } from './previewProject.mjs';
 const Preview = new PreviewProject();
 
-export class EventsManager {
+class EventsManager {
   constructor() {
-    this.body = siteBuilder.body;
-    this.header = siteBuilder.header;
-    this.nav = siteBuilder.nav;
-    this.section = siteBuilder.section;
+    this.body = document.querySelector('body');
+    this.header = document.querySelector('header');
+    this.nav = document.querySelector('nav');
+    this.section = document.querySelector('section');
     this.isPreviewDisplayed = false;
     this.isNavDisplayed = false;
     this.navToggle;
     this.arrow;
-  }
-
-  addEvents() {
-    this.init();
-    this.resizeWindow();
-    this.goToTop();
-    this.openPreviewProject();
-    this.clicOnPage();
-    this.scrollPage();
-    this.escapeKey();
-    this.rotatePhone();
-    this.submitForm();
   }
 
   init() {
@@ -74,8 +62,6 @@ export class EventsManager {
           setTimeout(() => {
             this.isPreviewDisplayed = true;
           }, 300);
-
-          // lancer une fonction qui attribue des événements aux flèches de défilement des images
         }
       });
     });
@@ -153,7 +139,7 @@ export class EventsManager {
         }),
       })
         .then((r) => {
-          siteBuilder.buildFormModal(
+          buildSite.buildFormModal(
             datasManager.modal.success.title,
             datasManager.modal.success.message
           );
@@ -161,7 +147,7 @@ export class EventsManager {
         })
         .catch((e) => {
           // le catch peut être généré par unne erreur dans la construction de buildFormModal
-          siteBuilder.buildFormModal(
+          buildSite.buildFormModal(
             datasManager.modal.error.title,
             datasManager.modal.error.message
           );
@@ -169,3 +155,17 @@ export class EventsManager {
     });
   }
 }
+
+export const addEvents = () => {
+  const eventManager = new EventsManager();
+
+  eventManager.init();
+  eventManager.resizeWindow();
+  eventManager.goToTop();
+  eventManager.openPreviewProject();
+  eventManager.clicOnPage();
+  eventManager.scrollPage();
+  eventManager.escapeKey();
+  eventManager.rotatePhone();
+  eventManager.submitForm();
+};
