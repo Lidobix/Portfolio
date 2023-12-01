@@ -13,6 +13,9 @@ class EventsManager {
     this.isNavDisplayed = false;
     this.navToggle;
     this.arrow;
+    this.currentScrollY;
+    this.verticalBodyHeight;
+    this.horizontalBodyHeight;
   }
 
   init() {
@@ -22,7 +25,8 @@ class EventsManager {
 
   scrollPage() {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 200) {
+      this.currentScrollY = window.scrollY;
+      if (this.currentScrollY > 200) {
         this.arrow.classList.remove('invisible');
         this.arrow.classList.add('visible');
       } else {
@@ -88,12 +92,32 @@ class EventsManager {
     window.addEventListener('orientationchange', () => {
       if (window.orientation === 0) {
         // Appareil en position portrait
-        this.lastHorizontalScrollY = window.scrollY;
+
+        setTimeout(() => {
+          this.verticalBodyHeight = !!this.verticalBodyHeight
+            ? this.verticalBodyHeight
+            : parseFloat(window.getComputedStyle(this.body).height);
+
+          console.log('verticalBodyHeight', this.verticalBodyHeight);
+        }, 100);
+        // au lancement de l'app, déterminer la hauteur du body en fonction de si on est en portrait ou en paysage
+        // utiliser cette donnée pour faire le calcul du % de la hauteur à scroller.
+
+        // const equivVerticalScroll=this.currentScrollY/this.
+        // this.lastHorizontalScrollY = window.scrollY;
         setTimeout(() => {
           window.scroll(0, this.lastVerticalScrollY);
         }, 100);
       } else if (window.orientation === 90 || window.orientation === -90) {
         // Appareil en position paysage
+
+        setTimeout(() => {
+          this.horizontalBodyHeight = !!this.horizontalBodyHeight
+            ? this.horizontalBodyHeight
+            : parseFloat(window.getComputedStyle(this.body).height);
+
+          console.log('horizontalBodyHeight', this.horizontalBodyHeight);
+        }, 100);
 
         this.lastVerticalScrollY = window.scrollY;
         setTimeout(() => {
