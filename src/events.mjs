@@ -111,7 +111,6 @@ class EventsManager {
       const form = event.target;
       const formData = new FormData(form);
       const searchParams = new URLSearchParams(formData);
-      // await fetch('http://localhost:3000/portfolio/contact', {
       await fetch('https://lidobix.alwaysdata.net/portfolio/contact', {
         method: 'POST',
         body: searchParams.toString(),
