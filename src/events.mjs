@@ -75,30 +75,12 @@ class EventsManager {
       Preview.updateImage(1);
     });
   }
+
   escapeKey() {
     document.addEventListener('keydown', (e) => {
       if (e.code === 'Escape' && this.isPreviewDisplayed) {
         Preview.close();
         this.isPreviewDisplayed = false;
-      }
-    });
-  }
-
-  rotatePhone() {
-    window.addEventListener('orientationchange', () => {
-      if (window.orientation === 0) {
-        // Appareil en position portrait
-        this.lastHorizontalScrollY = window.scrollY;
-        setTimeout(() => {
-          window.scroll(0, this.lastVerticalScrollY);
-        }, 100);
-      } else if (window.orientation === 90 || window.orientation === -90) {
-        // Appareil en position paysage
-
-        this.lastVerticalScrollY = window.scrollY;
-        setTimeout(() => {
-          window.scroll(0, this.lastHorizontalScrollY);
-        }, 100);
       }
     });
   }
@@ -166,6 +148,5 @@ export const addEvents = () => {
   eventManager.clicOnPage();
   eventManager.scrollPage();
   eventManager.escapeKey();
-  eventManager.rotatePhone();
   eventManager.submitForm();
 };
