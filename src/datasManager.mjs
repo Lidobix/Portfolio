@@ -2,8 +2,7 @@ class DatasManager {
   constructor() {}
 
   async fetchElements() {
-    return fetch('http://localhost:8100/portfolio/home', {
-      // return fetch('https://lidobix.alwaysdata.net/portfolio/home', {
+    return fetch('https://lidobix.alwaysdata.net/portfolio/home', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
