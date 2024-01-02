@@ -95,18 +95,26 @@ export class PreviewProject {
     this.background.style.height = window.getComputedStyle(this.body).height;
   }
 
+  showNextImage() {
+    this.updateImage(-1);
+  }
+
+  showPreviousImage() {
+    this.updateImage(1);
+  }
+
   updateImage(offset = 0) {
     this.imageIndex = this.imageIndex + offset;
 
-    this.checkImageIndex();
-    this.updateArrows();
+    this.checkNewImageIndexValidity();
+    this.updateArrowButtons();
 
     this.image.style.backgroundImage = `url(${
       this.project.images[this.imageIndex]
     })`;
   }
 
-  checkImageIndex() {
+  checkNewImageIndexValidity() {
     if (this.imageIndex < 0) {
       this.imageIndex = 0;
     }
@@ -115,7 +123,7 @@ export class PreviewProject {
     }
   }
 
-  updateArrows() {
+  updateArrowButtons() {
     if (this.project.images.length > 1) {
       if (this.imageIndex === 0) {
         this.leftArrow.style.backgroundImage = ``;

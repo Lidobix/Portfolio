@@ -69,10 +69,10 @@ class EventsManager {
 
   clicOnPreviewArrow() {
     Preview.leftArrow.addEventListener('click', () => {
-      Preview.updateImage(-1);
+      Preview.showPreviousImage();
     });
     Preview.rightArrow.addEventListener('click', () => {
-      Preview.updateImage(1);
+      Preview.showNextImage();
     });
   }
 
@@ -88,10 +88,10 @@ class EventsManager {
   tapOnArrowKeys() {
     document.addEventListener('keydown', (e) => {
       if (e.code === 'ArrowLeft' && this.isPreviewDisplayed) {
-        Preview.updateImage(-1);
+        Preview.showPreviousImage();
       }
       if (e.code === 'ArrowRight' && this.isPreviewDisplayed) {
-        Preview.updateImage(1);
+        Preview.showNextImage();
       }
     });
   }
