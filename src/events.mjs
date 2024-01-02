@@ -12,28 +12,28 @@ class EventsManager {
     this.isPreviewDisplayed = false;
     this.isNavDisplayed = false;
     this.navToggle;
-    this.arrow;
+    this.arrowToTop;
   }
 
   init() {
-    this.arrow = document.getElementById('navArrowTop');
+    this.arrowToTop = document.getElementById('navArrowTop');
     this.navToggle = document.getElementById('navToggle');
   }
 
   scrollPage() {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 200) {
-        this.arrow.classList.remove('invisible');
-        this.arrow.classList.add('visible');
+        this.arrowToTop.classList.remove('invisible');
+        this.arrowToTop.classList.add('visible');
       } else {
-        this.arrow.classList.remove('visible');
-        this.arrow.classList.add('invisible');
+        this.arrowToTop.classList.remove('visible');
+        this.arrowToTop.classList.add('invisible');
       }
     });
   }
 
   goToTop() {
-    this.arrow.addEventListener('click', () => {
+    this.arrowToTop.addEventListener('click', () => {
       window.scrollTo(0, 0);
     });
   }
@@ -57,7 +57,7 @@ class EventsManager {
       card.addEventListener('click', (e) => {
         if (!e.target.classList.contains('enabledLink')) {
           Preview.open(project);
-          this.clicArrowPreview();
+          this.clicOnPreviewArrow();
 
           setTimeout(() => {
             this.isPreviewDisplayed = true;
@@ -67,7 +67,7 @@ class EventsManager {
     });
   }
 
-  clicArrowPreview() {
+  clicOnPreviewArrow() {
     Preview.leftArrow.addEventListener('click', () => {
       Preview.updateImage(-1);
     });
@@ -76,11 +76,22 @@ class EventsManager {
     });
   }
 
-  escapeKey() {
+  tapOnEscapeKey() {
     document.addEventListener('keydown', (e) => {
       if (e.code === 'Escape' && this.isPreviewDisplayed) {
         Preview.close();
         this.isPreviewDisplayed = false;
+      }
+    });
+  }
+
+  tapOnArrowKeys() {
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'ArrowLeft' && this.isPreviewDisplayed) {
+        Preview.updateImage(-1);
+      }
+      if (e.code === 'ArrowRight' && this.isPreviewDisplayed) {
+        Preview.updateImage(1);
       }
     });
   }
@@ -146,6 +157,7 @@ export const addEvents = () => {
   eventManager.openPreviewProject();
   eventManager.clicOnPage();
   eventManager.scrollPage();
-  eventManager.escapeKey();
+  eventManager.tapOnEscapeKey();
+  eventManager.tapOnArrowKeys();
   eventManager.submitForm();
 };

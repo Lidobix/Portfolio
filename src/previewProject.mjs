@@ -100,7 +100,6 @@ export class PreviewProject {
 
     this.checkImageIndex();
     this.updateArrows();
-    const _this = this;
 
     this.image.style.backgroundImage = `url(${
       this.project.images[this.imageIndex]
