@@ -17,7 +17,10 @@ class Loader {
   }
 
   close() {
-    this.loader.style.backgroundColor = 'transparent';
+    setTimeout(() => {
+      this.loader.style.backgroundColor = 'transparent';
+    }, 300);
+
     setTimeout(() => {
       this.loader.remove();
     }, this.duration + 800);
