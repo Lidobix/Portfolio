@@ -96,11 +96,11 @@ export class PreviewProject {
   }
 
   showNextImage() {
-    this.updateImage(-1);
+    this.updateImage(1);
   }
 
   showPreviousImage() {
-    this.updateImage(1);
+    this.updateImage(-1);
   }
 
   updateImage(offset = 0) {
