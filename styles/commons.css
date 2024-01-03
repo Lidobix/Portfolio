@@ -30,6 +30,14 @@
     -o-transition: 800ms ease-in-out;
 }
 
+.transition1500{
+    transition: 1500ms ease-in-out;
+    -webkit-transition: 1500ms ease-in-out;
+    -moz-transition: 1500ms ease-in-out;
+    -ms-transition: 1500ms ease-in-out;
+    -o-transition: 1500ms ease-in-out;
+}
+
 .transition2000{
     transition: 3000ms ease-in-out;
     -webkit-transition: 3000ms ease-in-out;

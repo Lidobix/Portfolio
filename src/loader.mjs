@@ -5,7 +5,7 @@ class Loader {
   constructor() {
     this.loader;
     this.body = document.querySelector('body');
-    this.duration = 800;
+    this.duration = 1500;
   }
 
   open() {
