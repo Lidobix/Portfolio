@@ -5,10 +5,11 @@ class Loader {
   constructor() {
     this.loader;
     this.body = document.querySelector('body');
+    this.duration = 800;
   }
 
   open() {
-    this.loader = DomCreator.createNode('div', ['transition800'], {
+    this.loader = DomCreator.createNode('div', [`transition${this.duration}`], {
       id: 'loader',
     });
 
@@ -19,7 +20,7 @@ class Loader {
     this.loader.style.backgroundColor = 'transparent';
     setTimeout(() => {
       this.loader.remove();
-    }, 800);
+    }, this.duration + 800);
   }
 }
 
