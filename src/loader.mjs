@@ -8,7 +8,7 @@ class Loader {
   }
 
   open() {
-    this.loader = DomCreator.createNode('div', ['transition500'], {
+    this.loader = DomCreator.createNode('div', ['transition800'], {
       id: 'loader',
     });
 
@@ -19,7 +19,7 @@ class Loader {
     this.loader.style.backgroundColor = 'transparent';
     setTimeout(() => {
       this.loader.remove();
-    }, 1800);
+    }, 800);
   }
 }
 
