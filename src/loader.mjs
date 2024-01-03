@@ -8,7 +8,7 @@ class Loader {
   }
 
   open() {
-    this.loader = DomCreator.createNode('div', ['transition800'], {
+    this.loader = DomCreator.createNode('div', ['transition2000'], {
       id: 'loader',
     });
 
