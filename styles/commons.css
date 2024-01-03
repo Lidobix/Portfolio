@@ -31,11 +31,11 @@
 }
 
 .transition2000{
-    transition: 2000ms ease-in-out;
-    -webkit-transition: 2000ms ease-in-out;
-    -moz-transition: 2000ms ease-in-out;
-    -ms-transition: 2000ms ease-in-out;
-    -o-transition: 2000ms ease-in-out;
+    transition: 3000ms ease-in-out;
+    -webkit-transition: 3000ms ease-in-out;
+    -moz-transition: 3000ms ease-in-out;
+    -ms-transition: 3000ms ease-in-out;
+    -o-transition: 3000ms ease-in-out;
 }
 
 .borderRad_01{

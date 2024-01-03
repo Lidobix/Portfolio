@@ -5,6 +5,7 @@ import loader from './src/loader.mjs';
 
 window.addEventListener('DOMContentLoaded', function () {
   loader.open();
+
   datasManager
     .fetchElements()
     .then(() => {
