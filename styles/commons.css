@@ -22,6 +22,14 @@
     -o-transition: 500ms ease-in-out;
 }
 
+.transition800{
+    transition: 800ms ease-in-out;
+    -webkit-transition: 800ms ease-in-out;
+    -moz-transition: 800ms ease-in-out;
+    -ms-transition: 800ms ease-in-out;
+    -o-transition: 800ms ease-in-out;
+}
+
 .borderRad_01{
     border-radius: 0.1rem;
     -webkit-border-radius: 0.1rem;
